@@ -487,7 +487,7 @@
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 1px;
+            gap: 2px;
             text-align: center;
             width: 100%;
             max-width: 220px;
@@ -498,14 +498,14 @@
             font-weight: 600;
             color: var(--text-muted);
             text-transform: uppercase;
-            padding: 1px 0;
+            padding: 2px 0;
         }
 
         .calendar-grid .day {
             font-size: 0.7rem;
             font-weight: 500;
             color: var(--text-secondary);
-            padding: 2px 0;
+            padding: 3px 0;
             border-radius: 4px;
             transition: 0.15s;
         }
@@ -540,37 +540,38 @@
             letter-spacing: 0.04em;
         }
 
-        /* === Toggle Switcher === */
+        /* === Toggle Switcher (уменьшенный, прозрачный) === */
         .toggle-switcher {
             position: absolute;
             top: 12px;
             right: 12px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             z-index: 10;
         }
 
         .toggle-track {
-            width: 36px;
-            height: 18px;
+            width: 28px;
+            height: 14px;
             background: var(--bg-input);
-            border-radius: 18px;
+            border-radius: 14px;
             border: 1px solid var(--border-color);
             cursor: pointer;
             position: relative;
             transition: 0.3s;
             flex-shrink: 0;
+            opacity: 0.55;
         }
 
         .toggle-track:hover {
-            border-color: var(--border-hover);
+            opacity: 0.8;
         }
 
         .toggle-thumb {
-            width: 14px;
-            height: 14px;
-            background: var(--text-muted);
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
             border-radius: 50%;
             position: absolute;
             top: 1px;
@@ -579,8 +580,7 @@
         }
 
         .toggle-track.active .toggle-thumb {
-            left: 20px;
-            background: var(--accent);
+            left: 16px;
         }
 
         /* === РИСОВАЛКА (6x8) === */
@@ -730,51 +730,6 @@
             min-height: 0;
         }
 
-        .text-editor .editor-toolbar {
-            display: flex;
-            gap: 4px;
-            margin-bottom: 6px;
-            flex-shrink: 0;
-            flex-wrap: wrap;
-        }
-
-        .text-editor .editor-toolbar button {
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 0.6rem;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            transition: 0.2s;
-            height: 26px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-weight: 500;
-        }
-
-        .text-editor .editor-toolbar button:hover {
-            background: var(--bg-hover);
-            color: var(--text-primary);
-            border-color: var(--border-hover);
-        }
-
-        .text-editor .editor-toolbar button.active {
-            background: var(--accent);
-            color: var(--bg-primary);
-            border-color: var(--accent);
-        }
-
-        .text-editor .editor-toolbar .toolbar-divider {
-            width: 1px;
-            height: 22px;
-            background: var(--border-color);
-            flex-shrink: 0;
-            margin: 0 2px;
-        }
-
         .text-editor textarea {
             flex: 1;
             background: var(--bg-input);
@@ -804,6 +759,7 @@
             gap: 6px;
             margin-top: 6px;
             flex-shrink: 0;
+            flex-wrap: wrap;
         }
 
         .text-editor .editor-controls button {
@@ -1069,11 +1025,6 @@
                 width: 18px;
                 height: 18px;
             }
-            .text-editor .editor-toolbar button {
-                font-size: 0.5rem;
-                padding: 2px 6px;
-                height: 22px;
-            }
         }
     </style>
 </head>
@@ -1199,7 +1150,8 @@
                 <div class="draw-controls">
                     <button id="drawUndo" title="Отменить"><i class="fas fa-undo"></i></button>
                     <button id="drawClear" title="Очистить"><i class="fas fa-trash"></i></button>
-                    <button id="drawEraser" class="active" title="Ластик"><i class="fas fa-eraser"></i></button>
+                    <button id="drawEraser" title="Ластик"><i class="fas fa-eraser"></i></button>
+                    <button id="drawSave" title="Сохранить как PNG"><i class="fas fa-download"></i></button>
                     <div class="tool-divider"></div>
                     <div class="draw-colors" id="drawColors"></div>
                     <div class="tool-divider"></div>
@@ -1214,19 +1166,16 @@
             <!-- Текстовый редактор -->
             <div class="widget-content hidden" id="textMode">
                 <div class="text-editor">
-                    <div class="editor-toolbar">
-                        <button id="textBold" title="Жирный"><b>B</b></button>
-                        <button id="textItalic" title="Курсив"><i>I</i></button>
-                        <button id="textUnderline" title="Подчёркнутый"><u>U</u></button>
-                        <div class="toolbar-divider"></div>
+                    <textarea id="textEditor" placeholder="Введите текст здесь..."></textarea>
+                    <div class="editor-controls">
                         <button id="textSave"><i class="fas fa-save"></i> Сохранить</button>
+                        <button id="textDownload"><i class="fas fa-download"></i> Скачать .txt</button>
                         <button id="textClear"><i class="fas fa-trash"></i> Очистить</button>
                         <div class="editor-stats">
                             <span id="textWords">0 слов</span>
                             <span id="textChars">0 символов</span>
                         </div>
                     </div>
-                    <textarea id="textEditor" placeholder="Введите текст здесь..."></textarea>
                 </div>
             </div>
         </div>
@@ -1566,12 +1515,12 @@
             let isDrawing = false;
             let drawColor = '#ffffff';
             let drawSize = 3;
-            let isEraser = true;
+            let isEraser = false;
             let history = [];
             let historyIndex = -1;
             let isInitialized = false;
 
-            // Цвета - ровно столько, чтобы поместились без скролла
+            // Цвета
             const colors = [
                 '#ffffff', '#cccccc', '#888888', '#444444', '#000000',
                 '#ff6b6b', '#ee5a24', '#f97316', '#ff9f43', '#feca57',
@@ -1594,7 +1543,6 @@
                     isEraser = false;
                     const eraserBtn = document.getElementById('drawEraser');
                     eraserBtn.classList.remove('active');
-                    eraserBtn.innerHTML = '<i class="fas fa-eraser"></i>';
                     eraserBtn.style.color = '';
                 });
                 drawColorsContainer.appendChild(dot);
@@ -1696,7 +1644,7 @@
             canvas.addEventListener('touchmove', draw, { passive: false });
             canvas.addEventListener('touchend', endDraw, { passive: false });
 
-            // Ластик с правильным цветом иконки
+            // Ластик (изначально не активен)
             const eraserBtn = document.getElementById('drawEraser');
 
             eraserBtn.addEventListener('click', function() {
@@ -1704,12 +1652,8 @@
                 this.classList.toggle('active');
 
                 if (isEraser) {
-                    this.innerHTML = '<i class="fas fa-eraser"></i>';
-                    this.style.color = '';
                     document.querySelectorAll('.draw-colors .color-dot').forEach(d => d.classList.remove('active'));
                 } else {
-                    this.innerHTML = '<i class="fas fa-eraser"></i>';
-                    this.style.color = '';
                     const activeColor = document.querySelector('.draw-colors .color-dot.active');
                     if (activeColor) {
                         drawColor = activeColor.dataset.color;
@@ -1721,6 +1665,14 @@
                         }
                     }
                 }
+            });
+
+            // Сохранить как PNG
+            document.getElementById('drawSave').addEventListener('click', () => {
+                const link = document.createElement('a');
+                link.download = `рисунок_${new Date().toISOString().slice(0,10)}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
             });
 
             // Размер
@@ -1762,7 +1714,6 @@
             const textEditor = document.getElementById('textEditor');
             const textWords = document.getElementById('textWords');
             const textChars = document.getElementById('textChars');
-            let textFormatting = { bold: false, italic: false, underline: false };
 
             function updateTextStats() {
                 const text = textEditor.value;
@@ -1773,51 +1724,6 @@
             }
 
             textEditor.addEventListener('input', updateTextStats);
-
-            // Форматирование текста
-            function applyFormatting() {
-                const start = textEditor.selectionStart;
-                const end = textEditor.selectionEnd;
-                const selected = textEditor.value.substring(start, end);
-
-                if (selected.length === 0) return;
-
-                let prefix = '';
-                let suffix = '';
-
-                if (textFormatting.bold) { prefix += '**';
-                    suffix = '**' + suffix; }
-                if (textFormatting.italic) { prefix += '*';
-                    suffix = '*' + suffix; }
-                if (textFormatting.underline) { prefix += '__';
-                    suffix = '__' + suffix; }
-
-                const newText = textEditor.value.substring(0, start) + prefix + selected + suffix + textEditor.value.substring(
-                end);
-                textEditor.value = newText;
-                textEditor.selectionStart = start + prefix.length;
-                textEditor.selectionEnd = end + prefix.length;
-                updateTextStats();
-                textEditor.focus();
-            }
-
-            document.getElementById('textBold').addEventListener('click', function() {
-                textFormatting.bold = !textFormatting.bold;
-                this.classList.toggle('active');
-                applyFormatting();
-            });
-
-            document.getElementById('textItalic').addEventListener('click', function() {
-                textFormatting.italic = !textFormatting.italic;
-                this.classList.toggle('active');
-                applyFormatting();
-            });
-
-            document.getElementById('textUnderline').addEventListener('click', function() {
-                textFormatting.underline = !textFormatting.underline;
-                this.classList.toggle('active');
-                applyFormatting();
-            });
 
             const savedText = localStorage.getItem('dashboard_text');
             if (savedText) {
@@ -1834,15 +1740,25 @@
                 }, 1500);
             });
 
+            document.getElementById('textDownload').addEventListener('click', () => {
+                const text = textEditor.value;
+                if (!text.trim()) {
+                    alert('Нет текста для сохранения');
+                    return;
+                }
+                const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+                const link = document.createElement('a');
+                link.download = `заметки_${new Date().toISOString().slice(0,10)}.txt`;
+                link.href = URL.createObjectURL(blob);
+                link.click();
+                URL.revokeObjectURL(link.href);
+            });
+
             document.getElementById('textClear').addEventListener('click', () => {
                 if (confirm('Очистить текст?')) {
                     textEditor.value = '';
                     updateTextStats();
                     localStorage.removeItem('dashboard_text');
-                    document.getElementById('textBold').classList.remove('active');
-                    document.getElementById('textItalic').classList.remove('active');
-                    document.getElementById('textUnderline').classList.remove('active');
-                    textFormatting = { bold: false, italic: false, underline: false };
                 }
             });
 
