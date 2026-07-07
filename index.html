@@ -22,10 +22,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* === ЦВЕТОВЫЕ СХЕМЫ === */
+        /* === ЦВЕТОВЫЕ СХЕМЫ (15 штук!) === */
         .theme-dark {
             --bg-primary: #0d0d0d;
             --bg-secondary: #121212;
@@ -40,6 +40,8 @@
             --accent: #f97316;
             --accent-hover: #ff8c38;
             --shadow: rgba(0,0,0,0.8);
+            --vinyl-dark: #1a1a1a;
+            --vinyl-light: #0d0d0d;
         }
 
         .theme-light {
@@ -56,6 +58,8 @@
             --accent: #e8600c;
             --accent-hover: #f97316;
             --shadow: rgba(0,0,0,0.15);
+            --vinyl-dark: #e0e0e0;
+            --vinyl-light: #c0c0c0;
         }
 
         .theme-ocean {
@@ -72,6 +76,8 @@
             --accent: #4fc3ff;
             --accent-hover: #7ad0ff;
             --shadow: rgba(0,0,0,0.7);
+            --vinyl-dark: #1a2a4a;
+            --vinyl-light: #0a1a3a;
         }
 
         .theme-forest {
@@ -88,6 +94,152 @@
             --accent: #66d966;
             --accent-hover: #88e888;
             --shadow: rgba(0,0,0,0.7);
+            --vinyl-dark: #1a2a1a;
+            --vinyl-light: #0a1a0a;
+        }
+
+        .theme-sunset {
+            --bg-primary: #1a0a0a;
+            --bg-secondary: #2a1010;
+            --bg-widget: #3a1818;
+            --bg-widget-alt: #301414;
+            --bg-input: #4a2020;
+            --text-primary: #f5d0c0;
+            --text-secondary: #e89070;
+            --text-muted: #9a6a5a;
+            --border-color: rgba(255,150,100,0.08);
+            --border-hover: rgba(255,150,100,0.15);
+            --accent: #ff7f50;
+            --accent-hover: #ff9a70;
+            --shadow: rgba(0,0,0,0.7);
+            --vinyl-dark: #3a1a1a;
+            --vinyl-light: #2a0a0a;
+        }
+
+        .theme-midnight {
+            --bg-primary: #0a0a1a;
+            --bg-secondary: #10102a;
+            --bg-widget: #18183a;
+            --bg-widget-alt: #141430;
+            --bg-input: #20204a;
+            --text-primary: #d0d0f0;
+            --text-secondary: #9090d0;
+            --text-muted: #5a5a8a;
+            --border-color: rgba(150,100,255,0.08);
+            --border-hover: rgba(150,100,255,0.15);
+            --accent: #a78bfa;
+            --accent-hover: #c4b5fd;
+            --shadow: rgba(0,0,0,0.7);
+            --vinyl-dark: #1a1a3a;
+            --vinyl-light: #0a0a2a;
+        }
+
+        .theme-cyber {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #0f0f1a;
+            --bg-widget: #1a1a2e;
+            --bg-widget-alt: #14142a;
+            --bg-input: #22223a;
+            --text-primary: #b0f0f0;
+            --text-secondary: #70d0d0;
+            --text-muted: #4a7a7a;
+            --border-color: rgba(0,255,255,0.08);
+            --border-hover: rgba(0,255,255,0.15);
+            --accent: #00ffff;
+            --accent-hover: #66ffff;
+            --shadow: rgba(0,0,0,0.8);
+            --vinyl-dark: #1a1a2a;
+            --vinyl-light: #0a0a1a;
+        }
+
+        .theme-rose {
+            --bg-primary: #1a0a14;
+            --bg-secondary: #2a0f1e;
+            --bg-widget: #3a1528;
+            --bg-widget-alt: #301222;
+            --bg-input: #4a1a32;
+            --text-primary: #f0d0e0;
+            --text-secondary: #d080b0;
+            --text-muted: #8a5a7a;
+            --border-color: rgba(255,100,150,0.08);
+            --border-hover: rgba(255,100,150,0.15);
+            --accent: #f472b6;
+            --accent-hover: #f9a8d4;
+            --shadow: rgba(0,0,0,0.7);
+            --vinyl-dark: #3a1a28;
+            --vinyl-light: #2a0a1e;
+        }
+
+        .theme-coffee {
+            --bg-primary: #14100a;
+            --bg-secondary: #1e1812;
+            --bg-widget: #2a221a;
+            --bg-widget-alt: #241e16;
+            --bg-input: #362c22;
+            --text-primary: #e8ddd0;
+            --text-secondary: #b0a090;
+            --text-muted: #7a6a5a;
+            --border-color: rgba(200,170,130,0.08);
+            --border-hover: rgba(200,170,130,0.15);
+            --accent: #d4a373;
+            --accent-hover: #e0b88a;
+            --shadow: rgba(0,0,0,0.7);
+            --vinyl-dark: #2a221a;
+            --vinyl-light: #1a120a;
+        }
+
+        .theme-aurora {
+            --bg-primary: #0a0a14;
+            --bg-secondary: #0a1420;
+            --bg-widget: #0f2030;
+            --bg-widget-alt: #0a1a2a;
+            --bg-input: #142a3a;
+            --text-primary: #d0f0e8;
+            --text-secondary: #80d0c0;
+            --text-muted: #4a8a7a;
+            --border-color: rgba(50,200,180,0.08);
+            --border-hover: rgba(50,200,180,0.15);
+            --accent: #5eead4;
+            --accent-hover: #8ff0e0;
+            --shadow: rgba(0,0,0,0.7);
+            --vinyl-dark: #0a1a2a;
+            --vinyl-light: #0a0a1a;
+        }
+
+        .theme-lavender {
+            --bg-primary: #140a1a;
+            --bg-secondary: #1e1028;
+            --bg-widget: #2a1838;
+            --bg-widget-alt: #241430;
+            --bg-input: #36204a;
+            --text-primary: #e8d8f0;
+            --text-secondary: #b090d0;
+            --text-muted: #7a5a8a;
+            --border-color: rgba(180,100,255,0.08);
+            --border-hover: rgba(180,100,255,0.15);
+            --accent: #c084fc;
+            --accent-hover: #d8a8fc;
+            --shadow: rgba(0,0,0,0.7);
+            --vinyl-dark: #2a1a3a;
+            --vinyl-light: #1a0a2a;
+        }
+
+        .theme-matrix {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #0a100a;
+            --bg-widget: #0f1a0f;
+            --bg-widget-alt: #0a160a;
+            --bg-input: #142014;
+            --text-primary: #b0e8b0;
+            --text-secondary: #60b060;
+            --text-muted: #3a6a3a;
+            --border-color: rgba(0,200,0,0.08);
+            --border-hover: rgba(0,200,0,0.15);
+            --accent: #00cc00;
+            --accent-hover: #33ff33;
+            --shadow: rgba(0,0,0,0.8);
+            --vinyl-dark: #0a1a0a;
+            --vinyl-light: #0a0a0a;
         }
 
         body {
@@ -108,10 +260,9 @@
             padding: 24px;
             border-radius: 40px;
             box-shadow: 0 25px 60px var(--shadow);
-            transition: background 0.3s ease, box-shadow 0.3s ease;
+            transition: background 0.4s ease, box-shadow 0.4s ease;
         }
 
-        /* === ВИДЖЕТЫ === */
         .widget {
             background: var(--bg-widget);
             border-radius: 28px;
@@ -122,7 +273,7 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            transition: background 0.3s ease, border-color 0.2s;
+            transition: background 0.4s ease, border-color 0.2s;
         }
 
         .widget:hover {
@@ -146,7 +297,7 @@
             font-size: 1rem;
             color: var(--accent);
             width: 20px;
-            transition: color 0.3s ease;
+            transition: color 0.4s ease;
         }
 
         .widget-header .header-right {
@@ -272,20 +423,20 @@
             flex: 1;
         }
 
-        /* === SVG ВИНИЛ === */
         .vinyl-container {
             flex-shrink: 0;
-            width: 90px;
-            height: 90px;
+            width: 100px;
+            height: 100px;
             position: relative;
         }
 
         .vinyl-container svg {
             width: 100%;
             height: 100%;
-            animation: spin 4s linear infinite;
+            animation: spin 6s linear infinite;
             animation-play-state: paused;
-            filter: drop-shadow(0 4px 16px rgba(0,0,0,0.5));
+            filter: drop-shadow(0 4px 20px rgba(0,0,0,0.6));
+            border-radius: 50%;
         }
 
         .vinyl-container.playing svg {
@@ -295,12 +446,6 @@
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
-        }
-
-        /* Метка центра винила */
-        .vinyl-label {
-            fill: var(--accent);
-            transition: fill 0.3s ease;
         }
 
         .radio-info {
@@ -322,8 +467,9 @@
         .player-controls {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 10px;
             margin-top: 8px;
+            flex-wrap: wrap;
         }
 
         .player-controls button {
@@ -335,8 +481,8 @@
             padding: 6px;
             border-radius: 40px;
             transition: 0.2s;
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -354,7 +500,7 @@
             height: 48px;
             font-size: 1.2rem;
             box-shadow: 0 4px 16px rgba(249, 115, 22, 0.25);
-            transition: background 0.3s ease, box-shadow 0.3s ease;
+            transition: background 0.4s ease, box-shadow 0.4s ease;
         }
 
         .player-controls .play-btn:hover {
@@ -366,15 +512,15 @@
             background: var(--bg-input);
             border: 1px solid var(--border-color);
             color: var(--text-primary);
-            padding: 6px 14px 6px 12px;
+            padding: 6px 12px;
             border-radius: 40px;
             font-size: 0.7rem;
             font-weight: 500;
             outline: none;
             cursor: pointer;
             font-family: 'Inter', sans-serif;
-            max-width: 180px;
-            transition: background 0.3s ease, color 0.3s ease;
+            max-width: 150px;
+            transition: background 0.4s ease, color 0.4s ease;
         }
 
         .station-select option {
@@ -382,47 +528,126 @@
             color: var(--text-primary);
         }
 
-        /* === ЧАСЫ === */
+        .theme-select {
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 4px 10px;
+            border-radius: 40px;
+            font-size: 0.65rem;
+            font-weight: 500;
+            outline: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+
+        .theme-select option {
+            background: var(--bg-widget);
+            color: var(--text-primary);
+        }
+
+        /* === ЧАСЫ + КАЛЕНДАРЬ === */
         .clock-widget {
             grid-column: 2 / 3;
             grid-row: 2 / 3;
             background: var(--bg-widget-alt);
+            padding: 16px 24px;
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 16px 24px;
+            gap: 40px;
         }
 
-        .clock-display {
+        .clock-section {
             display: flex;
-            align-items: baseline;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            gap: 12px;
-            width: 100%;
+            flex: 1;
         }
 
         .clock-time {
-            font-size: 4.2rem;
+            font-size: 4.5rem;
             font-weight: 700;
-            letter-spacing: 0.04em;
+            letter-spacing: 0.06em;
             color: var(--text-primary);
             font-variant-numeric: tabular-nums;
-            transition: color 0.3s ease;
-        }
-
-        .clock-seconds {
-            font-size: 1.8rem;
-            font-weight: 300;
-            color: var(--accent);
-            opacity: 0.8;
-            transition: color 0.3s ease;
+            transition: color 0.4s ease;
+            line-height: 1;
         }
 
         .clock-date {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: var(--text-muted);
-            margin-left: 8px;
+            margin-top: 6px;
             font-weight: 400;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.03em;
+        }
+
+        /* Календарь */
+        .calendar-section {
+            flex-shrink: 0;
+            width: 160px;
+            background: var(--bg-widget);
+            border-radius: 20px;
+            padding: 12px 16px 14px 16px;
+            border: 1px solid var(--border-color);
+            transition: background 0.4s ease;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+            text-align: center;
+        }
+
+        .calendar-grid .day-name {
+            font-size: 0.5rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            padding: 2px 0;
+            letter-spacing: 0.04em;
+        }
+
+        .calendar-grid .day {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            padding: 3px 0;
+            border-radius: 8px;
+            transition: 0.15s;
+            cursor: default;
+        }
+
+        .calendar-grid .day.weekend {
+            color: var(--text-muted);
+            opacity: 0.6;
+        }
+
+        .calendar-grid .day.today {
+            background: var(--accent);
+            color: var(--bg-primary);
+            font-weight: 700;
+            box-shadow: 0 2px 12px rgba(249, 115, 22, 0.25);
+        }
+
+        .calendar-grid .day.empty {
+            color: transparent;
         }
 
         /* === ЗАМЕТКИ === */
@@ -561,37 +786,6 @@
             letter-spacing: 0.03em;
         }
 
-        /* === ПЕРЕКЛЮЧАТЕЛЬ ТЕМ === */
-        .theme-switcher {
-            display: flex;
-            gap: 6px;
-            margin-left: 8px;
-        }
-
-        .theme-dot {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            border: 2px solid transparent;
-            cursor: pointer;
-            transition: 0.2s;
-            flex-shrink: 0;
-        }
-
-        .theme-dot:hover {
-            transform: scale(1.15);
-        }
-
-        .theme-dot.active {
-            border-color: var(--accent);
-            box-shadow: 0 0 12px rgba(249, 115, 22, 0.3);
-        }
-
-        .theme-dot-dark { background: #1a1a1a; border-color: #444; }
-        .theme-dot-light { background: #e8e8e8; border-color: #bbb; }
-        .theme-dot-ocean { background: #1a3a6a; border-color: #4a8aba; }
-        .theme-dot-forest { background: #1a3a1a; border-color: #4a8a4a; }
-
         /* === АДАПТИВНОСТЬ === */
         @media (max-width: 1024px) {
             .dashboard {
@@ -599,14 +793,14 @@
                 gap: 14px;
                 padding: 18px;
             }
-            .clock-time { font-size: 3.2rem; }
-            .clock-seconds { font-size: 1.4rem; }
+            .clock-time { font-size: 3.5rem; }
+            .calendar-section { width: 140px; padding: 10px 12px; }
         }
 
         @media (max-width: 820px) {
             .dashboard {
                 grid-template-columns: 1fr;
-                grid-template-rows: auto auto auto auto;
+                grid-template-rows: auto auto auto auto auto;
                 max-height: none;
                 height: auto;
                 padding: 14px;
@@ -625,20 +819,19 @@
             .clock-widget {
                 grid-column: 1 / 2;
                 grid-row: auto;
-                min-height: 100px;
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
             }
             .notes-widget {
                 grid-column: 1 / 2;
                 grid-row: auto;
                 min-height: 250px;
             }
-            .clock-time { font-size: 2.8rem; }
-            .clock-seconds { font-size: 1.2rem; }
-            .vinyl-container {
-                width: 70px;
-                height: 70px;
-            }
-            .station-select { max-width: 140px; font-size: 0.65rem; }
+            .clock-time { font-size: 3rem; }
+            .calendar-section { width: 180px; }
+            .vinyl-container { width: 75px; height: 75px; }
+            .station-select { max-width: 130px; font-size: 0.65rem; }
         }
 
         @media (max-width: 500px) {
@@ -646,9 +839,11 @@
             .dashboard { padding: 10px; border-radius: 20px; gap: 10px; }
             .widget { padding: 14px 16px; }
             .player-content { flex-wrap: wrap; gap: 12px; }
-            .station-select { max-width: 120px; font-size: 0.6rem; }
-            .clock-time { font-size: 2.2rem; }
-            .clock-seconds { font-size: 1rem; }
+            .station-select { max-width: 110px; font-size: 0.6rem; }
+            .clock-time { font-size: 2.4rem; }
+            .clock-date { font-size: 0.75rem; }
+            .calendar-section { width: 150px; padding: 8px 10px; }
+            .calendar-grid .day { font-size: 0.65rem; }
             .rss-widget { max-height: 280px; }
         }
     </style>
@@ -682,98 +877,105 @@
             <i class="fas fa-headphones"></i>
             <span>Радио / Плеер</span>
             <div class="header-right">
-                <select class="station-select" id="stationSelect">
-                    <option value="https://ice1.somafm.com/groovesalad-128-mp3" selected>Groove Salad (Chill)</option>
-                    <option value="https://ice1.somafm.com/darkzone-128-mp3">The Dark Zone</option>
-                    <option value="https://ice1.somafm.com/defcon-128-mp3">Def Con Radio</option>
-                    <option value="https://ice1.somafm.com/metal-128-mp3">Metal Detector</option>
-                    <option value="https://ice1.somafm.com/lc70s-128-mp3">Left Coast 70s</option>
-                    <option value="https://ice1.somafm.com/u80s-128-mp3">Underground 80s</option>
-                    <option value="https://ice1.somafm.com/7soul-128-mp3">Seven Inch Soul</option>
-                    <option value="https://ice1.somafm.com/insound-128-mp3">The In-Sound</option>
-                    <option value="https://ice1.somafm.com/covers-128-mp3">Covers</option>
-                    <option value="https://ice1.somafm.com/sf1033-128-mp3">SF 10-33</option>
-                    <option value="https://ice1.somafm.com/scanner-128-mp3">SF Police Scanner</option>
-                    <option value="https://ice1.somafm.com/sfinsf-128-mp3">SF in SF</option>
-                    <option value="https://ice1.somafm.com/vaporwaves-128-mp3">Vaporvawes</option>
-                    <option value="https://ice1.somafm.com/doomed-128-mp3">Doomed</option>
-                    <option value="https://ice1.somafm.com/beatblender-128-mp3">Beat Blender</option>
+                <select class="station-select" id="stationSelect"></select>
+                <select class="theme-select" id="themeSelect">
+                    <option value="theme-dark">Тёмная</option>
+                    <option value="theme-light">Светлая</option>
+                    <option value="theme-ocean">Океан</option>
+                    <option value="theme-forest">Лес</option>
+                    <option value="theme-sunset">Закат</option>
+                    <option value="theme-midnight">Полночь</option>
+                    <option value="theme-cyber">Кибер</option>
+                    <option value="theme-rose">Роза</option>
+                    <option value="theme-coffee">Кофе</option>
+                    <option value="theme-aurora">Аврора</option>
+                    <option value="theme-lavender">Лаванда</option>
+                    <option value="theme-matrix">Матрица</option>
                 </select>
-                <div class="theme-switcher">
-                    <div class="theme-dot theme-dot-dark active" data-theme="theme-dark" title="Тёмная"></div>
-                    <div class="theme-dot theme-dot-light" data-theme="theme-light" title="Светлая"></div>
-                    <div class="theme-dot theme-dot-ocean" data-theme="theme-ocean" title="Океан"></div>
-                    <div class="theme-dot theme-dot-forest" data-theme="theme-forest" title="Лес"></div>
-                </div>
             </div>
         </div>
 
         <div class="player-content">
             <div class="vinyl-container" id="vinylContainer">
-                <svg viewBox="0 0 100 100">
-                    <!-- Винил с реалистичными деталями -->
+                <svg viewBox="0 0 120 120">
                     <defs>
                         <radialGradient id="vinylGrad" cx="50%" cy="50%" r="50%">
-                            <stop offset="0%" stop-color="#2a2a2a"/>
-                            <stop offset="30%" stop-color="#1a1a1a"/>
-                            <stop offset="70%" stop-color="#0d0d0d"/>
-                            <stop offset="100%" stop-color="#050505"/>
+                            <stop offset="0%" stop-color="var(--vinyl-dark)"/>
+                            <stop offset="25%" stop-color="var(--vinyl-light)"/>
+                            <stop offset="50%" stop-color="var(--vinyl-dark)"/>
+                            <stop offset="75%" stop-color="var(--vinyl-light)"/>
+                            <stop offset="100%" stop-color="var(--vinyl-dark)"/>
                         </radialGradient>
-                        <radialGradient id="shineGrad" cx="35%" cy="35%" r="60%">
-                            <stop offset="0%" stop-color="rgba(255,255,255,0.08)"/>
+                        <radialGradient id="shineGrad" cx="35%" cy="30%" r="70%">
+                            <stop offset="0%" stop-color="rgba(255,255,255,0.12)"/>
                             <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+                        </radialGradient>
+                        <radialGradient id="labelGrad" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="var(--accent)"/>
+                            <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.7"/>
                         </radialGradient>
                     </defs>
                     <!-- Тёмный диск -->
-                    <circle cx="50" cy="50" r="45" fill="url(#vinylGrad)" stroke="#333" stroke-width="0.5"/>
+                    <circle cx="60" cy="60" r="54" fill="url(#vinylGrad)" stroke="var(--border-color)" stroke-width="0.5"/>
                     <!-- Блик -->
-                    <circle cx="50" cy="50" r="45" fill="url(#shineGrad)"/>
+                    <circle cx="60" cy="60" r="54" fill="url(#shineGrad)"/>
                     <!-- Бороздки (концентрические круги) -->
-                    <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.3"/>
-                    <circle cx="50" cy="50" r="34" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.3"/>
-                    <circle cx="50" cy="50" r="30" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.3"/>
-                    <circle cx="50" cy="50" r="26" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.3"/>
-                    <circle cx="50" cy="50" r="22" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.3"/>
+                    <circle cx="60" cy="60" r="48" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.4"/>
+                    <circle cx="60" cy="60" r="44" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.3"/>
+                    <circle cx="60" cy="60" r="40" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.4"/>
+                    <circle cx="60" cy="60" r="36" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.3"/>
+                    <circle cx="60" cy="60" r="32" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.4"/>
+                    <circle cx="60" cy="60" r="28" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.3"/>
+                    <circle cx="60" cy="60" r="24" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.4"/>
                     <!-- Центральная этикетка -->
-                    <circle cx="50" cy="50" r="14" fill="var(--accent)" opacity="0.9" class="vinyl-label"/>
-                    <circle cx="50" cy="50" r="11" fill="var(--bg-secondary)" opacity="0.15"/>
-                    <circle cx="50" cy="50" r="4" fill="#222" stroke="#444" stroke-width="0.5"/>
-                    <circle cx="50" cy="50" r="2.5" fill="#111"/>
-                    <!-- Текст на этикетке (микро) -->
-                    <text x="50" y="45" font-size="3.5" fill="rgba(255,255,255,0.6)" text-anchor="middle" font-weight="700" letter-spacing="0.5">S</text>
-                    <text x="50" y="52" font-size="2.8" fill="rgba(255,255,255,0.4)" text-anchor="middle" font-weight="300">FM</text>
+                    <circle cx="60" cy="60" r="18" fill="url(#labelGrad)" opacity="0.9"/>
+                    <circle cx="60" cy="60" r="14" fill="var(--bg-secondary)" opacity="0.15"/>
+                    <circle cx="60" cy="60" r="8" fill="var(--bg-secondary)" stroke="var(--border-color)" stroke-width="0.5"/>
+                    <circle cx="60" cy="60" r="4" fill="var(--bg-primary)"/>
+                    <circle cx="60" cy="60" r="2" fill="var(--accent)" opacity="0.3"/>
+                    <!-- Текст на этикетке -->
+                    <text x="60" y="53" font-size="5" fill="rgba(255,255,255,0.6)" text-anchor="middle" font-weight="700" letter-spacing="0.5">S</text>
+                    <text x="60" y="63" font-size="3.5" fill="rgba(255,255,255,0.4)" text-anchor="middle" font-weight="300">FM</text>
                 </svg>
             </div>
             <div class="radio-info">
                 <div class="track" id="trackName">Groove Salad</div>
                 <div class="station" id="stationName">SomaFM · Chillout</div>
                 <div class="player-controls">
+                    <button id="prevBtn" title="Предыдущая">
+                        <i class="fas fa-step-backward"></i>
+                    </button>
                     <button id="playBtn" class="play-btn">
                         <i class="fas fa-play"></i>
                     </button>
-                    <button id="stopBtn">
+                    <button id="nextBtn" title="Следующая">
+                        <i class="fas fa-step-forward"></i>
+                    </button>
+                    <button id="stopBtn" title="Стоп">
                         <i class="fas fa-stop"></i>
                     </button>
-                    <div style="display: flex; align-items: center; gap: 8px; margin-left: 4px;">
-                        <i class="fas fa-volume-low" style="color: var(--text-muted); font-size: 0.8rem;"></i>
+                    <div style="display: flex; align-items: center; gap: 6px; margin-left: 2px;">
+                        <i class="fas fa-volume-low" style="color: var(--text-muted); font-size: 0.7rem;"></i>
                         <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.7" 
-                               style="width: 70px; background: var(--bg-input); height: 3px; border-radius: 10px; accent-color: var(--accent);">
+                               style="width: 60px; background: var(--bg-input); height: 3px; border-radius: 10px; accent-color: var(--accent);">
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- === ЧАСЫ === -->
+    <!-- === ЧАСЫ + КАЛЕНДАРЬ === -->
     <div class="widget clock-widget">
-        <div class="widget-header" style="margin-bottom: 4px;">
-            <i class="fas fa-clock"></i>
-            <span>Текущее время</span>
+        <div class="clock-section">
+            <div class="clock-time" id="clockTime">00:00:00</div>
+            <div class="clock-date" id="clockDate">1 января 2026</div>
         </div>
-        <div class="clock-display">
-            <span class="clock-time" id="clockTime">00:00</span>
-            <span class="clock-seconds" id="clockSeconds">00</span>
-            <span class="clock-date" id="clockDate">1 января 2026</span>
+        <div class="calendar-section" id="calendarWidget">
+            <div class="calendar-header">
+                <span id="calendarMonth">Январь</span>
+                <span id="calendarYear">2026</span>
+            </div>
+            <div class="calendar-grid" id="calendarGrid"></div>
         </div>
     </div>
 
@@ -801,27 +1003,53 @@
     (function() {
         'use strict';
 
-        // === ПЕРЕКЛЮЧАТЕЛЬ ТЕМ ===
-        const themeDots = document.querySelectorAll('.theme-dot');
+        // === СПИСОК РАДИОСТАНЦИЙ ===
+        const stations = [
+            { value: 'https://ice1.somafm.com/groovesalad-128-mp3', track: 'Groove Salad', station: 'SomaFM · Chillout' },
+            { value: 'https://ice1.somafm.com/darkzone-128-mp3', track: 'The Dark Zone', station: 'SomaFM · Ambient' },
+            { value: 'https://ice1.somafm.com/defcon-128-mp3', track: 'Def Con Radio', station: 'SomaFM · Dark Ambient' },
+            { value: 'https://ice1.somafm.com/metal-128-mp3', track: 'Metal Detector', station: 'SomaFM · Heavy Metal' },
+            { value: 'https://ice1.somafm.com/lc70s-128-mp3', track: 'Left Coast 70s', station: 'SomaFM · 70s Hits' },
+            { value: 'https://ice1.somafm.com/u80s-128-mp3', track: 'Underground 80s', station: 'SomaFM · 80s Underground' },
+            { value: 'https://ice1.somafm.com/7soul-128-mp3', track: 'Seven Inch Soul', station: 'SomaFM · Soul Classics' },
+            { value: 'https://ice1.somafm.com/insound-128-mp3', track: 'The In-Sound', station: 'SomaFM · 60s Garage' },
+            { value: 'https://ice1.somafm.com/covers-128-mp3', track: 'Covers', station: 'SomaFM · Cover Versions' },
+            { value: 'https://ice1.somafm.com/sf1033-128-mp3', track: 'SF 10-33', station: 'SomaFM · Police Radio' },
+            { value: 'https://ice1.somafm.com/scanner-128-mp3', track: 'SF Police Scanner', station: 'SomaFM · Live Scanner' },
+            { value: 'https://ice1.somafm.com/sfinsf-128-mp3', track: 'SF in SF', station: 'SomaFM · Live in SF' },
+            { value: 'https://ice1.somafm.com/vaporwaves-128-mp3', track: 'Vaporvawes', station: 'SomaFM · Vaporwave' },
+            { value: 'https://ice1.somafm.com/doomed-128-mp3', track: 'Doomed', station: 'SomaFM · Doom Metal' },
+            { value: 'https://ice1.somafm.com/beatblender-128-mp3', track: 'Beat Blender', station: 'SomaFM · Deep House' },
+        ];
+
+        let currentStationIndex = 0;
+
+        // Заполняем select
+        const stationSelect = document.getElementById('stationSelect');
+        stations.forEach((s, i) => {
+            const opt = document.createElement('option');
+            opt.value = s.value;
+            opt.textContent = s.track;
+            if (i === 0) opt.selected = true;
+            stationSelect.appendChild(opt);
+        });
+
+        // === ПЕРЕКЛЮЧАТЕЛЬ ТЕМ (выпадающий список) ===
+        const themeSelect = document.getElementById('themeSelect');
         const body = document.body;
 
         function setTheme(themeName) {
             body.className = themeName;
-            themeDots.forEach(dot => {
-                dot.classList.toggle('active', dot.dataset.theme === themeName);
-            });
+            themeSelect.value = themeName;
             localStorage.setItem('dashboard_theme', themeName);
         }
 
-        themeDots.forEach(dot => {
-            dot.addEventListener('click', () => {
-                setTheme(dot.dataset.theme);
-            });
+        themeSelect.addEventListener('change', () => {
+            setTheme(themeSelect.value);
         });
 
-        // Восстанавливаем тему
         const savedTheme = localStorage.getItem('dashboard_theme');
-        if (savedTheme && document.querySelector(`[data-theme="${savedTheme}"]`)) {
+        if (savedTheme && document.querySelector(`option[value="${savedTheme}"]`)) {
             setTheme(savedTheme);
         } else {
             setTheme('theme-dark');
@@ -833,13 +1061,59 @@
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
             const seconds = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('clockTime').textContent = `${hours}:${minutes}`;
-            document.getElementById('clockSeconds').textContent = seconds;
+            document.getElementById('clockTime').textContent = `${hours}:${minutes}:${seconds}`;
             const options = { day: 'numeric', month: 'long', year: 'numeric' };
             document.getElementById('clockDate').textContent = now.toLocaleDateString('ru-RU', options);
         }
         updateClock();
         setInterval(updateClock, 1000);
+
+        // === КАЛЕНДАРЬ ===
+        function renderCalendar() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth();
+            const today = now.getDate();
+
+            document.getElementById('calendarMonth').textContent = now.toLocaleDateString('ru-RU', { month: 'long' });
+            document.getElementById('calendarYear').textContent = year;
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+            let html = '';
+            const dayNames = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+            dayNames.forEach(name => {
+                html += `<div class="day-name">${name}</div>`;
+            });
+
+            // Пустые ячейки до первого дня (пн=1, вс=7)
+            let startOffset = firstDay === 0 ? 6 : firstDay - 1;
+
+            // Дни предыдущего месяца
+            for (let i = startOffset - 1; i >= 0; i--) {
+                const day = daysInPrevMonth - i;
+                html += `<div class="day empty">${day}</div>`;
+            }
+
+            for (let d = 1; d <= daysInMonth; d++) {
+                const isWeekend = (new Date(year, month, d).getDay() === 0 || new Date(year, month, d).getDay() === 6);
+                const isToday = d === today ? 'today' : '';
+                const weekendClass = isWeekend ? 'weekend' : '';
+                html += `<div class="day ${isToday} ${weekendClass}">${d}</div>`;
+            }
+
+            // Дни следующего месяца (чтобы заполнить сетку)
+            const totalCells = startOffset + daysInMonth;
+            const remaining = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
+            for (let d = 1; d <= remaining; d++) {
+                html += `<div class="day empty">${d}</div>`;
+            }
+
+            document.getElementById('calendarGrid').innerHTML = html;
+        }
+        renderCalendar();
 
         // === RSS ===
         const RSS_FEEDS = [
@@ -925,9 +1199,8 @@
         }
 
         fetchRSS();
-        const rssInterval = setInterval(fetchRSS, 600000);
+        setInterval(fetchRSS, 600000);
 
-        // Кнопка обновления
         document.getElementById('refreshRssBtn').addEventListener('click', () => {
             const btn = document.getElementById('refreshRssBtn');
             btn.style.transform = 'rotate(360deg)';
@@ -943,42 +1216,21 @@
         const vinylContainer = document.getElementById('vinylContainer');
         const playBtn = document.getElementById('playBtn');
         const stopBtn = document.getElementById('stopBtn');
-        const stationSelect = document.getElementById('stationSelect');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
         const trackName = document.getElementById('trackName');
         const stationName = document.getElementById('stationName');
         const volumeSlider = document.getElementById('volumeSlider');
 
-        const stationNames = {
-            'https://ice1.somafm.com/groovesalad-128-mp3': { track: 'Groove Salad', station: 'SomaFM · Chillout' },
-            'https://ice1.somafm.com/darkzone-128-mp3': { track: 'The Dark Zone', station: 'SomaFM · Ambient' },
-            'https://ice1.somafm.com/defcon-128-mp3': { track: 'Def Con Radio', station: 'SomaFM · Dark Ambient' },
-            'https://ice1.somafm.com/metal-128-mp3': { track: 'Metal Detector', station: 'SomaFM · Heavy Metal' },
-            'https://ice1.somafm.com/lc70s-128-mp3': { track: 'Left Coast 70s', station: 'SomaFM · 70s Hits' },
-            'https://ice1.somafm.com/u80s-128-mp3': { track: 'Underground 80s', station: 'SomaFM · 80s Underground' },
-            'https://ice1.somafm.com/7soul-128-mp3': { track: 'Seven Inch Soul', station: 'SomaFM · Soul Classics' },
-            'https://ice1.somafm.com/insound-128-mp3': { track: 'The In-Sound', station: 'SomaFM · 60s Garage' },
-            'https://ice1.somafm.com/covers-128-mp3': { track: 'Covers', station: 'SomaFM · Cover Versions' },
-            'https://ice1.somafm.com/sf1033-128-mp3': { track: 'SF 10-33', station: 'SomaFM · Police Radio' },
-            'https://ice1.somafm.com/scanner-128-mp3': { track: 'SF Police Scanner', station: 'SomaFM · Live Scanner' },
-            'https://ice1.somafm.com/sfinsf-128-mp3': { track: 'SF in SF', station: 'SomaFM · Live in SF' },
-            'https://ice1.somafm.com/vaporwaves-128-mp3': { track: 'Vaporvawes', station: 'SomaFM · Vaporwave' },
-            'https://ice1.somafm.com/doomed-128-mp3': { track: 'Doomed', station: 'SomaFM · Doom Metal' },
-            'https://ice1.somafm.com/beatblender-128-mp3': { track: 'Beat Blender', station: 'SomaFM · Deep House' },
-        };
-
-        function updateStationInfo(url) {
-            const info = stationNames[url];
-            if (info) {
-                trackName.textContent = info.track;
-                stationName.textContent = info.station;
-            } else {
-                trackName.textContent = 'Radio';
-                stationName.textContent = 'Stream';
-            }
+        function updateStationInfo(index) {
+            const s = stations[index];
+            trackName.textContent = s.track;
+            stationName.textContent = s.station;
+            stationSelect.value = s.value;
         }
 
-        function playRadio() {
-            const url = stationSelect.value;
+        function playRadio(index) {
+            const url = stations[index].value;
             if (audio.src !== url) {
                 audio.src = url;
                 audio.load();
@@ -986,7 +1238,8 @@
             audio.play().catch(e => console.warn('Play error:', e));
             vinylContainer.classList.add('playing');
             playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            updateStationInfo(url);
+            updateStationInfo(index);
+            currentStationIndex = index;
         }
 
         function pauseRadio() {
@@ -1009,17 +1262,41 @@
             if (audio.src && !audio.paused) {
                 pauseRadio();
             } else {
-                playRadio();
+                playRadio(currentStationIndex);
             }
         });
 
         stopBtn.addEventListener('click', stopRadio);
 
-        stationSelect.addEventListener('change', () => {
+        prevBtn.addEventListener('click', () => {
+            const newIndex = (currentStationIndex - 1 + stations.length) % stations.length;
             if (audio.src && !audio.paused) {
-                playRadio();
+                playRadio(newIndex);
             } else {
-                updateStationInfo(stationSelect.value);
+                currentStationIndex = newIndex;
+                updateStationInfo(newIndex);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            const newIndex = (currentStationIndex + 1) % stations.length;
+            if (audio.src && !audio.paused) {
+                playRadio(newIndex);
+            } else {
+                currentStationIndex = newIndex;
+                updateStationInfo(newIndex);
+            }
+        });
+
+        stationSelect.addEventListener('change', () => {
+            const idx = stations.findIndex(s => s.value === stationSelect.value);
+            if (idx !== -1) {
+                currentStationIndex = idx;
+                if (audio.src && !audio.paused) {
+                    playRadio(idx);
+                } else {
+                    updateStationInfo(idx);
+                }
             }
         });
 
@@ -1027,7 +1304,8 @@
             audio.volume = parseFloat(e.target.value);
         });
 
-        updateStationInfo(stationSelect.value);
+        // Стартовая станция
+        updateStationInfo(0);
 
         // === ЗАМЕТКИ ===
         const notesList = document.getElementById('notesList');
