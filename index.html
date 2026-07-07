@@ -266,7 +266,7 @@
             border-radius: 24px;
             padding: 14px 16px;
             border: 1px solid var(--border-color);
-            transition: background 0.4s ease, border-color 0.2s, flex 0.3s ease, max-width 0.3s ease;
+            transition: background 0.4s ease, border-color 0.2s;
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -307,25 +307,26 @@
             font-size: 0.6rem;
         }
 
-        /* === ЛЕВАЯ КОЛОНКА: RSS (с возможностью скрыть) === */
+        /* === ЛЕВАЯ КОЛОНКА: RSS === */
         .left-column {
             display: flex;
             flex-direction: column;
             gap: 12px;
-            transition: max-width 0.3s ease, flex 0.3s ease;
+            transition: all 0.3s ease;
             max-width: 280px;
             min-width: 180px;
             flex: 0 0 auto;
+            overflow: hidden;
         }
 
         .left-column.collapsed {
             max-width: 0;
             min-width: 0;
             flex: 0 0 0;
-            overflow: hidden;
-            margin: 0;
             padding: 0;
             gap: 0;
+            margin: 0;
+            border: 0;
         }
 
         .left-column .widget {
@@ -412,7 +413,8 @@
             text-transform: uppercase;
         }
 
-        .refresh-btn, .toggle-btn {
+        .refresh-btn,
+        .toggle-btn {
             background: none;
             border: none;
             color: var(--text-muted);
@@ -423,7 +425,8 @@
             transition: 0.2s;
         }
 
-        .refresh-btn:hover, .toggle-btn:hover {
+        .refresh-btn:hover,
+        .toggle-btn:hover {
             color: var(--accent);
         }
 
@@ -491,13 +494,24 @@
         }
 
         @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         @keyframes pulseShadow {
-            0%, 100% { opacity: 0.15; transform: scale(1); }
-            50% { opacity: 0.35; transform: scale(1.05); }
+            0%,
+            100% {
+                opacity: 0.15;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.35;
+                transform: scale(1.05);
+            }
         }
 
         .vinyl-shadow {
@@ -648,7 +662,7 @@
             min-height: 0;
         }
 
-        /* === ВИДЖЕТ: РИСОВАНИЕ === */
+        /* === РИСОВАНИЕ === */
         .draw-area {
             flex: 1;
             position: relative;
@@ -708,7 +722,7 @@
             display: flex;
             gap: 3px;
             flex-wrap: wrap;
-            max-width: 180px;
+            max-width: 200px;
         }
 
         .draw-colors .color-dot {
@@ -749,7 +763,7 @@
             min-width: 14px;
         }
 
-        /* === ВИДЖЕТ: ТЕКСТОВЫЙ РЕДАКТОР === */
+        /* === ТЕКСТОВЫЙ РЕДАКТОР === */
         .text-editor {
             flex: 1;
             display: flex;
@@ -819,194 +833,6 @@
             gap: 10px;
         }
 
-        /* === ВИДЖЕТ: ПОГОДА === */
-        .weather-widget {
-            background: var(--bg-widget-alt);
-            align-items: center;
-            justify-content: center;
-        }
-
-        .weather-display {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
-        }
-
-        .weather-display .weather-icon {
-            font-size: 2.8rem;
-            color: var(--accent);
-        }
-
-        .weather-display .weather-temp {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .weather-display .weather-desc {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            text-transform: capitalize;
-        }
-
-        .weather-display .weather-details {
-            display: flex;
-            gap: 16px;
-            margin-top: 4px;
-            font-size: 0.6rem;
-            color: var(--text-muted);
-        }
-
-        .weather-display .weather-details span {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        /* === ВИДЖЕТ: TO-DO СПИСОК === */
-        .todo-widget {
-            background: var(--bg-widget-alt);
-        }
-
-        .todo-list {
-            flex: 1;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            padding-right: 4px;
-        }
-
-        .todo-list::-webkit-scrollbar {
-            width: 3px;
-        }
-        .todo-list::-webkit-scrollbar-thumb {
-            background: var(--text-muted);
-            border-radius: 10px;
-        }
-
-        .todo-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 10px;
-            background: var(--bg-hover);
-            border-radius: 10px;
-            transition: 0.15s;
-            cursor: default;
-        }
-
-        .todo-item:hover {
-            background: var(--bg-input);
-        }
-
-        .todo-item input[type="checkbox"] {
-            appearance: none;
-            width: 16px;
-            height: 16px;
-            border: 2px solid var(--border-color);
-            border-radius: 4px;
-            cursor: pointer;
-            flex-shrink: 0;
-            transition: 0.2s;
-            position: relative;
-        }
-
-        .todo-item input[type="checkbox"]:checked {
-            background: var(--accent);
-            border-color: var(--accent);
-        }
-
-        .todo-item input[type="checkbox"]:checked::after {
-            content: '✓';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: var(--bg-primary);
-            font-size: 0.6rem;
-            font-weight: 700;
-        }
-
-        .todo-item .todo-text {
-            flex: 1;
-            font-size: 0.75rem;
-            color: var(--text-primary);
-        }
-
-        .todo-item .todo-text.done {
-            text-decoration: line-through;
-            color: var(--text-muted);
-        }
-
-        .todo-item .todo-delete {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 0.6rem;
-            padding: 2px 6px;
-            border-radius: 6px;
-            transition: 0.2s;
-            opacity: 0;
-        }
-
-        .todo-item:hover .todo-delete {
-            opacity: 1;
-        }
-
-        .todo-item .todo-delete:hover {
-            color: #f87171;
-            background: rgba(248, 113, 113, 0.1);
-        }
-
-        .todo-input-row {
-            display: flex;
-            gap: 6px;
-            margin-top: 6px;
-            flex-shrink: 0;
-        }
-
-        .todo-input-row input {
-            flex: 1;
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 6px 12px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.7rem;
-            color: var(--text-primary);
-            outline: none;
-            transition: 0.2s;
-        }
-
-        .todo-input-row input:focus {
-            border-color: var(--accent);
-        }
-
-        .todo-input-row input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .todo-input-row button {
-            background: var(--accent);
-            border: none;
-            border-radius: 20px;
-            padding: 0 14px;
-            font-weight: 600;
-            color: var(--bg-primary);
-            cursor: pointer;
-            transition: 0.2s;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.6rem;
-            white-space: nowrap;
-        }
-
-        .todo-input-row button:hover {
-            background: var(--accent-hover);
-        }
-
         /* === ПЕРЕКЛЮЧАТЕЛЬ ВИДЖЕТОВ === */
         .widget-switcher {
             display: flex;
@@ -1021,7 +847,7 @@
             cursor: pointer;
             padding: 2px 8px;
             border-radius: 12px;
-            font-size: 0.5rem;
+            font-size: 0.7rem;
             font-family: 'Inter', sans-serif;
             transition: 0.2s;
             border: 1px solid transparent;
@@ -1225,10 +1051,20 @@
                 max-height: none;
                 height: auto;
             }
-            .left-column { max-width: 220px; min-width: 140px; }
-            .clock-time { font-size: 2.2rem; }
-            .vinyl-container { width: 65px; height: 65px; }
-            .bottom-right { flex-direction: column; }
+            .left-column {
+                max-width: 220px;
+                min-width: 140px;
+            }
+            .clock-time {
+                font-size: 2.2rem;
+            }
+            .vinyl-container {
+                width: 65px;
+                height: 65px;
+            }
+            .bottom-right {
+                flex-direction: column;
+            }
         }
 
         @media (max-width: 820px) {
@@ -1256,1091 +1092,894 @@
                 padding: 0;
                 gap: 0;
             }
-            .top-right { grid-template-columns: 1fr 1fr; }
-            .bottom-right { flex-direction: column; }
-            .bottom-right .widget { min-height: 180px; }
-            .clock-time { font-size: 2rem; }
-            .vinyl-container { width: 60px; height: 60px; }
+            .top-right {
+                grid-template-columns: 1fr 1fr;
+            }
+            .bottom-right {
+                flex-direction: column;
+            }
+            .bottom-right .widget {
+                min-height: 180px;
+            }
+            .clock-time {
+                font-size: 2rem;
+            }
+            .vinyl-container {
+                width: 60px;
+                height: 60px;
+            }
         }
 
         @media (max-width: 500px) {
-            body { padding: 8px; }
-            .dashboard { padding: 8px; gap: 8px; border-radius: 16px; }
-            .widget { padding: 10px 12px; border-radius: 16px; }
-            .top-right { grid-template-columns: 1fr; }
-            .clock-time { font-size: 1.8rem; }
-            .vinyl-container { width: 55px; height: 55px; }
-            .bottom-right .widget { min-height: 150px; }
-            .station-dropdown-btn { max-width: 80px; font-size: 0.5rem; }
+            body {
+                padding: 8px;
+            }
+            .dashboard {
+                padding: 8px;
+                gap: 8px;
+                border-radius: 16px;
+            }
+            .widget {
+                padding: 10px 12px;
+                border-radius: 16px;
+            }
+            .top-right {
+                grid-template-columns: 1fr;
+            }
+            .clock-time {
+                font-size: 1.8rem;
+            }
+            .vinyl-container {
+                width: 55px;
+                height: 55px;
+            }
+            .bottom-right .widget {
+                min-height: 150px;
+            }
+            .station-dropdown-btn {
+                max-width: 80px;
+                font-size: 0.5rem;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="dashboard">
+    <div class="dashboard">
 
-    <!-- === ЛЕВАЯ КОЛОНКА: RSS === -->
-    <div class="left-column" id="leftColumn">
-        <div class="widget rss-widget">
-            <div class="widget-header">
-                <i class="fas fa-rss"></i>
-                <span>Лента</span>
-                <div class="header-right">
-                    <button class="refresh-btn" id="refreshRssBtn"><i class="fas fa-sync-alt"></i></button>
-                    <button class="toggle-btn" id="toggleRssBtn" title="Скрыть/показать"><i class="fas fa-chevron-left"></i></button>
-                </div>
-            </div>
-            <div class="rss-feed" id="rssFeed">
-                <div style="text-align:center; padding:20px 0; color:var(--text-muted); font-size:0.7rem;">
-                    <i class="fas fa-spinner fa-pulse" style="font-size:1rem; color:var(--accent);"></i><br><br>Загрузка...
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- === ПРАВАЯ ЧАСТЬ === -->
-    <div class="right-area">
-
-        <!-- === ВЕРХНЯЯ ПРАВАЯ: Плеер + Часы === -->
-        <div class="top-right">
-            <!-- Плеер -->
-            <div class="widget player-widget">
+        <!-- === ЛЕВАЯ КОЛОНКА: RSS === -->
+        <div class="left-column" id="leftColumn">
+            <div class="widget rss-widget">
                 <div class="widget-header">
-                    <i class="fas fa-headphones"></i>
-                    <span>Радио</span>
+                    <i class="fas fa-rss"></i>
+                    <span>Лента</span>
                     <div class="header-right">
-                        <div class="dropdown-wrapper">
-                            <button class="station-dropdown-btn" id="stationDropdownBtn">
-                                <span id="currentStationLabel">Groove Salad</span>
-                                <i class="fas fa-chevron-down"></i>
-                            </button>
-                            <div class="station-dropdown-menu" id="stationDropdownMenu"></div>
-                        </div>
-                        <div class="theme-picker-wrapper">
-                            <div class="theme-picker-trigger" id="themePickerTrigger" title="Выбрать тему"></div>
-                            <div class="theme-picker-popup" id="themePickerPopup"></div>
-                        </div>
+                        <button class="refresh-btn" id="refreshRssBtn"><i class="fas fa-sync-alt"></i></button>
+                        <button class="toggle-btn" id="toggleRssBtn" title="Скрыть/показать"><i class="fas fa-chevron-left"></i></button>
                     </div>
                 </div>
-
-                <div class="player-content">
-                    <div class="vinyl-container" id="vinylContainer">
-                        <div class="vinyl-shadow"></div>
-                        <svg viewBox="0 0 120 120">
-                            <defs>
-                                <radialGradient id="vinylGrad" cx="50%" cy="50%" r="50%">
-                                    <stop offset="0%" stop-color="var(--vinyl-dark)"/>
-                                    <stop offset="15%" stop-color="var(--vinyl-light)"/>
-                                    <stop offset="30%" stop-color="var(--vinyl-dark)"/>
-                                    <stop offset="45%" stop-color="var(--vinyl-light)"/>
-                                    <stop offset="60%" stop-color="var(--vinyl-dark)"/>
-                                    <stop offset="75%" stop-color="var(--vinyl-light)"/>
-                                    <stop offset="90%" stop-color="var(--vinyl-dark)"/>
-                                    <stop offset="100%" stop-color="var(--vinyl-light)"/>
-                                </radialGradient>
-                                <radialGradient id="shine1" cx="65%" cy="30%" r="35%">
-                                    <stop offset="0%" stop-color="rgba(255,255,255,0.15)"/>
-                                    <stop offset="60%" stop-color="rgba(255,255,255,0.04)"/>
-                                    <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-                                </radialGradient>
-                                <radialGradient id="shine2" cx="85%" cy="75%" r="25%">
-                                    <stop offset="0%" stop-color="rgba(255,255,255,0.07)"/>
-                                    <stop offset="70%" stop-color="rgba(255,255,255,0.02)"/>
-                                    <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-                                </radialGradient>
-                                <radialGradient id="labelGrad" cx="50%" cy="50%" r="50%">
-                                    <stop offset="0%" stop-color="var(--accent)"/>
-                                    <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.7"/>
-                                </radialGradient>
-                            </defs>
-                            <circle cx="60" cy="60" r="56" fill="url(#vinylGrad)" stroke="var(--border-color)" stroke-width="0.5"/>
-                            <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.3"/>
-                            <circle cx="60" cy="60" r="49" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.2"/>
-                            <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.3"/>
-                            <circle cx="60" cy="60" r="43" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.2"/>
-                            <circle cx="60" cy="60" r="40" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.3"/>
-                            <circle cx="60" cy="60" r="37" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.2"/>
-                            <circle cx="60" cy="60" r="34" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.3"/>
-                            <circle cx="60" cy="60" r="31" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.2"/>
-                            <circle cx="60" cy="60" r="28" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.3"/>
-                            <circle cx="60" cy="60" r="25" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.2"/>
-                            <circle cx="60" cy="60" r="22" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.3"/>
-                            <circle cx="60" cy="60" r="56" fill="url(#shine1)"/>
-                            <circle cx="60" cy="60" r="56" fill="url(#shine2)"/>
-                            <circle cx="60" cy="60" r="18" fill="url(#labelGrad)" opacity="0.9"/>
-                            <circle cx="60" cy="60" r="14" fill="var(--bg-secondary)" opacity="0.12"/>
-                            <circle cx="60" cy="60" r="8" fill="var(--bg-secondary)" stroke="var(--border-color)" stroke-width="0.5"/>
-                            <circle cx="60" cy="60" r="4" fill="var(--bg-primary)"/>
-                            <circle cx="60" cy="60" r="2" fill="var(--accent)" opacity="0.3"/>
-                            <text x="60" y="53" font-size="5" fill="rgba(255,255,255,0.7)" text-anchor="middle" font-weight="700" letter-spacing="0.5">S</text>
-                            <text x="60" y="63" font-size="3.5" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-weight="300">FM</text>
-                        </svg>
+                <div class="rss-feed" id="rssFeed">
+                    <div style="text-align:center; padding:20px 0; color:var(--text-muted); font-size:0.7rem;">
+                        <i class="fas fa-spinner fa-pulse" style="font-size:1rem; color:var(--accent);"></i><br><br>Загрузка...
                     </div>
-                    <div class="radio-info">
-                        <div class="track" id="trackName">Groove Salad</div>
-                        <div class="station" id="stationName">SomaFM · Chillout</div>
-                        <div class="player-controls">
-                            <button id="prevBtn"><i class="fas fa-step-backward"></i></button>
-                            <button id="playBtn" class="play-btn"><i class="fas fa-play"></i></button>
-                            <button id="nextBtn"><i class="fas fa-step-forward"></i></button>
-                            <button id="stopBtn"><i class="fas fa-stop"></i></button>
-                            <i class="fas fa-volume-low" style="color:var(--text-muted); font-size:0.6rem;"></i>
-                            <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.7">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Часы -->
-            <div class="widget clock-widget">
-                <div class="clock-display">
-                    <div class="clock-time" id="clockTime">00:00:00</div>
-                    <div class="clock-date" id="clockDate">1 января 2026</div>
                 </div>
             </div>
         </div>
 
-        <!-- === НИЖНЯЯ ПРАВАЯ: Мульти-виджет === -->
-        <div class="bottom-right">
-            <div class="widget" id="mainWidget">
-                <div class="widget-header">
-                    <i class="fas fa-paint-brush" id="widgetIcon"></i>
-                    <span id="widgetTitle">Наброски</span>
-                    <div class="header-right">
-                        <div class="widget-switcher">
-                            <button class="switcher-btn active" data-widget="draw">🎨</button>
-                            <button class="switcher-btn" data-widget="text">📝</button>
-                            <button class="switcher-btn" data-widget="todo">✅</button>
-                            <button class="switcher-btn" data-widget="weather">🌤</button>
+        <!-- === ПРАВАЯ ЧАСТЬ === -->
+        <div class="right-area">
+
+            <!-- === ВЕРХНЯЯ ПРАВАЯ: Плеер + Часы === -->
+            <div class="top-right">
+                <!-- Плеер -->
+                <div class="widget player-widget">
+                    <div class="widget-header">
+                        <i class="fas fa-headphones"></i>
+                        <span>Радио</span>
+                        <div class="header-right">
+                            <div class="dropdown-wrapper">
+                                <button class="station-dropdown-btn" id="stationDropdownBtn">
+                                    <span id="currentStationLabel">Groove Salad</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="station-dropdown-menu" id="stationDropdownMenu"></div>
+                            </div>
+                            <div class="theme-picker-wrapper">
+                                <div class="theme-picker-trigger" id="themePickerTrigger" title="Выбрать тему"></div>
+                                <div class="theme-picker-popup" id="themePickerPopup"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Рисование -->
-                <div class="widget-content" id="widgetDraw">
-                    <div class="draw-area" id="drawArea">
-                        <canvas id="drawCanvas"></canvas>
-                    </div>
-                    <div class="draw-controls">
-                        <button id="drawUndo"><i class="fas fa-undo"></i></button>
-                        <button id="drawClear"><i class="fas fa-eraser"></i></button>
-                        <button id="drawEraser" class="active"><i class="fas fa-pencil"></i></button>
-                        <button id="drawFill"><i class="fas fa-fill-drip"></i></button>
-                        <div class="draw-colors" id="drawColors"></div>
-                        <div class="size-control">
-                            <input type="range" id="drawSize" min="1" max="30" value="3">
-                            <span id="drawSizeLabel">3</span>
+                    <div class="player-content">
+                        <div class="vinyl-container" id="vinylContainer">
+                            <div class="vinyl-shadow"></div>
+                            <svg viewBox="0 0 120 120">
+                                <defs>
+                                    <radialGradient id="vinylGrad" cx="50%" cy="50%" r="50%">
+                                        <stop offset="0%" stop-color="var(--vinyl-dark)"/>
+                                        <stop offset="15%" stop-color="var(--vinyl-light)"/>
+                                        <stop offset="30%" stop-color="var(--vinyl-dark)"/>
+                                        <stop offset="45%" stop-color="var(--vinyl-light)"/>
+                                        <stop offset="60%" stop-color="var(--vinyl-dark)"/>
+                                        <stop offset="75%" stop-color="var(--vinyl-light)"/>
+                                        <stop offset="90%" stop-color="var(--vinyl-dark)"/>
+                                        <stop offset="100%" stop-color="var(--vinyl-light)"/>
+                                    </radialGradient>
+                                    <radialGradient id="shine1" cx="65%" cy="30%" r="35%">
+                                        <stop offset="0%" stop-color="rgba(255,255,255,0.15)"/>
+                                        <stop offset="60%" stop-color="rgba(255,255,255,0.04)"/>
+                                        <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+                                    </radialGradient>
+                                    <radialGradient id="shine2" cx="85%" cy="75%" r="25%">
+                                        <stop offset="0%" stop-color="rgba(255,255,255,0.07)"/>
+                                        <stop offset="70%" stop-color="rgba(255,255,255,0.02)"/>
+                                        <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+                                    </radialGradient>
+                                    <radialGradient id="labelGrad" cx="50%" cy="50%" r="50%">
+                                        <stop offset="0%" stop-color="var(--accent)"/>
+                                        <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.7"/>
+                                    </radialGradient>
+                                </defs>
+                                <circle cx="60" cy="60" r="56" fill="url(#vinylGrad)" stroke="var(--border-color)" stroke-width="0.5"/>
+                                <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.3"/>
+                                <circle cx="60" cy="60" r="49" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.2"/>
+                                <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.3"/>
+                                <circle cx="60" cy="60" r="43" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.2"/>
+                                <circle cx="60" cy="60" r="40" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.3"/>
+                                <circle cx="60" cy="60" r="37" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.2"/>
+                                <circle cx="60" cy="60" r="34" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.3"/>
+                                <circle cx="60" cy="60" r="31" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.2"/>
+                                <circle cx="60" cy="60" r="28" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.3"/>
+                                <circle cx="60" cy="60" r="25" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.2"/>
+                                <circle cx="60" cy="60" r="22" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.3"/>
+                                <circle cx="60" cy="60" r="56" fill="url(#shine1)"/>
+                                <circle cx="60" cy="60" r="56" fill="url(#shine2)"/>
+                                <circle cx="60" cy="60" r="18" fill="url(#labelGrad)" opacity="0.9"/>
+                                <circle cx="60" cy="60" r="14" fill="var(--bg-secondary)" opacity="0.12"/>
+                                <circle cx="60" cy="60" r="8" fill="var(--bg-secondary)" stroke="var(--border-color)" stroke-width="0.5"/>
+                                <circle cx="60" cy="60" r="4" fill="var(--bg-primary)"/>
+                                <circle cx="60" cy="60" r="2" fill="var(--accent)" opacity="0.3"/>
+                                <text x="60" y="53" font-size="5" fill="rgba(255,255,255,0.7)" text-anchor="middle" font-weight="700" letter-spacing="0.5">S</text>
+                                <text x="60" y="63" font-size="3.5" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-weight="300">FM</text>
+                            </svg>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Текстовый редактор -->
-                <div class="widget-content hidden" id="widgetText">
-                    <div class="text-editor">
-                        <textarea id="textEditor" placeholder="Введите текст здесь..."></textarea>
-                        <div class="editor-controls">
-                            <button id="textSave"><i class="fas fa-save"></i> Сохранить</button>
-                            <button id="textClear"><i class="fas fa-trash"></i> Очистить</button>
-                            <div class="editor-stats">
-                                <span id="textWords">0 слов</span>
-                                <span id="textChars">0 символов</span>
+                        <div class="radio-info">
+                            <div class="track" id="trackName">Groove Salad</div>
+                            <div class="station" id="stationName">SomaFM · Chillout</div>
+                            <div class="player-controls">
+                                <button id="prevBtn"><i class="fas fa-step-backward"></i></button>
+                                <button id="playBtn" class="play-btn"><i class="fas fa-play"></i></button>
+                                <button id="nextBtn"><i class="fas fa-step-forward"></i></button>
+                                <button id="stopBtn"><i class="fas fa-stop"></i></button>
+                                <i class="fas fa-volume-low" style="color:var(--text-muted); font-size:0.6rem;"></i>
+                                <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.7">
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- To-Do список -->
-                <div class="widget-content hidden" id="widgetTodo">
-                    <div class="todo-list" id="todoList"></div>
-                    <div class="todo-input-row">
-                        <input type="text" id="todoInput" placeholder="Новая задача..." maxlength="100">
-                        <button id="todoAddBtn"><i class="fas fa-plus"></i></button>
-                    </div>
-                </div>
-
-                <!-- Погода -->
-                <div class="widget-content hidden" id="widgetWeather">
-                    <div class="weather-display" id="weatherDisplay">
-                        <div class="weather-icon"><i class="fas fa-cloud-sun"></i></div>
-                        <div class="weather-temp">--°C</div>
-                        <div class="weather-desc">Загрузка...</div>
-                        <div class="weather-details">
-                            <span><i class="fas fa-tint"></i> --%</span>
-                            <span><i class="fas fa-wind"></i> -- м/с</span>
-                        </div>
-                        <div style="margin-top:8px; font-size:0.6rem; color:var(--text-muted);">
-                            <button id="weatherRefresh" style="background:none;border:none;color:var(--accent);cursor:pointer;font-size:0.6rem;">
-                                <i class="fas fa-sync-alt"></i> Обновить
-                            </button>
-                        </div>
+                <!-- Часы -->
+                <div class="widget clock-widget">
+                    <div class="clock-display">
+                        <div class="clock-time" id="clockTime">00:00:00</div>
+                        <div class="clock-date" id="clockDate">1 января 2026</div>
                     </div>
                 </div>
             </div>
+
+            <!-- === НИЖНЯЯ ПРАВАЯ: Рисовалка + Текстовый редактор === -->
+            <div class="bottom-right">
+
+                <!-- Рисование -->
+                <div class="widget" id="drawWidget">
+                    <div class="widget-header">
+                        <i class="fas fa-paint-brush"></i>
+                        <span>Наброски</span>
+                        <div class="header-right">
+                            <div class="widget-switcher">
+                                <button class="switcher-btn active" data-target="draw">🎨</button>
+                                <button class="switcher-btn" data-target="text">📝</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-content" id="drawContent">
+                        <div class="draw-area" id="drawArea">
+                            <canvas id="drawCanvas"></canvas>
+                        </div>
+                        <div class="draw-controls">
+                            <button id="drawUndo"><i class="fas fa-undo"></i></button>
+                            <button id="drawClear"><i class="fas fa-eraser"></i></button>
+                            <button id="drawEraser"><i class="fas fa-pencil"></i></button>
+                            <button id="drawFill"><i class="fas fa-fill-drip"></i></button>
+                            <div class="draw-colors" id="drawColors"></div>
+                            <div class="size-control">
+                                <input type="range" id="drawSize" min="1" max="30" value="3">
+                                <span id="drawSizeLabel">3</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Текстовый редактор -->
+                    <div class="widget-content hidden" id="textContent">
+                        <div class="text-editor">
+                            <textarea id="textEditor" placeholder="Введите текст здесь..."></textarea>
+                            <div class="editor-controls">
+                                <button id="textSave"><i class="fas fa-save"></i> Сохранить</button>
+                                <button id="textClear"><i class="fas fa-trash"></i> Очистить</button>
+                                <div class="editor-stats">
+                                    <span id="textWords">0 слов</span>
+                                    <span id="textChars">0 символов</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
-
     </div>
-</div>
 
-<script>
-    (function() {
-        'use strict';
+    <script>
+        (function() {
+            'use strict';
 
-        // === СПИСОК РАДИОСТАНЦИЙ ===
-        const stations = [
-            { value: 'https://ice1.somafm.com/groovesalad-128-mp3', track: 'Groove Salad', station: 'SomaFM · Chillout' },
-            { value: 'https://ice1.somafm.com/darkzone-128-mp3', track: 'The Dark Zone', station: 'SomaFM · Ambient' },
-            { value: 'https://ice1.somafm.com/defcon-128-mp3', track: 'Def Con Radio', station: 'SomaFM · Dark Ambient' },
-            { value: 'https://ice1.somafm.com/metal-128-mp3', track: 'Metal Detector', station: 'SomaFM · Heavy Metal' },
-            { value: 'https://ice1.somafm.com/lc70s-128-mp3', track: 'Left Coast 70s', station: 'SomaFM · 70s Hits' },
-            { value: 'https://ice1.somafm.com/u80s-128-mp3', track: 'Underground 80s', station: 'SomaFM · 80s Underground' },
-            { value: 'https://ice1.somafm.com/7soul-128-mp3', track: 'Seven Inch Soul', station: 'SomaFM · Soul Classics' },
-            { value: 'https://ice1.somafm.com/insound-128-mp3', track: 'The In-Sound', station: 'SomaFM · 60s Garage' },
-            { value: 'https://ice1.somafm.com/covers-128-mp3', track: 'Covers', station: 'SomaFM · Cover Versions' },
-            { value: 'https://ice1.somafm.com/sf1033-128-mp3', track: 'SF 10-33', station: 'SomaFM · Police Radio' },
-            { value: 'https://ice1.somafm.com/scanner-128-mp3', track: 'SF Police Scanner', station: 'SomaFM · Live Scanner' },
-            { value: 'https://ice1.somafm.com/sfinsf-128-mp3', track: 'SF in SF', station: 'SomaFM · Live in SF' },
-            { value: 'https://ice1.somafm.com/vaporwaves-128-mp3', track: 'Vaporvawes', station: 'SomaFM · Vaporwave' },
-            { value: 'https://ice1.somafm.com/doomed-128-mp3', track: 'Doomed', station: 'SomaFM · Doom Metal' },
-            { value: 'https://ice1.somafm.com/beatblender-128-mp3', track: 'Beat Blender', station: 'SomaFM · Deep House' },
-        ];
+            // === СПИСОК РАДИОСТАНЦИЙ ===
+            const stations = [
+                { value: 'https://ice1.somafm.com/groovesalad-128-mp3', track: 'Groove Salad', station: 'SomaFM · Chillout' },
+                { value: 'https://ice1.somafm.com/darkzone-128-mp3', track: 'The Dark Zone', station: 'SomaFM · Ambient' },
+                { value: 'https://ice1.somafm.com/defcon-128-mp3', track: 'Def Con Radio', station: 'SomaFM · Dark Ambient' },
+                { value: 'https://ice1.somafm.com/metal-128-mp3', track: 'Metal Detector', station: 'SomaFM · Heavy Metal' },
+                { value: 'https://ice1.somafm.com/lc70s-128-mp3', track: 'Left Coast 70s', station: 'SomaFM · 70s Hits' },
+                { value: 'https://ice1.somafm.com/u80s-128-mp3', track: 'Underground 80s', station: 'SomaFM · 80s Underground' },
+                { value: 'https://ice1.somafm.com/7soul-128-mp3', track: 'Seven Inch Soul', station: 'SomaFM · Soul Classics' },
+                { value: 'https://ice1.somafm.com/insound-128-mp3', track: 'The In-Sound', station: 'SomaFM · 60s Garage' },
+                { value: 'https://ice1.somafm.com/covers-128-mp3', track: 'Covers', station: 'SomaFM · Cover Versions' },
+                { value: 'https://ice1.somafm.com/sf1033-128-mp3', track: 'SF 10-33', station: 'SomaFM · Police Radio' },
+                { value: 'https://ice1.somafm.com/scanner-128-mp3', track: 'SF Police Scanner', station: 'SomaFM · Live Scanner' },
+                { value: 'https://ice1.somafm.com/sfinsf-128-mp3', track: 'SF in SF', station: 'SomaFM · Live in SF' },
+                { value: 'https://ice1.somafm.com/vaporwaves-128-mp3', track: 'Vaporvawes', station: 'SomaFM · Vaporwave' },
+                { value: 'https://ice1.somafm.com/doomed-128-mp3', track: 'Doomed', station: 'SomaFM · Doom Metal' },
+                { value: 'https://ice1.somafm.com/beatblender-128-mp3', track: 'Beat Blender', station: 'SomaFM · Deep House' },
+            ];
 
-        let currentStationIndex = 0;
+            let currentStationIndex = 0;
 
-        // === КАСТОМНЫЙ ДРОПДАУН СТАНЦИЙ ===
-        const dropdownBtn = document.getElementById('stationDropdownBtn');
-        const dropdownMenu = document.getElementById('stationDropdownMenu');
-        const currentStationLabel = document.getElementById('currentStationLabel');
+            // === КАСТОМНЫЙ ДРОПДАУН СТАНЦИЙ ===
+            const dropdownBtn = document.getElementById('stationDropdownBtn');
+            const dropdownMenu = document.getElementById('stationDropdownMenu');
+            const currentStationLabel = document.getElementById('currentStationLabel');
 
-        function renderStationDropdown() {
-            let html = '';
-            stations.forEach((s, i) => {
-                html += `
-                    <div class="station-dropdown-item ${i === currentStationIndex ? 'active' : ''}" data-index="${i}">
-                        <span class="dot"></span>
-                        ${s.track}
-                    </div>
-                `;
-            });
-            dropdownMenu.innerHTML = html;
-
-            dropdownMenu.querySelectorAll('.station-dropdown-item').forEach(item => {
-                item.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const idx = parseInt(item.dataset.index, 10);
-                    selectStation(idx);
-                    dropdownMenu.classList.remove('open');
-                    dropdownBtn.classList.remove('open');
+            function renderStationDropdown() {
+                let html = '';
+                stations.forEach((s, i) => {
+                    html += `
+                            <div class="station-dropdown-item ${i === currentStationIndex ? 'active' : ''}" data-index="${i}">
+                                <span class="dot"></span>
+                                ${s.track}
+                            </div>
+                        `;
                 });
-            });
-        }
+                dropdownMenu.innerHTML = html;
 
-        function selectStation(index) {
-            currentStationIndex = index;
-            const s = stations[index];
-            currentStationLabel.textContent = s.track;
-            updateStationInfo(index);
-            if (audio.src && !audio.paused) {
-                playRadio(index);
-            }
-            renderStationDropdown();
-        }
-
-        dropdownBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            dropdownMenu.classList.toggle('open');
-            dropdownBtn.classList.toggle('open');
-        });
-
-        document.addEventListener('click', () => {
-            dropdownMenu.classList.remove('open');
-            dropdownBtn.classList.remove('open');
-        });
-
-        // === ТЕМЫ ===
-        const themes = [
-            { id: 'theme-dark', color: '#1a1a1a' },
-            { id: 'theme-light', color: '#e8e8e8' },
-            { id: 'theme-ocean', color: '#1a3a6a' },
-            { id: 'theme-forest', color: '#1a3a1a' },
-            { id: 'theme-sunset', color: '#6a2a1a' },
-            { id: 'theme-midnight', color: '#2a1a4a' },
-            { id: 'theme-cyber', color: '#1a3a3a' },
-            { id: 'theme-rose', color: '#4a1a2a' },
-            { id: 'theme-coffee', color: '#3a2a1a' },
-            { id: 'theme-aurora', color: '#1a3a4a' },
-            { id: 'theme-lavender', color: '#3a1a4a' },
-            { id: 'theme-matrix', color: '#1a3a1a' },
-        ];
-
-        const themeTrigger = document.getElementById('themePickerTrigger');
-        const themePopup = document.getElementById('themePickerPopup');
-        const body = document.body;
-
-        function renderThemePicker() {
-            let html = '';
-            themes.forEach(t => {
-                const isActive = body.className === t.id;
-                html += `
-                    <div class="theme-dot ${isActive ? 'active' : ''}" 
-                         style="background:${t.color};" 
-                         data-theme="${t.id}"
-                         title="${t.id.replace('theme-', '')}">
-                    </div>
-                `;
-            });
-            themePopup.innerHTML = html;
-
-            const activeTheme = themes.find(t => t.id === body.className);
-            if (activeTheme) {
-                themeTrigger.style.background = activeTheme.color;
-            }
-
-            themePopup.querySelectorAll('.theme-dot').forEach(dot => {
-                dot.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    setTheme(dot.dataset.theme);
-                    themePopup.classList.remove('open');
-                });
-            });
-        }
-
-        function setTheme(themeName) {
-            body.className = themeName;
-            localStorage.setItem('dashboard_theme', themeName);
-            renderThemePicker();
-        }
-
-        themeTrigger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            themePopup.classList.toggle('open');
-        });
-
-        document.addEventListener('click', () => {
-            themePopup.classList.remove('open');
-        });
-
-        const savedTheme = localStorage.getItem('dashboard_theme');
-        if (savedTheme && themes.some(t => t.id === savedTheme)) {
-            setTheme(savedTheme);
-        } else {
-            setTheme('theme-dark');
-        }
-
-        // === ЧАСЫ ===
-        function updateClock() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('clockTime').textContent = `${hours}:${minutes}:${seconds}`;
-            const options = { day: 'numeric', month: 'long', year: 'numeric' };
-            document.getElementById('clockDate').textContent = now.toLocaleDateString('ru-RU', options);
-        }
-        updateClock();
-        setInterval(updateClock, 1000);
-
-        // === RSS ===
-        const RSS_FEEDS = [
-            { name: 'Meduza', url: 'https://meduza.io/rss/all' },
-            { name: 'TechCrunch', url: 'https://techcrunch.com/feed/' },
-            { name: 'BBC Russian', url: 'http://feeds.bbci.co.uk/russian/news/rss.xml' },
-        ];
-
-        const rssFeedContainer = document.getElementById('rssFeed');
-
-        async function fetchRSS() {
-            try {
-                let allItems = [];
-
-                for (const feed of RSS_FEEDS) {
-                    const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(feed.url)}`;
-                    const response = await fetch(proxyUrl);
-                    if (!response.ok) continue;
-                    const xmlText = await response.text();
-                    
-                    const parser = new DOMParser();
-                    const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
-                    const items = xmlDoc.querySelectorAll('item');
-                    
-                    items.forEach(item => {
-                        const title = item.querySelector('title')?.textContent?.trim() || 'Без заголовка';
-                        const link = item.querySelector('link')?.textContent?.trim() || '#';
-                        const pubDate = item.querySelector('pubDate')?.textContent?.trim() || '';
-                        allItems.push({
-                            title: title,
-                            link: link,
-                            source: feed.name,
-                            date: pubDate,
-                        });
+                dropdownMenu.querySelectorAll('.station-dropdown-item').forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const idx = parseInt(item.dataset.index, 10);
+                        selectStation(idx);
+                        dropdownMenu.classList.remove('open');
+                        dropdownBtn.classList.remove('open');
                     });
+                });
+            }
+
+            function selectStation(index) {
+                currentStationIndex = index;
+                const s = stations[index];
+                currentStationLabel.textContent = s.track;
+                updateStationInfo(index);
+                if (audio.src && !audio.paused) {
+                    playRadio(index);
+                }
+                renderStationDropdown();
+            }
+
+            dropdownBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                dropdownMenu.classList.toggle('open');
+                dropdownBtn.classList.toggle('open');
+            });
+
+            document.addEventListener('click', () => {
+                dropdownMenu.classList.remove('open');
+                dropdownBtn.classList.remove('open');
+            });
+
+            // === ТЕМЫ ===
+            const themes = [
+                { id: 'theme-dark', color: '#1a1a1a' },
+                { id: 'theme-light', color: '#e8e8e8' },
+                { id: 'theme-ocean', color: '#1a3a6a' },
+                { id: 'theme-forest', color: '#1a3a1a' },
+                { id: 'theme-sunset', color: '#6a2a1a' },
+                { id: 'theme-midnight', color: '#2a1a4a' },
+                { id: 'theme-cyber', color: '#1a3a3a' },
+                { id: 'theme-rose', color: '#4a1a2a' },
+                { id: 'theme-coffee', color: '#3a2a1a' },
+                { id: 'theme-aurora', color: '#1a3a4a' },
+                { id: 'theme-lavender', color: '#3a1a4a' },
+                { id: 'theme-matrix', color: '#1a3a1a' },
+            ];
+
+            const themeTrigger = document.getElementById('themePickerTrigger');
+            const themePopup = document.getElementById('themePickerPopup');
+            const body = document.body;
+
+            function renderThemePicker() {
+                let html = '';
+                themes.forEach(t => {
+                    const isActive = body.className === t.id;
+                    html += `
+                            <div class="theme-dot ${isActive ? 'active' : ''}" 
+                                 style="background:${t.color};" 
+                                 data-theme="${t.id}"
+                                 title="${t.id.replace('theme-', '')}">
+                            </div>
+                        `;
+                });
+                themePopup.innerHTML = html;
+
+                const activeTheme = themes.find(t => t.id === body.className);
+                if (activeTheme) {
+                    themeTrigger.style.background = activeTheme.color;
                 }
 
-                allItems.sort((a, b) => {
-                    const dateA = new Date(a.date);
-                    const dateB = new Date(b.date);
-                    if (isNaN(dateA) || isNaN(dateB)) return 0;
-                    return dateB - dateA;
+                themePopup.querySelectorAll('.theme-dot').forEach(dot => {
+                    dot.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        setTheme(dot.dataset.theme);
+                        themePopup.classList.remove('open');
+                    });
                 });
+            }
 
-                allItems = allItems.slice(0, 15);
+            function setTheme(themeName) {
+                body.className = themeName;
+                localStorage.setItem('dashboard_theme', themeName);
+                renderThemePicker();
+            }
 
-                if (allItems.length === 0) {
+            themeTrigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                themePopup.classList.toggle('open');
+            });
+
+            document.addEventListener('click', () => {
+                themePopup.classList.remove('open');
+            });
+
+            const savedTheme = localStorage.getItem('dashboard_theme');
+            if (savedTheme && themes.some(t => t.id === savedTheme)) {
+                setTheme(savedTheme);
+            } else {
+                setTheme('theme-dark');
+            }
+
+            // === ЧАСЫ ===
+            function updateClock() {
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                document.getElementById('clockTime').textContent = `${hours}:${minutes}:${seconds}`;
+                const options = { day: 'numeric', month: 'long', year: 'numeric' };
+                document.getElementById('clockDate').textContent = now.toLocaleDateString('ru-RU', options);
+            }
+            updateClock();
+            setInterval(updateClock, 1000);
+
+            // === RSS ===
+            const RSS_FEEDS = [
+                { name: 'Meduza', url: 'https://meduza.io/rss/all' },
+                { name: 'TechCrunch', url: 'https://techcrunch.com/feed/' },
+                { name: 'BBC Russian', url: 'http://feeds.bbci.co.uk/russian/news/rss.xml' },
+            ];
+
+            const rssFeedContainer = document.getElementById('rssFeed');
+
+            async function fetchRSS() {
+                try {
+                    let allItems = [];
+
+                    for (const feed of RSS_FEEDS) {
+                        const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(feed.url)}`;
+                        const response = await fetch(proxyUrl);
+                        if (!response.ok) continue;
+                        const xmlText = await response.text();
+
+                        const parser = new DOMParser();
+                        const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+                        const items = xmlDoc.querySelectorAll('item');
+
+                        items.forEach(item => {
+                            const title = item.querySelector('title')?.textContent?.trim() || 'Без заголовка';
+                            const link = item.querySelector('link')?.textContent?.trim() || '#';
+                            const pubDate = item.querySelector('pubDate')?.textContent?.trim() || '';
+                            allItems.push({
+                                title: title,
+                                link: link,
+                                source: feed.name,
+                                date: pubDate,
+                            });
+                        });
+                    }
+
+                    allItems.sort((a, b) => {
+                        const dateA = new Date(a.date);
+                        const dateB = new Date(b.date);
+                        if (isNaN(dateA) || isNaN(dateB)) return 0;
+                        return dateB - dateA;
+                    });
+
+                    allItems = allItems.slice(0, 15);
+
+                    if (allItems.length === 0) {
+                        rssFeedContainer.innerHTML = `
+                                <div style="padding:15px 0; text-align:center; color:var(--text-muted); font-size:0.7rem;">
+                                    <i class="fas fa-newspaper" style="color:var(--accent);"></i><br><br>Нет новостей
+                                </div>
+                            `;
+                        return;
+                    }
+
+                    let html = '';
+                    allItems.forEach(item => {
+                        const title = item.title.length > 70 ? item.title.slice(0, 70) + '…' : item.title;
+                        const dateStr = item.date ? new Date(item.date).toLocaleDateString('ru-RU', { day: 'numeric',
+                            month: 'short' }) : '';
+                        html += `
+                                <div class="rss-item">
+                                    <div class="title"><a href="${item.link}" target="_blank" rel="noopener">${title}</a></div>
+                                    <div class="rss-meta">
+                                        <span class="source">${item.source}</span>
+                                        ${dateStr ? `<span>${dateStr}</span>` : ''}
+                                    </div>
+                                </div>
+                            `;
+                    });
+                    rssFeedContainer.innerHTML = html;
+                } catch (error) {
+                    console.warn('RSS error:', error);
                     rssFeedContainer.innerHTML = `
-                        <div style="padding:15px 0; text-align:center; color:var(--text-muted); font-size:0.7rem;">
-                            <i class="fas fa-newspaper" style="color:var(--accent);"></i><br><br>Нет новостей
-                        </div>
-                    `;
+                            <div style="padding:15px 0; text-align:center; color:var(--text-muted); font-size:0.7rem;">
+                                <i class="fas fa-exclamation-triangle" style="color:var(--accent);"></i><br><br>Ошибка загрузки
+                            </div>
+                        `;
+                }
+            }
+
+            fetchRSS();
+            setInterval(fetchRSS, 600000);
+
+            document.getElementById('refreshRssBtn').addEventListener('click', () => {
+                const btn = document.getElementById('refreshRssBtn');
+                btn.style.transform = 'rotate(360deg)';
+                fetchRSS().finally(() => {
+                    setTimeout(() => { btn.style.transform = ''; }, 300);
+                });
+            });
+
+            // === СКРЫТИЕ RSS (ИСПРАВЛЕНО) ===
+            const leftColumn = document.getElementById('leftColumn');
+            const toggleBtn = document.getElementById('toggleRssBtn');
+
+            toggleBtn.addEventListener('click', () => {
+                leftColumn.classList.toggle('collapsed');
+                toggleBtn.classList.toggle('collapsed');
+
+                // Перерисовываем canvas после анимации
+                setTimeout(() => {
+                    if (window.resizeDrawCanvas) window.resizeDrawCanvas();
+                }, 350);
+            });
+
+            // === РАДИО ===
+            const audio = new Audio();
+            audio.volume = 0.7;
+
+            const vinylContainer = document.getElementById('vinylContainer');
+            const playBtn = document.getElementById('playBtn');
+            const stopBtn = document.getElementById('stopBtn');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const trackName = document.getElementById('trackName');
+            const stationName = document.getElementById('stationName');
+            const volumeSlider = document.getElementById('volumeSlider');
+
+            function updateStationInfo(index) {
+                const s = stations[index];
+                trackName.textContent = s.track;
+                stationName.textContent = s.station;
+                currentStationLabel.textContent = s.track;
+                renderStationDropdown();
+            }
+
+            function playRadio(index) {
+                const url = stations[index].value;
+                if (audio.src !== url) {
+                    audio.src = url;
+                    audio.load();
+                }
+                audio.play().catch(e => console.warn('Play error:', e));
+                vinylContainer.classList.add('playing');
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                updateStationInfo(index);
+                currentStationIndex = index;
+            }
+
+            function pauseRadio() {
+                audio.pause();
+                vinylContainer.classList.remove('playing');
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+
+            function stopRadio() {
+                audio.pause();
+                audio.currentTime = 0;
+                audio.src = '';
+                vinylContainer.classList.remove('playing');
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                trackName.textContent = 'Выберите станцию';
+                stationName.textContent = 'Нажмите Play';
+            }
+
+            playBtn.addEventListener('click', () => {
+                if (audio.src && !audio.paused) {
+                    pauseRadio();
+                } else {
+                    playRadio(currentStationIndex);
+                }
+            });
+
+            stopBtn.addEventListener('click', stopRadio);
+
+            prevBtn.addEventListener('click', () => {
+                const newIndex = (currentStationIndex - 1 + stations.length) % stations.length;
+                if (audio.src && !audio.paused) {
+                    playRadio(newIndex);
+                } else {
+                    currentStationIndex = newIndex;
+                    updateStationInfo(newIndex);
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                const newIndex = (currentStationIndex + 1) % stations.length;
+                if (audio.src && !audio.paused) {
+                    playRadio(newIndex);
+                } else {
+                    currentStationIndex = newIndex;
+                    updateStationInfo(newIndex);
+                }
+            });
+
+            volumeSlider.addEventListener('input', (e) => {
+                audio.volume = parseFloat(e.target.value);
+            });
+
+            renderStationDropdown();
+            updateStationInfo(0);
+
+            // === ПЕРЕКЛЮЧЕНИЕ МЕЖДУ РИСОВАЛКОЙ И ТЕКСТОВЫМ РЕДАКТОРОМ ===
+            const switcherBtns = document.querySelectorAll('.switcher-btn');
+            const drawContent = document.getElementById('drawContent');
+            const textContent = document.getElementById('textContent');
+
+            switcherBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    switcherBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const target = btn.dataset.target;
+
+                    if (target === 'draw') {
+                        drawContent.classList.remove('hidden');
+                        textContent.classList.add('hidden');
+                        // Перерисовываем canvas
+                        setTimeout(() => {
+                            if (window.resizeDrawCanvas) window.resizeDrawCanvas();
+                        }, 50);
+                    } else {
+                        drawContent.classList.add('hidden');
+                        textContent.classList.remove('hidden');
+                    }
+                });
+            });
+
+            // === РИСОВАНИЕ ===
+            const canvas = document.getElementById('drawCanvas');
+            const ctx = canvas.getContext('2d');
+            const drawArea = document.getElementById('drawArea');
+            let isDrawing = false;
+            let drawColor = '#ffffff';
+            let drawSize = 3;
+            let isEraser = false;
+            let isFillMode = false;
+            let history = [];
+            let historyIndex = -1;
+            let isInitialized = false;
+
+            // Цвета (расширенная палитра)
+            const colors = [
+                '#ffffff', '#cccccc', '#888888', '#444444', '#000000',
+                '#ff6b6b', '#ee5a24', '#f97316', '#ff9f43', '#feca57',
+                '#ffd93d', '#fdcb6e', '#6ab04c', '#00b894', '#00cec9',
+                '#0984e3', '#4fc3ff', '#74b9ff', '#a29bfe', '#6c5ce7',
+                '#fd79a8', '#f472b6', '#e84393', '#fd79a8', '#e17055',
+            ];
+
+            const drawColorsContainer = document.getElementById('drawColors');
+
+            colors.forEach(c => {
+                const dot = document.createElement('div');
+                dot.className = 'color-dot' + (c === '#ffffff' ? ' active' : '');
+                dot.style.background = c;
+                dot.dataset.color = c;
+                dot.addEventListener('click', () => {
+                    document.querySelectorAll('.draw-colors .color-dot').forEach(d => d.classList.remove(
+                    'active'));
+                    dot.classList.add('active');
+                    drawColor = c;
+                    isEraser = false;
+                    isFillMode = false;
+                    document.getElementById('drawEraser').classList.remove('active');
+                    document.getElementById('drawEraser').innerHTML = '<i class="fas fa-pencil"></i>';
+                    document.getElementById('drawFill').classList.remove('active');
+                    document.getElementById('drawFill').innerHTML = '<i class="fas fa-fill-drip"></i>';
+                });
+                drawColorsContainer.appendChild(dot);
+            });
+
+            function resizeDrawCanvas() {
+                const rect = drawArea.getBoundingClientRect();
+                canvas.width = rect.width || 300;
+                canvas.height = rect.height || 200;
+                if (isInitialized) {
+                    restoreFromHistory();
+                }
+            }
+            window.resizeDrawCanvas = resizeDrawCanvas;
+
+            function saveToHistory() {
+                if (historyIndex < history.length - 1) {
+                    history = history.slice(0, historyIndex + 1);
+                }
+                history.push(canvas.toDataURL());
+                historyIndex = history.length - 1;
+                if (history.length > 50) {
+                    history.shift();
+                    historyIndex--;
+                }
+            }
+
+            function restoreFromHistory() {
+                if (historyIndex >= 0 && history[historyIndex]) {
+                    const img = new Image();
+                    img.onload = () => {
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        ctx.drawImage(img, 0, 0);
+                    };
+                    img.src = history[historyIndex];
+                } else {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+            }
+
+            function getPos(e) {
+                const rect = canvas.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                return {
+                    x: (clientX - rect.left) * (canvas.width / rect.width),
+                    y: (clientY - rect.top) * (canvas.height / rect.height)
+                };
+            }
+
+            function startDraw(e) {
+                e.preventDefault();
+                if (isFillMode) {
+                    // Заливка
+                    const pos = getPos(e);
+                    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                    const data = imageData.data;
+                    const idx = (Math.floor(pos.y) * canvas.width + Math.floor(pos.x)) * 4;
+                    const targetR = data[idx];
+                    const targetG = data[idx + 1];
+                    const targetB = data[idx + 2];
+                    const targetA = data[idx + 3];
+
+                    const fillColor = drawColor;
+                    const hex = fillColor.replace('#', '');
+                    const r = parseInt(hex.substring(0, 2), 16);
+                    const g = parseInt(hex.substring(2, 4), 16);
+                    const b = parseInt(hex.substring(4, 6), 16);
+
+                    const stack = [
+                        [Math.floor(pos.x), Math.floor(pos.y)]
+                    ];
+                    const visited = new Set();
+                    const width = canvas.width;
+                    const height = canvas.height;
+
+                    while (stack.length > 0) {
+                        const [x, y] = stack.pop();
+                        const key = `${x},${y}`;
+                        if (visited.has(key)) continue;
+                        if (x < 0 || x >= width || y < 0 || y >= height) continue;
+                        const idx2 = (y * width + x) * 4;
+                        if (Math.abs(data[idx2] - targetR) > 5 ||
+                            Math.abs(data[idx2 + 1] - targetG) > 5 ||
+                            Math.abs(data[idx2 + 2] - targetB) > 5) continue;
+
+                        visited.add(key);
+                        data[idx2] = r;
+                        data[idx2 + 1] = g;
+                        data[idx2 + 2] = b;
+                        data[idx2 + 3] = 255;
+
+                        stack.push([x + 1, y], [x - 1, y], [x, y + 1], [x, y - 1]);
+                    }
+
+                    ctx.putImageData(imageData, 0, 0);
+                    saveToHistory();
                     return;
                 }
 
-                let html = '';
-                allItems.forEach(item => {
-                    const title = item.title.length > 70 ? item.title.slice(0, 70) + '…' : item.title;
-                    const dateStr = item.date ? new Date(item.date).toLocaleDateString('ru-RU', {day:'numeric', month:'short'}) : '';
-                    html += `
-                        <div class="rss-item">
-                            <div class="title"><a href="${item.link}" target="_blank" rel="noopener">${title}</a></div>
-                            <div class="rss-meta">
-                                <span class="source">${item.source}</span>
-                                ${dateStr ? `<span>${dateStr}</span>` : ''}
-                            </div>
-                        </div>
-                    `;
-                });
-                rssFeedContainer.innerHTML = html;
-            } catch (error) {
-                console.warn('RSS error:', error);
-                rssFeedContainer.innerHTML = `
-                    <div style="padding:15px 0; text-align:center; color:var(--text-muted); font-size:0.7rem;">
-                        <i class="fas fa-exclamation-triangle" style="color:var(--accent);"></i><br><br>Ошибка загрузки
-                    </div>
-                `;
-            }
-        }
-
-        fetchRSS();
-        setInterval(fetchRSS, 600000);
-
-        document.getElementById('refreshRssBtn').addEventListener('click', () => {
-            const btn = document.getElementById('refreshRssBtn');
-            btn.style.transform = 'rotate(360deg)';
-            fetchRSS().finally(() => {
-                setTimeout(() => { btn.style.transform = ''; }, 300);
-            });
-        });
-
-        // === СКРЫТИЕ RSS ===
-        const leftColumn = document.getElementById('leftColumn');
-        const toggleBtn = document.getElementById('toggleRssBtn');
-
-        toggleBtn.addEventListener('click', () => {
-            leftColumn.classList.toggle('collapsed');
-            toggleBtn.classList.toggle('collapsed');
-            setTimeout(() => {
-                // Перерисовываем canvas после анимации
-                if (window.resizeDrawCanvas) window.resizeDrawCanvas();
-            }, 350);
-        });
-
-        // === РАДИО ===
-        const audio = new Audio();
-        audio.volume = 0.7;
-
-        const vinylContainer = document.getElementById('vinylContainer');
-        const playBtn = document.getElementById('playBtn');
-        const stopBtn = document.getElementById('stopBtn');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const trackName = document.getElementById('trackName');
-        const stationName = document.getElementById('stationName');
-        const volumeSlider = document.getElementById('volumeSlider');
-
-        function updateStationInfo(index) {
-            const s = stations[index];
-            trackName.textContent = s.track;
-            stationName.textContent = s.station;
-            currentStationLabel.textContent = s.track;
-            renderStationDropdown();
-        }
-
-        function playRadio(index) {
-            const url = stations[index].value;
-            if (audio.src !== url) {
-                audio.src = url;
-                audio.load();
-            }
-            audio.play().catch(e => console.warn('Play error:', e));
-            vinylContainer.classList.add('playing');
-            playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            updateStationInfo(index);
-            currentStationIndex = index;
-        }
-
-        function pauseRadio() {
-            audio.pause();
-            vinylContainer.classList.remove('playing');
-            playBtn.innerHTML = '<i class="fas fa-play"></i>';
-        }
-
-        function stopRadio() {
-            audio.pause();
-            audio.currentTime = 0;
-            audio.src = '';
-            vinylContainer.classList.remove('playing');
-            playBtn.innerHTML = '<i class="fas fa-play"></i>';
-            trackName.textContent = 'Выберите станцию';
-            stationName.textContent = 'Нажмите Play';
-        }
-
-        playBtn.addEventListener('click', () => {
-            if (audio.src && !audio.paused) {
-                pauseRadio();
-            } else {
-                playRadio(currentStationIndex);
-            }
-        });
-
-        stopBtn.addEventListener('click', stopRadio);
-
-        prevBtn.addEventListener('click', () => {
-            const newIndex = (currentStationIndex - 1 + stations.length) % stations.length;
-            if (audio.src && !audio.paused) {
-                playRadio(newIndex);
-            } else {
-                currentStationIndex = newIndex;
-                updateStationInfo(newIndex);
-            }
-        });
-
-        nextBtn.addEventListener('click', () => {
-            const newIndex = (currentStationIndex + 1) % stations.length;
-            if (audio.src && !audio.paused) {
-                playRadio(newIndex);
-            } else {
-                currentStationIndex = newIndex;
-                updateStationInfo(newIndex);
-            }
-        });
-
-        volumeSlider.addEventListener('input', (e) => {
-            audio.volume = parseFloat(e.target.value);
-        });
-
-        renderStationDropdown();
-        updateStationInfo(0);
-
-        // === ПЕРЕКЛЮЧЕНИЕ ВИДЖЕТОВ ===
-        const switcherBtns = document.querySelectorAll('.switcher-btn');
-        const widgetContents = {
-            draw: document.getElementById('widgetDraw'),
-            text: document.getElementById('widgetText'),
-            todo: document.getElementById('widgetTodo'),
-            weather: document.getElementById('widgetWeather'),
-        };
-        const widgetIcon = document.getElementById('widgetIcon');
-        const widgetTitle = document.getElementById('widgetTitle');
-
-        const widgetNames = {
-            draw: { icon: 'fa-paint-brush', title: 'Наброски' },
-            text: { icon: 'fa-edit', title: 'Заметки' },
-            todo: { icon: 'fa-tasks', title: 'Список дел' },
-            weather: { icon: 'fa-cloud-sun', title: 'Погода' },
-        };
-
-        let currentWidget = 'draw';
-
-        switcherBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const widget = btn.dataset.widget;
-                if (widget === currentWidget) return;
-
-                switcherBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                Object.keys(widgetContents).forEach(key => {
-                    widgetContents[key].classList.toggle('hidden', key !== widget);
-                });
-
-                widgetIcon.className = `fas ${widgetNames[widget].icon}`;
-                widgetTitle.textContent = widgetNames[widget].title;
-
-                currentWidget = widget;
-
-                if (widget === 'draw') {
-                    setTimeout(() => {
-                        if (window.resizeDrawCanvas) window.resizeDrawCanvas();
-                    }, 50);
-                }
-            });
-        });
-
-        // === РИСОВАНИЕ ===
-        const canvas = document.getElementById('drawCanvas');
-        const ctx = canvas.getContext('2d');
-        const drawArea = document.getElementById('drawArea');
-        let isDrawing = false;
-        let drawColor = '#ffffff';
-        let drawSize = 3;
-        let isEraser = false;
-        let isFillMode = false;
-        let history = [];
-        let historyIndex = -1;
-        let isInitialized = false;
-
-        // Цвета (расширенная палитра)
-        const colors = [
-            '#ffffff', '#cccccc', '#888888', '#444444', '#000000',
-            '#ff6b6b', '#ee5a24', '#f97316', '#ff9f43', '#feca57',
-            '#ffd93d', '#fdcb6e', '#6ab04c', '#00b894', '#00cec9',
-            '#0984e3', '#4fc3ff', '#74b9ff', '#a29bfe', '#6c5ce7',
-            '#fd79a8', '#f472b6', '#e84393', '#fd79a8', '#e17055',
-        ];
-
-        const drawColorsContainer = document.getElementById('drawColors');
-
-        colors.forEach(c => {
-            const dot = document.createElement('div');
-            dot.className = 'color-dot' + (c === '#ffffff' ? ' active' : '');
-            dot.style.background = c;
-            dot.dataset.color = c;
-            dot.addEventListener('click', () => {
-                document.querySelectorAll('.draw-colors .color-dot').forEach(d => d.classList.remove('active'));
-                dot.classList.add('active');
-                drawColor = c;
-                isEraser = false;
-                isFillMode = false;
-                document.getElementById('drawEraser').classList.remove('active');
-            });
-            drawColorsContainer.appendChild(dot);
-        });
-
-        function resizeDrawCanvas() {
-            const rect = drawArea.getBoundingClientRect();
-            canvas.width = rect.width || 300;
-            canvas.height = rect.height || 200;
-            if (isInitialized) {
-                restoreFromHistory();
-            }
-        }
-        window.resizeDrawCanvas = resizeDrawCanvas;
-
-        function saveToHistory() {
-            if (historyIndex < history.length - 1) {
-                history = history.slice(0, historyIndex + 1);
-            }
-            history.push(canvas.toDataURL());
-            historyIndex = history.length - 1;
-            if (history.length > 50) {
-                history.shift();
-                historyIndex--;
-            }
-        }
-
-        function restoreFromHistory() {
-            if (historyIndex >= 0 && history[historyIndex]) {
-                const img = new Image();
-                img.onload = () => {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    ctx.drawImage(img, 0, 0);
-                };
-                img.src = history[historyIndex];
-            } else {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-            }
-        }
-
-        function getPos(e) {
-            const rect = canvas.getBoundingClientRect();
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-            return {
-                x: (clientX - rect.left) * (canvas.width / rect.width),
-                y: (clientY - rect.top) * (canvas.height / rect.height)
-            };
-        }
-
-        function startDraw(e) {
-            e.preventDefault();
-            if (isFillMode) {
-                // Заливка
+                isDrawing = true;
                 const pos = getPos(e);
-                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                const data = imageData.data;
-                const idx = (Math.floor(pos.y) * canvas.width + Math.floor(pos.x)) * 4;
-                const targetR = data[idx];
-                const targetG = data[idx + 1];
-                const targetB = data[idx + 2];
-                const targetA = data[idx + 3];
-
-                // Простая заливка (замена цвета)
-                const fillColor = drawColor;
-                const hex = fillColor.replace('#', '');
-                const r = parseInt(hex.substring(0, 2), 16);
-                const g = parseInt(hex.substring(2, 4), 16);
-                const b = parseInt(hex.substring(4, 6), 16);
-
-                const stack = [[Math.floor(pos.x), Math.floor(pos.y)]];
-                const visited = new Set();
-                const width = canvas.width;
-                const height = canvas.height;
-
-                while (stack.length > 0) {
-                    const [x, y] = stack.pop();
-                    const key = `${x},${y}`;
-                    if (visited.has(key)) continue;
-                    if (x < 0 || x >= width || y < 0 || y >= height) continue;
-                    const idx2 = (y * width + x) * 4;
-                    if (Math.abs(data[idx2] - targetR) > 5 || 
-                        Math.abs(data[idx2 + 1] - targetG) > 5 || 
-                        Math.abs(data[idx2 + 2] - targetB) > 5) continue;
-                    
-                    visited.add(key);
-                    data[idx2] = r;
-                    data[idx2 + 1] = g;
-                    data[idx2 + 2] = b;
-                    data[idx2 + 3] = 255;
-
-                    stack.push([x + 1, y], [x - 1, y], [x, y + 1], [x, y - 1]);
-                }
-
-                ctx.putImageData(imageData, 0, 0);
-                saveToHistory();
-                return;
+                ctx.beginPath();
+                ctx.moveTo(pos.x, pos.y);
             }
 
-            isDrawing = true;
-            const pos = getPos(e);
-            ctx.beginPath();
-            ctx.moveTo(pos.x, pos.y);
-        }
-
-        function draw(e) {
-            e.preventDefault();
-            if (!isDrawing) return;
-            const pos = getPos(e);
-            ctx.lineTo(pos.x, pos.y);
-            ctx.strokeStyle = isEraser ? 'rgba(0,0,0,0)' : drawColor;
-            ctx.globalCompositeOperation = isEraser ? 'destination-out' : 'source-over';
-            ctx.lineWidth = isEraser ? drawSize * 3 : drawSize;
-            ctx.lineCap = 'round';
-            ctx.lineJoin = 'round';
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(pos.x, pos.y);
-            ctx.globalCompositeOperation = 'source-over';
-        }
-
-        function endDraw(e) {
-            if (!isDrawing) return;
-            isDrawing = false;
-            ctx.beginPath();
-            ctx.globalCompositeOperation = 'source-over';
-            saveToHistory();
-        }
-
-        canvas.addEventListener('mousedown', startDraw);
-        canvas.addEventListener('mousemove', draw);
-        canvas.addEventListener('mouseup', endDraw);
-        canvas.addEventListener('mouseleave', endDraw);
-
-        canvas.addEventListener('touchstart', startDraw, { passive: false });
-        canvas.addEventListener('touchmove', draw, { passive: false });
-        canvas.addEventListener('touchend', endDraw, { passive: false });
-
-        // Ластик
-        document.getElementById('drawEraser').addEventListener('click', function() {
-            isEraser = !isEraser;
-            isFillMode = false;
-            this.classList.toggle('active');
-            document.querySelectorAll('.draw-colors .color-dot').forEach(d => d.classList.remove('active'));
-            if (isEraser) {
-                this.innerHTML = '<i class="fas fa-eraser"></i>';
-            } else {
-                this.innerHTML = '<i class="fas fa-pencil"></i>';
-            }
-        });
-
-        // Заливка
-        document.getElementById('drawFill').addEventListener('click', function() {
-            isFillMode = !isFillMode;
-            isEraser = false;
-            this.classList.toggle('active');
-            document.getElementById('drawEraser').classList.remove('active');
-            document.getElementById('drawEraser').innerHTML = '<i class="fas fa-pencil"></i>';
-            if (isFillMode) {
-                this.innerHTML = '<i class="fas fa-fill-drip" style="color:var(--accent);"></i>';
-            } else {
-                this.innerHTML = '<i class="fas fa-fill-drip"></i>';
-            }
-        });
-
-        // Размер
-        const drawSizeInput = document.getElementById('drawSize');
-        const drawSizeLabel = document.getElementById('drawSizeLabel');
-        drawSizeInput.addEventListener('input', () => {
-            drawSize = parseInt(drawSizeInput.value);
-            drawSizeLabel.textContent = drawSize;
-        });
-
-        // Очистить
-        document.getElementById('drawClear').addEventListener('click', () => {
-            if (confirm('Очистить холст?')) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                saveToHistory();
-            }
-        });
-
-        // Отменить
-        document.getElementById('drawUndo').addEventListener('click', () => {
-            if (historyIndex > 0) {
-                historyIndex--;
-                restoreFromHistory();
-            }
-        });
-
-        function initCanvas() {
-            resizeDrawCanvas();
-            ctx.fillStyle = 'rgba(0,0,0,0.02)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            isInitialized = true;
-            saveToHistory();
-        }
-
-        initCanvas();
-        window.addEventListener('resize', resizeDrawCanvas);
-
-        // === ТЕКСТОВЫЙ РЕДАКТОР ===
-        const textEditor = document.getElementById('textEditor');
-        const textWords = document.getElementById('textWords');
-        const textChars = document.getElementById('textChars');
-
-        function updateTextStats() {
-            const text = textEditor.value;
-            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
-            const chars = text.length;
-            textWords.textContent = `${words} слов`;
-            textChars.textContent = `${chars} символов`;
-        }
-
-        textEditor.addEventListener('input', updateTextStats);
-
-        // Загрузка сохранённого текста
-        const savedText = localStorage.getItem('dashboard_text');
-        if (savedText) {
-            textEditor.value = savedText;
-            updateTextStats();
-        }
-
-        document.getElementById('textSave').addEventListener('click', () => {
-            localStorage.setItem('dashboard_text', textEditor.value);
-            const btn = document.getElementById('textSave');
-            btn.innerHTML = '<i class="fas fa-check"></i> Сохранено';
-            setTimeout(() => {
-                btn.innerHTML = '<i class="fas fa-save"></i> Сохранить';
-            }, 1500);
-        });
-
-        document.getElementById('textClear').addEventListener('click', () => {
-            if (confirm('Очистить текст?')) {
-                textEditor.value = '';
-                updateTextStats();
-                localStorage.removeItem('dashboard_text');
-            }
-        });
-
-        // === TO-DO СПИСОК ===
-        const todoList = document.getElementById('todoList');
-        const todoInput = document.getElementById('todoInput');
-        const todoAddBtn = document.getElementById('todoAddBtn');
-        let todos = [];
-
-        function loadTodos() {
-            try {
-                const stored = localStorage.getItem('dashboard_todos');
-                todos = stored ? JSON.parse(stored) : [];
-            } catch (e) {
-                todos = [];
-            }
-            renderTodos();
-        }
-
-        function saveTodos() {
-            localStorage.setItem('dashboard_todos', JSON.stringify(todos));
-            renderTodos();
-        }
-
-        function renderTodos() {
-            if (todos.length === 0) {
-                todoList.innerHTML = `
-                    <div style="text-align:center; padding:20px 0; color:var(--text-muted); font-size:0.7rem;">
-                        <i class="fas fa-check-circle" style="font-size:1.2rem; display:block; margin-bottom:6px; opacity:0.3;"></i>
-                        Нет задач
-                    </div>
-                `;
-                return;
-            }
-
-            let html = '';
-            todos.forEach((todo, index) => {
-                html += `
-                    <div class="todo-item">
-                        <input type="checkbox" ${todo.done ? 'checked' : ''} data-index="${index}">
-                        <span class="todo-text ${todo.done ? 'done' : ''}">${todo.text}</span>
-                        <button class="todo-delete" data-index="${index}"><i class="fas fa-times"></i></button>
-                    </div>
-                `;
-            });
-            todoList.innerHTML = html;
-
-            todoList.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-                cb.addEventListener('change', function() {
-                    const idx = parseInt(this.dataset.index, 10);
-                    todos[idx].done = this.checked;
-                    saveTodos();
-                });
-            });
-
-            todoList.querySelectorAll('.todo-delete').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const idx = parseInt(this.dataset.index, 10);
-                    todos.splice(idx, 1);
-                    saveTodos();
-                });
-            });
-        }
-
-        function addTodo() {
-            const text = todoInput.value.trim();
-            if (text === '') return;
-            todos.unshift({ text, done: false });
-            todoInput.value = '';
-            saveTodos();
-            todoInput.focus();
-        }
-
-        todoInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
+            function draw(e) {
                 e.preventDefault();
-                addTodo();
+                if (!isDrawing) return;
+                const pos = getPos(e);
+                ctx.lineTo(pos.x, pos.y);
+                ctx.strokeStyle = isEraser ? 'rgba(0,0,0,0)' : drawColor;
+                ctx.globalCompositeOperation = isEraser ? 'destination-out' : 'source-over';
+                ctx.lineWidth = isEraser ? drawSize * 3 : drawSize;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(pos.x, pos.y);
+                ctx.globalCompositeOperation = 'source-over';
             }
-        });
 
-        todoAddBtn.addEventListener('click', addTodo);
-
-        loadTodos();
-
-        // === ПОГОДА ===
-        const weatherDisplay = document.getElementById('weatherDisplay');
-        let weatherData = null;
-
-        async function fetchWeather() {
-            try {
-                // Используем бесплатный API wttr.in
-                const response = await fetch('https://wttr.in/Moscow?format=j1&lang=ru');
-                if (!response.ok) throw new Error('Weather API error');
-                const data = await response.json();
-                weatherData = data;
-
-                const current = data.current_condition[0];
-                const temp = current.temp_C;
-                const desc = current.weatherDesc[0].value;
-                const humidity = current.humidity;
-                const wind = current.windSpeedKmph;
-                const code = current.weatherCode;
-
-                // Иконка
-                const iconMap = {
-                    '113': 'fa-sun',
-                    '116': 'fa-cloud-sun',
-                    '119': 'fa-cloud',
-                    '122': 'fa-cloud',
-                    '143': 'fa-smog',
-                    '176': 'fa-cloud-rain',
-                    '179': 'fa-cloud-snow',
-                    '182': 'fa-cloud-rain',
-                    '185': 'fa-cloud-rain',
-                    '200': 'fa-bolt',
-                    '227': 'fa-snowflake',
-                    '230': 'fa-snowflake',
-                    '248': 'fa-smog',
-                    '260': 'fa-smog',
-                    '263': 'fa-cloud-rain',
-                    '266': 'fa-cloud-rain',
-                    '281': 'fa-cloud-rain',
-                    '284': 'fa-cloud-rain',
-                    '293': 'fa-cloud-rain',
-                    '296': 'fa-cloud-rain',
-                    '299': 'fa-cloud-rain',
-                    '302': 'fa-cloud-showers-heavy',
-                    '305': 'fa-cloud-showers-heavy',
-                    '308': 'fa-cloud-showers-heavy',
-                    '311': 'fa-cloud-rain',
-                    '314': 'fa-cloud-rain',
-                    '317': 'fa-cloud-rain',
-                    '320': 'fa-snowflake',
-                    '323': 'fa-snowflake',
-                    '326': 'fa-snowflake',
-                    '329': 'fa-snowflake',
-                    '332': 'fa-snowflake',
-                    '335': 'fa-snowflake',
-                    '338': 'fa-snowflake',
-                    '350': 'fa-snowflake',
-                    '353': 'fa-cloud-rain',
-                    '356': 'fa-cloud-showers-heavy',
-                    '359': 'fa-cloud-showers-heavy',
-                    '362': 'fa-cloud-rain',
-                    '365': 'fa-cloud-rain',
-                    '368': 'fa-snowflake',
-                    '371': 'fa-snowflake',
-                    '374': 'fa-snowflake',
-                    '377': 'fa-snowflake',
-                    '386': 'fa-bolt',
-                    '389': 'fa-bolt',
-                    '392': 'fa-bolt',
-                    '395': 'fa-snowflake',
-                };
-
-                const icon = iconMap[code] || 'fa-cloud';
-
-                weatherDisplay.innerHTML = `
-                    <div class="weather-icon"><i class="fas ${icon}"></i></div>
-                    <div class="weather-temp">${temp}°C</div>
-                    <div class="weather-desc">${desc}</div>
-                    <div class="weather-details">
-                        <span><i class="fas fa-tint"></i> ${humidity}%</span>
-                        <span><i class="fas fa-wind"></i> ${wind} м/с</span>
-                    </div>
-                    <div style="margin-top:8px; font-size:0.6rem; color:var(--text-muted);">
-                        <button id="weatherRefresh" style="background:none;border:none;color:var(--accent);cursor:pointer;font-size:0.6rem;">
-                            <i class="fas fa-sync-alt"></i> Обновить
-                        </button>
-                    </div>
-                `;
-
-                document.getElementById('weatherRefresh')?.addEventListener('click', fetchWeather);
-
-            } catch (error) {
-                console.warn('Weather error:', error);
-                weatherDisplay.innerHTML = `
-                    <div style="text-align:center; padding:20px 0; color:var(--text-muted); font-size:0.7rem;">
-                        <i class="fas fa-exclamation-triangle" style="color:var(--accent); font-size:1.5rem; display:block; margin-bottom:8px;"></i>
-                        Ошибка загрузки погоды
-                        <div style="margin-top:8px;">
-                            <button id="weatherRefresh" style="background:none;border:none;color:var(--accent);cursor:pointer;font-size:0.6rem;">
-                                <i class="fas fa-sync-alt"></i> Повторить
-                            </button>
-                        </div>
-                    </div>
-                `;
-                document.getElementById('weatherRefresh')?.addEventListener('click', fetchWeather);
+            function endDraw(e) {
+                if (!isDrawing) return;
+                isDrawing = false;
+                ctx.beginPath();
+                ctx.globalCompositeOperation = 'source-over';
+                saveToHistory();
             }
-        }
 
-        fetchWeather();
-        setInterval(fetchWeather, 1800000); // 30 минут
+            canvas.addEventListener('mousedown', startDraw);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', endDraw);
+            canvas.addEventListener('mouseleave', endDraw);
 
-    })();
-</script>
+            canvas.addEventListener('touchstart', startDraw, { passive: false });
+            canvas.addEventListener('touchmove', draw, { passive: false });
+            canvas.addEventListener('touchend', endDraw, { passive: false });
+
+            // Ластик
+            document.getElementById('drawEraser').addEventListener('click', function() {
+                isEraser = !isEraser;
+                isFillMode = false;
+                this.classList.toggle('active');
+                document.getElementById('drawFill').classList.remove('active');
+                document.getElementById('drawFill').innerHTML = '<i class="fas fa-fill-drip"></i>';
+                document.querySelectorAll('.draw-colors .color-dot').forEach(d => d.classList.remove('active'));
+                if (isEraser) {
+                    this.innerHTML = '<i class="fas fa-eraser"></i>';
+                } else {
+                    this.innerHTML = '<i class="fas fa-pencil"></i>';
+                }
+            });
+
+            // Заливка
+            document.getElementById('drawFill').addEventListener('click', function() {
+                isFillMode = !isFillMode;
+                isEraser = false;
+                this.classList.toggle('active');
+                document.getElementById('drawEraser').classList.remove('active');
+                document.getElementById('drawEraser').innerHTML = '<i class="fas fa-pencil"></i>';
+                if (isFillMode) {
+                    this.innerHTML = '<i class="fas fa-fill-drip" style="color:var(--accent);"></i>';
+                } else {
+                    this.innerHTML = '<i class="fas fa-fill-drip"></i>';
+                }
+            });
+
+            // Размер
+            const drawSizeInput = document.getElementById('drawSize');
+            const drawSizeLabel = document.getElementById('drawSizeLabel');
+            drawSizeInput.addEventListener('input', () => {
+                drawSize = parseInt(drawSizeInput.value);
+                drawSizeLabel.textContent = drawSize;
+            });
+
+            // Очистить
+            document.getElementById('drawClear').addEventListener('click', () => {
+                if (confirm('Очистить холст?')) {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    saveToHistory();
+                }
+            });
+
+            // Отменить
+            document.getElementById('drawUndo').addEventListener('click', () => {
+                if (historyIndex > 0) {
+                    historyIndex--;
+                    restoreFromHistory();
+                }
+            });
+
+            function initCanvas() {
+                resizeDrawCanvas();
+                ctx.fillStyle = 'rgba(0,0,0,0.02)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                isInitialized = true;
+                saveToHistory();
+            }
+
+            initCanvas();
+            window.addEventListener('resize', resizeDrawCanvas);
+
+            // === ТЕКСТОВЫЙ РЕДАКТОР ===
+            const textEditor = document.getElementById('textEditor');
+            const textWords = document.getElementById('textWords');
+            const textChars = document.getElementById('textChars');
+
+            function updateTextStats() {
+                const text = textEditor.value;
+                const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+                const chars = text.length;
+                textWords.textContent = `${words} слов`;
+                textChars.textContent = `${chars} символов`;
+            }
+
+            textEditor.addEventListener('input', updateTextStats);
+
+            // Загрузка сохранённого текста
+            const savedText = localStorage.getItem('dashboard_text');
+            if (savedText) {
+                textEditor.value = savedText;
+                updateTextStats();
+            }
+
+            document.getElementById('textSave').addEventListener('click', () => {
+                localStorage.setItem('dashboard_text', textEditor.value);
+                const btn = document.getElementById('textSave');
+                btn.innerHTML = '<i class="fas fa-check"></i> Сохранено';
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-save"></i> Сохранить';
+                }, 1500);
+            });
+
+            document.getElementById('textClear').addEventListener('click', () => {
+                if (confirm('Очистить текст?')) {
+                    textEditor.value = '';
+                    updateTextStats();
+                    localStorage.removeItem('dashboard_text');
+                }
+            });
+
+        })();
+    </script>
 
 </body>
 </html>
