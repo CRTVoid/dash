@@ -4,14 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мой уголок / Дашборд</title>
-    <!-- Используем шрифт Inter для современного вида -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
-    <!-- Font Awesome 6 (бесплатные иконки) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* === ГЛОБАЛЬНЫЙ СБРОС И БАЗА === */
         * {
             margin: 0;
             padding: 0;
@@ -29,15 +26,14 @@
             align-items: center;
         }
 
-        /* Главная сетка — как у командира на мостике */
         .dashboard {
             max-width: 1440px;
             width: 100%;
             height: 100%;
             max-height: 900px;
             display: grid;
-            grid-template-columns: 1fr 2fr; /* 40% / 60% */
-            grid-template-rows: 1fr 1fr;    /* Две строки */
+            grid-template-columns: 1fr 2fr;
+            grid-template-rows: 1fr 1fr;
             gap: 20px;
             background: #121212;
             padding: 24px;
@@ -45,7 +41,6 @@
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
         }
 
-        /* === ОБЩИЙ СТИЛЬ ДЛЯ ВСЕХ ВИДЖЕТОВ === */
         .widget {
             background: #1c1c1c;
             border-radius: 28px;
@@ -78,7 +73,7 @@
 
         .widget-header i {
             font-size: 1rem;
-            color: #f97316; /* акцентный апельсин */
+            color: #f97316;
             width: 20px;
         }
 
@@ -86,11 +81,8 @@
             opacity: 0.7;
         }
 
-        /* ==========================================
-                   ВИДЖЕТ 1: RSS (ЛЕВЫЙ, ВО ВСЮ ВЫСОТУ)
-                ========================================== */
         .rss-widget {
-            grid-row: 1 / 3; /* Занимает две строки */
+            grid-row: 1 / 3;
             background: #181818;
             border-right: 1px solid rgba(255, 255, 255, 0.03);
         }
@@ -104,7 +96,6 @@
             gap: 4px;
         }
 
-        /* Кастомный скролл */
         .rss-feed::-webkit-scrollbar {
             width: 4px;
         }
@@ -173,9 +164,6 @@
             opacity: 0.7;
         }
 
-        /* ==========================================
-                   ВИДЖЕТ 2: ПЛЕЕР / РАДИО (ВЕРХНИЙ ПРАВЫЙ)
-                ========================================== */
         .player-widget {
             background: #1a1a1a;
             justify-content: space-between;
@@ -286,21 +274,22 @@
             color: #ddd;
             padding: 8px 16px 8px 14px;
             border-radius: 40px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
             outline: none;
             cursor: pointer;
             font-family: 'Inter', sans-serif;
             border: 1px solid #333;
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .station-select option {
             background: #1c1c1c;
+            font-size: 0.75rem;
         }
 
-        /* ==========================================
-                   ВИДЖЕТ 3: ЗАМЕТКИ (НИЖНИЙ ПРАВЫЙ)
-                ========================================== */
         .notes-widget {
             background: #181818;
         }
@@ -433,9 +422,6 @@
             letter-spacing: 0.03em;
         }
 
-        /* ==========================================
-                   АДАПТИВНОСТЬ (ПЛАНШЕТЫ)
-                ========================================== */
         @media (max-width: 900px) {
             .dashboard {
                 grid-template-columns: 1fr;
@@ -460,6 +446,10 @@
                 width: 60px;
                 height: 60px;
             }
+            .station-select {
+                max-width: 140px;
+                font-size: 0.7rem;
+            }
         }
 
         @media (max-width: 500px) {
@@ -467,6 +457,7 @@
             .dashboard { padding: 12px; border-radius: 20px; }
             .widget { padding: 16px; }
             .player-content { flex-wrap: wrap; gap: 12px; }
+            .station-select { max-width: 120px; }
         }
     </style>
 </head>
@@ -474,7 +465,6 @@
 
 <div class="dashboard">
 
-    <!-- ========== ВИДЖЕТ 1: RSS ========== -->
     <div class="widget rss-widget">
         <div class="widget-header">
             <i class="fas fa-rss"></i>
@@ -484,24 +474,32 @@
             </span>
         </div>
         <div class="rss-feed" id="rssFeed">
-            <!-- Сюда скрипт подгрузит новости -->
             <div style="text-align:center; padding: 40px 0; color: #444; font-size: 0.9rem;">
                 <i class="fas fa-spinner fa-pulse" style="font-size: 1.4rem; color: #f97316;"></i><br><br>Загружаю ленту...
             </div>
         </div>
     </div>
 
-    <!-- ========== ВИДЖЕТ 2: ПЛЕЕР / РАДИО ========== -->
     <div class="widget player-widget">
         <div class="widget-header">
             <i class="fas fa-headphones"></i>
             <span>Радио / Плеер</span>
             <select class="station-select" id="stationSelect">
-                <option value="https://ice1.somafm.com/groovesalad-128-mp3" selected>🎧 Groove Salad (Chill)</option>
-                <option value="https://ice1.somafm.com/lush-128-mp3">🌿 Lush (Ambient)</option>
-                <option value="https://ice1.somafm.com/secretagent-128-mp3">🕵️ Secret Agent (Lounge)</option>
-                <option value="https://ice1.somafm.com/defcon-128-mp3">💻 DEF CON (Dark Ambient)</option>
-                <option value="https://stream.dancewave.online:8080/dance.mp3">⚡ Dance Wave</option>
+                <option value="https://ice1.somafm.com/groovesalad-128-mp3" selected>Groove Salad (Chill)</option>
+                <option value="https://ice1.somafm.com/darkzone-128-mp3">The Dark Zone</option>
+                <option value="https://ice1.somafm.com/defcon-128-mp3">Def Con Radio</option>
+                <option value="https://ice1.somafm.com/metal-128-mp3">Metal Detector</option>
+                <option value="https://ice1.somafm.com/lc70s-128-mp3">Left Coast 70s</option>
+                <option value="https://ice1.somafm.com/u80s-128-mp3">Underground 80s</option>
+                <option value="https://ice1.somafm.com/7soul-128-mp3">Seven Inch Soul</option>
+                <option value="https://ice1.somafm.com/insound-128-mp3">The In-Sound</option>
+                <option value="https://ice1.somafm.com/covers-128-mp3">Covers</option>
+                <option value="https://ice1.somafm.com/sf1033-128-mp3">SF 10-33</option>
+                <option value="https://ice1.somafm.com/scanner-128-mp3">SF Police Scanner</option>
+                <option value="https://ice1.somafm.com/sfinsf-128-mp3">SF in SF</option>
+                <option value="https://ice1.somafm.com/vaporwaves-128-mp3">Vaporvawes</option>
+                <option value="https://ice1.somafm.com/doomed-128-mp3">Doomed</option>
+                <option value="https://ice1.somafm.com/beatblender-128-mp3">Beat Blender</option>
             </select>
         </div>
 
@@ -509,7 +507,7 @@
             <div class="vinyl" id="vinylDisc"></div>
             <div class="radio-info">
                 <div class="track" id="trackName">Groove Salad</div>
-                <div class="station" id="stationName">SomaFM · Чиллаут</div>
+                <div class="station" id="stationName">SomaFM · Chillout</div>
                 <div class="player-controls">
                     <button id="playBtn" class="play-btn">
                         <i class="fas fa-play"></i>
@@ -527,7 +525,6 @@
         </div>
     </div>
 
-    <!-- ========== ВИДЖЕТ 3: ЗАМЕТКИ ========== -->
     <div class="widget notes-widget">
         <div class="widget-header">
             <i class="fas fa-pencil-alt"></i>
@@ -537,9 +534,7 @@
             </span>
         </div>
         <div class="notes-area">
-            <div class="notes-list" id="notesList">
-                <!-- Список заметок отрисует JS -->
-            </div>
+            <div class="notes-list" id="notesList"></div>
             <div class="notes-input-row">
                 <input type="text" id="noteInput" placeholder="Напишите мысль и нажмите Enter..." maxlength="200">
                 <button id="addNoteBtn"><i class="fas fa-plus"></i> Добавить</button>
@@ -549,18 +544,15 @@
     </div>
 </div>
 
-<!-- ========================================================== -->
-<!-- ======================== JAVASCRIPT ======================= -->
-<!-- ========================================================== -->
 <script>
     (function() {
         'use strict';
 
-        // --- 1. RSS ПАРСЕР (через AllOrigins, бесплатно и без CORS) ---
+        // --- RSS ПАРСЕР (исправленный прокси) ---
         const RSS_FEEDS = [
             { name: 'Meduza', url: 'https://meduza.io/rss/all' },
             { name: 'TechCrunch', url: 'https://techcrunch.com/feed/' },
-            { name: 'BBC Рус', url: 'http://feeds.bbci.co.uk/russian/news/rss.xml' },
+            { name: 'BBC Russian', url: 'http://feeds.bbci.co.uk/russian/news/rss.xml' },
         ];
 
         const rssFeedContainer = document.getElementById('rssFeed');
@@ -570,12 +562,12 @@
                 let allItems = [];
 
                 for (const feed of RSS_FEEDS) {
-                    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(feed.url)}`;
+                    // Используем corsproxy.io вместо allorigins (более стабильный)
+                    const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(feed.url)}`;
                     const response = await fetch(proxyUrl);
                     if (!response.ok) continue;
                     const xmlText = await response.text();
                     
-                    // Парсим XML
                     const parser = new DOMParser();
                     const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
                     const items = xmlDoc.querySelectorAll('item');
@@ -593,7 +585,6 @@
                     });
                 }
 
-                // Сортируем по дате (свежие сверху) — если дата есть
                 allItems.sort((a, b) => {
                     const dateA = new Date(a.date);
                     const dateB = new Date(b.date);
@@ -601,51 +592,50 @@
                     return dateB - dateA;
                 });
 
-                // Ограничим 30 записями, чтобы не захламлять
                 allItems = allItems.slice(0, 30);
 
-                renderRSS(allItems);
+                if (allItems.length === 0) {
+                    rssFeedContainer.innerHTML = `
+                        <div style="padding: 30px 0; text-align:center; color: #666; font-size:0.9rem;">
+                            <i class="fas fa-newspaper" style="color: #f97316;"></i><br><br>
+                            Новостей пока нет<br>
+                            <span style="font-size:0.8rem; color:#444;">попробуйте обновить страницу</span>
+                        </div>
+                    `;
+                    return;
+                }
+
+                let html = '';
+                allItems.forEach(item => {
+                    const title = item.title.length > 120 ? item.title.slice(0, 120) + '…' : item.title;
+                    const dateStr = item.date ? new Date(item.date).toLocaleDateString('ru-RU', {day:'numeric', month:'short'}) : '';
+                    html += `
+                        <div class="rss-item">
+                            <div class="title"><a href="${item.link}" target="_blank" rel="noopener">${title}</a></div>
+                            <div class="rss-meta">
+                                <span class="source">${item.source}</span>
+                                ${dateStr ? `<span class="date">${dateStr}</span>` : ''}
+                            </div>
+                        </div>
+                    `;
+                });
+                rssFeedContainer.innerHTML = html;
             } catch (error) {
                 console.warn('RSS load error:', error);
                 rssFeedContainer.innerHTML = `
                     <div style="padding: 30px 0; text-align:center; color: #666; font-size:0.9rem;">
                         <i class="fas fa-exclamation-triangle" style="color: #f97316;"></i><br><br>
-                        Не удалось загрузить ленту.<br>
-                        <span style="font-size:0.8rem; color:#444;">(возможно, превышен лимит запросов)</span>
+                        Не удалось загрузить ленту<br>
+                        <span style="font-size:0.8rem; color:#444;">проверьте интернет-соединение</span>
                     </div>
                 `;
             }
         }
 
-        function renderRSS(items) {
-            if (!items.length) {
-                rssFeedContainer.innerHTML = `<div style="padding: 30px 0; text-align:center; color: #555;">Нет новостей</div>`;
-                return;
-            }
-
-            let html = '';
-            items.forEach(item => {
-                const title = item.title.length > 120 ? item.title.slice(0, 120) + '…' : item.title;
-                const dateStr = item.date ? new Date(item.date).toLocaleDateString('ru-RU', {day:'numeric', month:'short'}) : '';
-                html += `
-                    <div class="rss-item">
-                        <div class="title"><a href="${item.link}" target="_blank" rel="noopener">${title}</a></div>
-                        <div class="rss-meta">
-                            <span class="source">${item.source}</span>
-                            ${dateStr ? `<span class="date">${dateStr}</span>` : ''}
-                        </div>
-                    </div>
-                `;
-            });
-            rssFeedContainer.innerHTML = html;
-        }
-
-        // Загружаем RSS при старте
         fetchRSS();
-        // Обновляем раз в 10 минут (600 000 мс)
         setInterval(fetchRSS, 600000);
 
-        // --- 2. РАДИО / ПЛЕЕР ---
+        // --- РАДИО / ПЛЕЕР ---
         const audio = new Audio();
         audio.volume = 0.7;
 
@@ -657,13 +647,22 @@
         const stationName = document.getElementById('stationName');
         const volumeSlider = document.getElementById('volumeSlider');
 
-        // Маппинг для красивого отображения
         const stationNames = {
-            'https://ice1.somafm.com/groovesalad-128-mp3': { track: 'Groove Salad', station: 'SomaFM · Чиллаут' },
-            'https://ice1.somafm.com/lush-128-mp3': { track: 'Lush', station: 'SomaFM · Эмбиент' },
-            'https://ice1.somafm.com/secretagent-128-mp3': { track: 'Secret Agent', station: 'SomaFM · Лаунж' },
-            'https://ice1.somafm.com/defcon-128-mp3': { track: 'DEF CON', station: 'SomaFM · Dark Ambient' },
-            'https://stream.dancewave.online:8080/dance.mp3': { track: 'Dance Wave', station: 'Танцевальное радио' },
+            'https://ice1.somafm.com/groovesalad-128-mp3': { track: 'Groove Salad', station: 'SomaFM · Chillout' },
+            'https://ice1.somafm.com/darkzone-128-mp3': { track: 'The Dark Zone', station: 'SomaFM · Ambient' },
+            'https://ice1.somafm.com/defcon-128-mp3': { track: 'Def Con Radio', station: 'SomaFM · Dark Ambient' },
+            'https://ice1.somafm.com/metal-128-mp3': { track: 'Metal Detector', station: 'SomaFM · Heavy Metal' },
+            'https://ice1.somafm.com/lc70s-128-mp3': { track: 'Left Coast 70s', station: 'SomaFM · 70s Hits' },
+            'https://ice1.somafm.com/u80s-128-mp3': { track: 'Underground 80s', station: 'SomaFM · 80s Underground' },
+            'https://ice1.somafm.com/7soul-128-mp3': { track: 'Seven Inch Soul', station: 'SomaFM · Soul Classics' },
+            'https://ice1.somafm.com/insound-128-mp3': { track: 'The In-Sound', station: 'SomaFM · 60s Garage' },
+            'https://ice1.somafm.com/covers-128-mp3': { track: 'Covers', station: 'SomaFM · Cover Versions' },
+            'https://ice1.somafm.com/sf1033-128-mp3': { track: 'SF 10-33', station: 'SomaFM · Police Radio' },
+            'https://ice1.somafm.com/scanner-128-mp3': { track: 'SF Police Scanner', station: 'SomaFM · Live Scanner' },
+            'https://ice1.somafm.com/sfinsf-128-mp3': { track: 'SF in SF', station: 'SomaFM · Live in SF' },
+            'https://ice1.somafm.com/vaporwaves-128-mp3': { track: 'Vaporvawes', station: 'SomaFM · Vaporwave' },
+            'https://ice1.somafm.com/doomed-128-mp3': { track: 'Doomed', station: 'SomaFM · Doom Metal' },
+            'https://ice1.somafm.com/beatblender-128-mp3': { track: 'Beat Blender', station: 'SomaFM · Deep House' },
         };
 
         function updateStationInfo(url) {
@@ -672,8 +671,8 @@
                 trackName.textContent = info.track;
                 stationName.textContent = info.station;
             } else {
-                trackName.textContent = 'Радио';
-                stationName.textContent = 'Поток';
+                trackName.textContent = 'Radio';
+                stationName.textContent = 'Stream';
             }
         }
 
@@ -701,11 +700,10 @@
             audio.src = '';
             vinyl.classList.remove('playing');
             playBtn.innerHTML = '<i class="fas fa-play"></i>';
-            trackName.textContent = 'Станция не выбрана';
-            stationName.textContent = 'Нажмите Play';
+            trackName.textContent = 'No station selected';
+            stationName.textContent = 'Press Play';
         }
 
-        // События
         playBtn.addEventListener('click', () => {
             if (audio.src && !audio.paused) {
                 pauseRadio();
@@ -718,7 +716,6 @@
 
         stationSelect.addEventListener('change', () => {
             if (audio.src && !audio.paused) {
-                // Если играет — переключаем и продолжаем играть
                 playRadio();
             } else {
                 updateStationInfo(stationSelect.value);
@@ -729,10 +726,9 @@
             audio.volume = parseFloat(e.target.value);
         });
 
-        // При загрузке страницы поставим инфу о первой станции
         updateStationInfo(stationSelect.value);
 
-        // --- 3. ЗАМЕТКИ (localStorage) ---
+        // --- ЗАМЕТКИ (localStorage) ---
         const notesList = document.getElementById('notesList');
         const noteInput = document.getElementById('noteInput');
         const addNoteBtn = document.getElementById('addNoteBtn');
@@ -743,11 +739,7 @@
         function loadNotes() {
             try {
                 const stored = localStorage.getItem('dashboard_notes');
-                if (stored) {
-                    notes = JSON.parse(stored);
-                } else {
-                    notes = [];
-                }
+                notes = stored ? JSON.parse(stored) : [];
             } catch (e) {
                 notes = [];
             }
@@ -780,7 +772,6 @@
                 });
                 notesList.innerHTML = html;
 
-                // Вешаем удаление
                 document.querySelectorAll('.delete-note').forEach(btn => {
                     btn.addEventListener('click', function(e) {
                         const idx = parseInt(this.dataset.index, 10);
@@ -816,10 +807,8 @@
 
         addNoteBtn.addEventListener('click', addNote);
 
-        // Инициализация заметок
         loadNotes();
 
-        // Автосохранение при потере фокуса (на всякий случай)
         window.addEventListener('beforeunload', function() {
             saveNotes();
         });
