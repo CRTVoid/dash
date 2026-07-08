@@ -2,12 +2,18 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dash</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0a0a0a">
+    
+    <title>Radio Player</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <style>
         * {
             margin: 0;
@@ -15,1192 +21,469 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            height: 100vh;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: background-color 0.4s ease, color 0.4s ease;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-        }
-
-        /* === ЦВЕТОВЫЕ СХЕМЫ (7 уникальных) === */
-        .theme-dark {
-            --bg-primary: #0d0d0d;
-            --bg-secondary: #121212;
-            --bg-widget: #1c1c1c;
-            --bg-widget-alt: #181818;
-            --bg-input: #242424;
-            --bg-hover: rgba(255,255,255,0.06);
-            --text-primary: #e5e5e5;
-            --text-secondary: #a0a0a0;
-            --text-muted: #6b6b6b;
-            --border-color: rgba(255,255,255,0.06);
-            --border-hover: rgba(255,255,255,0.12);
-            --accent: #f97316;
-            --accent-hover: #ff8c38;
-            --shadow: rgba(0,0,0,0.8);
-            --vinyl-dark: #1a1a1a;
-            --vinyl-light: #0d0d0d;
-            --shadow-color: rgba(249,115,22,0.25);
-        }
-        .theme-light {
-            --bg-primary: #f0f0f0;
-            --bg-secondary: #ffffff;
-            --bg-widget: #f8f8f8;
-            --bg-widget-alt: #f0f0f0;
-            --bg-input: #e8e8e8;
-            --bg-hover: rgba(0,0,0,0.06);
-            --text-primary: #1a1a1a;
-            --text-secondary: #555555;
-            --text-muted: #888888;
-            --border-color: rgba(0,0,0,0.08);
-            --border-hover: rgba(0,0,0,0.14);
-            --accent: #e8600c;
-            --accent-hover: #f97316;
-            --shadow: rgba(0,0,0,0.15);
-            --vinyl-dark: #1a1a1a;
-            --vinyl-light: #0d0d0d;
-            --shadow-color: rgba(0,0,0,0.3);
-        }
-        .theme-ocean {
-            --bg-primary: #0a1628;
-            --bg-secondary: #0f2040;
-            --bg-widget: #152b4a;
-            --bg-widget-alt: #122240;
-            --bg-input: #1a3355;
-            --bg-hover: rgba(100,180,255,0.08);
-            --text-primary: #d0e4ff;
-            --text-secondary: #8ab4f8;
-            --text-muted: #5a7a9a;
-            --border-color: rgba(100,180,255,0.1);
-            --border-hover: rgba(100,180,255,0.18);
-            --accent: #4fc3ff;
-            --accent-hover: #7ad0ff;
-            --shadow: rgba(0,0,0,0.7);
-            --vinyl-dark: #1a1a1a;
-            --vinyl-light: #0d0d0d;
-            --shadow-color: rgba(79,195,255,0.25);
-        }
-        .theme-forest {
-            --bg-primary: #0a1a0a;
-            --bg-secondary: #0f240f;
-            --bg-widget: #163016;
-            --bg-widget-alt: #122812;
-            --bg-input: #1a3a1a;
-            --bg-hover: rgba(100,200,100,0.08);
-            --text-primary: #d4e8d4;
-            --text-secondary: #7ab87a;
-            --text-muted: #4a7a4a;
-            --border-color: rgba(100,200,100,0.1);
-            --border-hover: rgba(100,200,100,0.18);
-            --accent: #66d966;
-            --accent-hover: #88e888;
-            --shadow: rgba(0,0,0,0.7);
-            --vinyl-dark: #1a1a1a;
-            --vinyl-light: #0d0d0d;
-            --shadow-color: rgba(102,217,102,0.25);
-        }
-        .theme-sunset {
-            --bg-primary: #1a0a0a;
-            --bg-secondary: #2a1010;
-            --bg-widget: #3a1818;
-            --bg-widget-alt: #301414;
-            --bg-input: #4a2020;
-            --bg-hover: rgba(255,150,100,0.08);
-            --text-primary: #f5d0c0;
-            --text-secondary: #e89070;
-            --text-muted: #9a6a5a;
-            --border-color: rgba(255,150,100,0.1);
-            --border-hover: rgba(255,150,100,0.18);
-            --accent: #ff7f50;
-            --accent-hover: #ff9a70;
-            --shadow: rgba(0,0,0,0.7);
-            --vinyl-dark: #1a1a1a;
-            --vinyl-light: #0d0d0d;
-            --shadow-color: rgba(255,127,80,0.25);
-        }
-        .theme-midnight {
-            --bg-primary: #0a0a1a;
-            --bg-secondary: #10102a;
-            --bg-widget: #18183a;
-            --bg-widget-alt: #141430;
-            --bg-input: #20204a;
-            --bg-hover: rgba(150,100,255,0.08);
-            --text-primary: #d0d0f0;
-            --text-secondary: #9090d0;
-            --text-muted: #5a5a8a;
-            --border-color: rgba(150,100,255,0.1);
-            --border-hover: rgba(150,100,255,0.18);
-            --accent: #a78bfa;
-            --accent-hover: #c4b5fd;
-            --shadow: rgba(0,0,0,0.7);
-            --vinyl-dark: #1a1a1a;
-            --vinyl-light: #0d0d0d;
-            --shadow-color: rgba(167,139,250,0.25);
-        }
-        .theme-cyber {
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #0f0f1a;
-            --bg-widget: #1a1a2e;
-            --bg-widget-alt: #14142a;
-            --bg-input: #22223a;
-            --bg-hover: rgba(0,255,255,0.08);
-            --text-primary: #b0f0f0;
-            --text-secondary: #70d0d0;
-            --text-muted: #4a7a7a;
-            --border-color: rgba(0,255,255,0.1);
-            --border-hover: rgba(0,255,255,0.18);
-            --accent: #00ffff;
-            --accent-hover: #66ffff;
-            --shadow: rgba(0,0,0,0.8);
-            --vinyl-dark: #1a1a1a;
-            --vinyl-light: #0d0d0d;
-            --shadow-color: rgba(0,255,255,0.25);
-        }
-
-        /* === ОСНОВНОЙ КОНТЕЙНЕР === */
-        .dashboard {
-            max-width: 1200px;
-            width: 90%;
-            height: 90vh;
-            max-height: 800px;
-            display: grid;
-            grid-template-columns: 2fr 6fr;
-            grid-template-rows: 4fr 4fr;
-            gap: 12px;
-            background: var(--bg-secondary);
-            padding: 16px;
-            border-radius: 32px;
-            box-shadow: 0 25px 60px var(--shadow);
-            transition: background 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        .widget {
-            background: var(--bg-widget);
-            border-radius: 24px;
-            padding: 16px;
-            border: 1px solid var(--border-color);
-            transition: background 0.4s ease, border-color 0.2s;
-            display: flex;
-            flex-direction: column;
-            overflow: visible;
-            position: relative;
-        }
-
-        .widget:hover {
-            border-color: var(--border-hover);
-        }
-
-        /* === РАДИО (2x4) === */
-        .player-widget {
-            grid-column: 1 / 2;
-            grid-row: 1 / 2;
-            background: var(--bg-widget-alt);
-            overflow: visible;
-        }
-
-        .player-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            flex: 1;
-            gap: 10px;
-        }
-
-        .vinyl-container {
-            flex-shrink: 0;
-            width: 110px;
-            height: 110px;
-            position: relative;
-            border-radius: 50%;
-        }
-
-        .vinyl-container svg {
-            width: 100%;
+        html, body {
             height: 100%;
-            animation: spin 8s linear infinite;
-            animation-play-state: paused;
-            border-radius: 50%;
-            position: relative;
-            z-index: 1;
+            overflow: hidden;
+            background: #0a0a0a;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #ffffff;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
         }
 
-        .vinyl-container.playing svg {
+        #app {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            height: 100dvh;
+            padding: 20px 20px 20px;
+            background: radial-gradient(ellipse at 50% 30%, #1a1a2e, #0a0a0a);
+            transition: background 1.8s ease;
+            position: relative;
+        }
+
+        /* ===== SLIDER ===== */
+        .slider-container {
+            flex-shrink: 0;
+            height: 80px;
+            margin: 8px 0 16px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slider {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.7s cubic-bezier(0.34, 1.2, 0.64, 1);
+            will-change: transform;
+            padding: 0 20px;
+        }
+
+        .station-item {
+            flex: 0 0 auto;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.7s cubic-bezier(0.34, 1.2, 0.64, 1);
+            white-space: nowrap;
+            background: transparent;
+            cursor: pointer;
+            touch-action: manipulation;
+            opacity: 0.06;
+            transform: scale(0.4);
+            filter: blur(5px);
+        }
+
+        .station-item.active {
+            opacity: 1;
+            transform: scale(1);
+            filter: blur(0);
+            background: rgba(255,255,255,0.06);
+            padding: 8px 24px;
+            border-radius: 16px;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 0 40px rgba(255,255,255,0.05);
+        }
+
+        .station-item.prev,
+        .station-item.next {
+            opacity: 0.12;
+            transform: scale(0.5);
+            filter: blur(4px);
+        }
+
+        .station-item.hidden {
+            opacity: 0;
+            transform: scale(0.2);
+            filter: blur(8px);
+            pointer-events: none;
+        }
+
+        .station-item:active {
+            transform: scale(0.94);
+            transition-duration: 0.05s;
+        }
+
+        /* ===== VINYL ===== */
+        .vinyl-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 0;
+            padding: 4px 0;
+        }
+
+        .vinyl {
+            width: 280px;
+            height: 280px;
+            max-width: 68vw;
+            max-height: 68vw;
+            position: relative;
+            border-radius: 50%;
+            background: #121212;
+            box-shadow: 0 0 80px rgba(255,255,255,0.02), inset 0 0 60px rgba(0,0,0,0.5);
+        }
+
+        /* ===== МЕРЦАНИЕ ===== */
+        .vinyl::before {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            padding: 4px;
+            background: conic-gradient(
+                from 0deg,
+                rgba(255,255,255,0.01),
+                rgba(255,255,255,0.06),
+                rgba(255,255,255,0.01),
+                rgba(255,255,255,0.10),
+                rgba(255,255,255,0.01),
+                rgba(255,255,255,0.04),
+                rgba(255,255,255,0.01)
+            );
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 2s ease;
+            animation: glowPulse 5s ease-in-out infinite;
+            animation-play-state: paused;
+            filter: blur(3px);
+        }
+
+        .vinyl.glow::before {
+            opacity: 1;
             animation-play-state: running;
         }
 
-        .vinyl-container.playing .vinyl-shadow {
-            animation: pulseShadow 2s ease-in-out infinite;
+        @keyframes glowPulse {
+            0% { opacity: 0.2; transform: scale(1); }
+            25% { opacity: 0.8; transform: scale(1.015); }
+            50% { opacity: 0.3; transform: scale(0.99); }
+            75% { opacity: 0.6; transform: scale(1.008); }
+            100% { opacity: 0.2; transform: scale(1); }
+        }
+
+        .vinyl-disc {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                #1a1a1a, #2d2d2d, #1a1a1a, #333333, #1a1a1a,
+                #2d2d2d, #1a1a1a, #333333, #1a1a1a
+            );
+            animation: spin 8s linear infinite;
+            animation-play-state: paused;
+            position: relative;
+        }
+
+        .vinyl-disc::after {
+            content: '';
+            position: absolute;
+            inset: 6%;
+            border-radius: 50%;
+            background: radial-gradient(
+                circle at 35% 35%,
+                rgba(255,255,255,0.06) 0%,
+                transparent 60%
+            );
+        }
+
+        .vinyl-disc::before {
+            content: '';
+            position: absolute;
+            inset: 14%;
+            border-radius: 50%;
+            background: repeating-radial-gradient(
+                circle at center,
+                transparent 0%,
+                transparent 3%,
+                rgba(255,255,255,0.01) 3.5%,
+                transparent 4%
+            );
+        }
+
+        .vinyl-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 14%;
+            height: 14%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 40% 40%, #666, #111 80%);
+            border: 2px solid #222;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.8);
+        }
+
+        .vinyl-center::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40%;
+            height: 40%;
+            border-radius: 50%;
+            background: radial-gradient(circle, #888, #222);
         }
 
         @keyframes spin {
-            from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
-        @keyframes pulseShadow {
-            0%, 100% { opacity: 0.2; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(1.05); }
-        }
-
-        .vinyl-shadow {
-            position: absolute;
-            top: -8%;
-            left: -8%;
-            width: 116%;
-            height: 116%;
-            border-radius: 50%;
-            background: radial-gradient(ellipse at center, var(--shadow-color) 0%, transparent 70%);
-            opacity: 0;
-            filter: blur(20px);
-            transition: opacity 0.6s ease;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .vinyl-container.playing .vinyl-shadow {
-            opacity: 1;
-        }
-
-        .radio-info {
-            width: 100%;
-            text-align: center;
-        }
-
-        .radio-info .track {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--text-primary);
-        }
-
-        .radio-info .station {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-        }
-
-        .player-controls {
+        /* ===== CONTROLS ===== */
+        .controls {
             display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 4px;
-            margin-top: 4px;
-            flex-wrap: wrap;
+            align-items: center;
+            gap: 14px;
+            flex-shrink: 0;
+            padding: 12px 0 6px;
         }
 
-        .player-controls button {
+        .btn {
             background: none;
             border: none;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
+            color: #fff;
+            padding: 10px;
             cursor: pointer;
-            padding: 4px;
-            border-radius: 30px;
-            transition: 0.2s;
-            width: 30px;
-            height: 30px;
+            opacity: 0.3;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .player-controls button:hover {
-            background: var(--bg-input);
-            color: var(--accent);
-        }
-
-        .player-controls .play-btn {
-            background: var(--accent);
-            color: var(--bg-primary);
-            width: 42px;
-            height: 42px;
-            font-size: 0.95rem;
-            box-shadow: 0 4px 16px var(--shadow-color);
-            transition: background 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        .player-controls .play-btn:hover {
-            background: var(--accent-hover);
-            transform: scale(1.02);
-        }
-
-        .player-controls input[type="range"] {
-            width: 45px;
-            background: var(--bg-input);
-            height: 2px;
-            border-radius: 10px;
-            accent-color: var(--accent);
-        }
-
-        /* === ДРОПДАУН СТАНЦИЙ === */
-        .station-dropdown {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            z-index: 9999;
-        }
-
-        .station-dropdown-btn {
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 4px 12px 4px 12px;
-            border-radius: 30px;
-            font-size: 0.55rem;
-            font-weight: 500;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            transition: background 0.4s ease, color 0.4s ease;
-            max-width: 120px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .station-dropdown-btn:hover {
-            background: var(--bg-hover);
-            border-color: var(--border-hover);
-        }
-
-        .station-dropdown-btn i {
-            font-size: 0.5rem;
-            color: var(--text-muted);
-            transition: transform 0.3s;
-            flex-shrink: 0;
-        }
-
-        .station-dropdown-btn.open i {
-            transform: rotate(180deg);
-        }
-
-        .station-dropdown-menu {
-            position: absolute;
-            top: calc(100% + 4px);
-            right: 0;
-            background: var(--bg-widget);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 4px 0;
-            min-width: 160px;
-            max-height: 200px;
-            overflow-y: auto;
-            box-shadow: 0 12px 40px var(--shadow);
-            display: none;
-            backdrop-filter: blur(8px);
-        }
-
-        .station-dropdown-menu.open {
-            display: block;
-        }
-
-        .station-dropdown-menu::-webkit-scrollbar {
-            width: 3px;
-        }
-        .station-dropdown-menu::-webkit-scrollbar-thumb {
-            background: var(--text-muted);
-            border-radius: 10px;
-        }
-
-        .station-dropdown-item {
-            padding: 5px 12px;
-            font-size: 0.65rem;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: 0.15s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            border-left: 2px solid transparent;
-        }
-
-        .station-dropdown-item:hover {
-            background: var(--bg-hover);
-            color: var(--text-primary);
-            border-left-color: var(--accent);
-        }
-
-        .station-dropdown-item.active {
-            color: var(--accent);
-            font-weight: 600;
-            border-left-color: var(--accent);
-        }
-
-        .station-dropdown-item .dot {
-            width: 4px;
-            height: 4px;
+            touch-action: manipulation;
             border-radius: 50%;
-            background: var(--text-muted);
-            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            font-size: 1.2rem;
         }
 
-        .station-dropdown-item.active .dot {
-            background: var(--accent);
-        }
-
-        /* === ЧАСЫ (2x4) === */
-        .clock-widget {
-            grid-column: 1 / 2;
-            grid-row: 2 / 3;
-            background: var(--bg-widget);
-            overflow: visible;
-        }
-
-        .clock-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-
-        .clock-content.hidden {
-            display: none;
-        }
-
-        .clock-time {
-            font-size: 2.6rem;
-            font-weight: 700;
-            letter-spacing: 0.06em;
-            color: var(--text-primary);
-            font-variant-numeric: tabular-nums;
-            transition: color 0.4s ease;
-            line-height: 1.1;
-        }
-
-        .clock-date {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-            font-weight: 400;
-            letter-spacing: 0.04em;
-        }
-
-        /* Календарь */
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 2px;
-            text-align: center;
-            width: 100%;
-            max-width: 220px;
-        }
-
-        .calendar-grid .day-name {
-            font-size: 0.45rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            padding: 2px 0;
-        }
-
-        .calendar-grid .day {
-            font-size: 0.7rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            padding: 3px 0;
-            border-radius: 4px;
-            transition: 0.15s;
-        }
-
-        .calendar-grid .day.weekend {
-            color: var(--text-muted);
+        .btn:active {
+            transform: scale(0.88);
             opacity: 0.5;
         }
 
-        .calendar-grid .day.today {
-            background: var(--accent);
-            color: var(--bg-primary);
-            font-weight: 700;
-            border-radius: 4px;
-        }
-
-        .calendar-grid .day.empty {
-            color: transparent;
-        }
-
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            max-width: 220px;
-            margin-bottom: 4px;
-            font-size: 0.6rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-        }
-
-        /* === Toggle Switcher (уменьшенный, прозрачный) === */
-        .toggle-switcher {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            z-index: 10;
-        }
-
-        .toggle-track {
-            width: 28px;
-            height: 14px;
-            background: var(--bg-input);
-            border-radius: 14px;
-            border: 1px solid var(--border-color);
-            cursor: pointer;
-            position: relative;
-            transition: 0.3s;
-            flex-shrink: 0;
-            opacity: 0.55;
-        }
-
-        .toggle-track:hover {
-            opacity: 0.8;
-        }
-
-        .toggle-thumb {
-            width: 10px;
-            height: 10px;
-            background: var(--accent);
+        .btn-play {
+            width: 64px;
+            height: 64px;
             border-radius: 50%;
-            position: absolute;
-            top: 1px;
-            left: 1px;
-            transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            opacity: 1;
+            padding: 0;
+            font-size: 1.5rem;
         }
 
-        .toggle-track.active .toggle-thumb {
-            left: 16px;
+        .btn-play:active {
+            background: rgba(255,255,255,0.12);
+            transform: scale(0.92);
         }
 
-        /* === РИСОВАЛКА (6x8) === */
-        .draw-widget {
-            grid-column: 2 / 3;
-            grid-row: 1 / 3;
-            background: var(--bg-widget-alt);
-            overflow: visible;
+        .btn-play.active {
+            opacity: 1;
         }
 
-        .draw-area {
-            flex: 1;
-            position: relative;
-            border-radius: 14px;
-            overflow: hidden;
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            cursor: crosshair;
-            touch-action: none;
-            min-height: 150px;
-        }
-
-        .draw-area canvas {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
-
-        .draw-controls {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            margin-top: 8px;
-            flex-shrink: 0;
-            flex-wrap: nowrap;
-            width: 100%;
-            justify-content: flex-start;
-            overflow-x: auto;
-            padding-bottom: 2px;
-        }
-
-        .draw-controls::-webkit-scrollbar {
-            height: 2px;
-        }
-        .draw-controls::-webkit-scrollbar-thumb {
-            background: var(--text-muted);
-            border-radius: 10px;
-        }
-
-        .draw-controls button {
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            padding: 4px 10px;
-            border-radius: 16px;
-            font-size: 0.6rem;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            height: 28px;
-            flex-shrink: 0;
-        }
-
-        .draw-controls button:hover {
-            background: var(--bg-hover);
-            color: var(--text-primary);
-            border-color: var(--border-hover);
-        }
-
-        .draw-controls button.active {
-            background: var(--accent);
-            color: var(--bg-primary);
-            border-color: var(--accent);
-        }
-
-        .draw-controls button.active i {
-            color: var(--bg-primary);
-        }
-
-        .draw-colors {
-            display: flex;
-            gap: 3px;
-            flex-wrap: nowrap;
-            flex-shrink: 0;
-            padding: 2px 0;
-        }
-
-        .draw-colors .color-dot {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            border: 2px solid transparent;
-            cursor: pointer;
-            transition: 0.2s;
-            flex-shrink: 0;
-        }
-
-        .draw-colors .color-dot:hover {
-            transform: scale(1.15);
-        }
-
-        .draw-colors .color-dot.active {
-            border-color: var(--accent);
-            box-shadow: 0 0 10px var(--shadow-color);
-        }
-
-        .draw-controls .size-control {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-shrink: 0;
-        }
-
-        .draw-controls .size-control input {
-            width: 60px;
-            accent-color: var(--accent);
-            background: var(--bg-input);
-            height: 3px;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-
-        .draw-controls .size-control span {
-            font-size: 0.55rem;
-            color: var(--text-muted);
-            min-width: 18px;
-            text-align: center;
-            font-weight: 500;
-        }
-
-        .draw-controls .tool-divider {
-            width: 1px;
-            height: 24px;
-            background: var(--border-color);
-            flex-shrink: 0;
-            margin: 0 2px;
-        }
-
-        /* === ТЕКСТОВЫЙ РЕДАКТОР === */
-        .text-editor {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            min-height: 0;
-        }
-
-        .text-editor textarea {
-            flex: 1;
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 12px 14px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.85rem;
-            color: var(--text-primary);
-            resize: none;
-            outline: none;
-            transition: border-color 0.2s;
-            min-height: 100px;
-            line-height: 1.6;
-        }
-
-        .text-editor textarea:focus {
-            border-color: var(--accent);
-        }
-
-        .text-editor textarea::placeholder {
-            color: var(--text-muted);
-        }
-
-        .text-editor .editor-controls {
-            display: flex;
-            gap: 6px;
-            margin-top: 6px;
-            flex-shrink: 0;
-            flex-wrap: wrap;
-        }
-
-        .text-editor .editor-controls button {
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            padding: 4px 12px;
-            border-radius: 16px;
-            font-size: 0.55rem;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            transition: 0.2s;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .text-editor .editor-controls button:hover {
-            background: var(--bg-hover);
-            color: var(--text-primary);
-            border-color: var(--border-hover);
-        }
-
-        .text-editor .editor-stats {
-            font-size: 0.5rem;
-            color: var(--text-muted);
-            margin-left: auto;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .widget-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            min-height: 0;
-            overflow: hidden;
-            transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-
-        .widget-content.hidden {
-            display: none;
-        }
-
-        /* === ВЫБОР ТЕМЫ === */
-        .theme-wrapper {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            z-index: 99999;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 6px;
-        }
-
-        .theme-toggle {
+        .btn-stop {
+            opacity: 0.2;
             width: 40px;
             height: 40px;
-            border-radius: 50%;
-            border: 2px solid var(--border-color);
-            background: var(--bg-widget);
-            color: var(--text-primary);
-            cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 0.9rem;
+        }
+
+        /* ===== TRACK INFO ===== */
+        .track-info {
+            flex-shrink: 0;
+            text-align: center;
+            padding: 6px 0 2px;
+            min-height: 52px;
+        }
+
+        .track-title {
+            font-size: 16px;
+            font-weight: 500;
+            opacity: 0.85;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            letter-spacing: 0.3px;
+        }
+
+        .track-title.loading {
+            opacity: 0.3;
+            animation: pulse 1.2s ease-in-out infinite;
+        }
+
+        .track-artist {
+            font-size: 13px;
+            opacity: 0.4;
+            margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        /* ===== VOLUME ===== */
+        .volume-container {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 150px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            transition: 0.3s;
-            box-shadow: 0 4px 16px var(--shadow);
+            opacity: 0.2;
+            transition: opacity 0.4s ease;
+            padding: 12px 6px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.02);
         }
 
-        .theme-toggle:hover {
-            transform: scale(1.05);
-            border-color: var(--accent);
+        .volume-container:active,
+        .volume-container:focus-within {
+            opacity: 0.6;
         }
 
-        .theme-toggle .fa-palette {
-            transition: transform 0.4s ease;
-        }
-
-        .theme-toggle.open .fa-palette {
-            transform: rotate(180deg);
-        }
-
-        .theme-picker {
-            display: flex;
-            gap: 6px;
-            padding: 8px 12px;
-            background: var(--bg-secondary);
-            border-radius: 30px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 8px 32px var(--shadow);
-            backdrop-filter: blur(8px);
-            transition: all 0.3s ease;
-            transform-origin: bottom right;
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            padding: 0 12px;
-            gap: 0;
-        }
-
-        .theme-picker.open {
-            max-height: 60px;
-            opacity: 1;
-            padding: 8px 12px;
-            gap: 6px;
-        }
-
-        .theme-picker .theme-dot {
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            border: 2px solid transparent;
+        .volume-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100px;
+            height: 3px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 3px;
+            outline: none;
             cursor: pointer;
-            transition: 0.2s;
-            flex-shrink: 0;
+            transform: rotate(-90deg);
+            transform-origin: center;
+            position: absolute;
         }
 
-        .theme-picker .theme-dot:hover {
-            transform: scale(1.15);
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #fff;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(255,255,255,0.15);
         }
 
-        .theme-picker .theme-dot.active {
-            border-color: var(--accent);
-            box-shadow: 0 0 16px var(--shadow-color);
+        .volume-slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #fff;
+            border: none;
+            cursor: pointer;
         }
 
-        /* === АДАПТИВНОСТЬ === */
-        @media (max-width: 1024px) {
-            .dashboard {
-                width: 95%;
-                height: auto;
-                max-height: none;
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: auto auto auto;
-            }
-            .player-widget {
-                grid-column: 1 / 2;
-                grid-row: 1 / 2;
-            }
-            .clock-widget {
-                grid-column: 2 / 3;
-                grid-row: 1 / 2;
-            }
-            .draw-widget {
-                grid-column: 1 / 3;
-                grid-row: 2 / 3;
-                min-height: 300px;
-            }
-            .vinyl-container {
-                width: 90px;
-                height: 90px;
-            }
-            .clock-time {
-                font-size: 2.2rem;
-            }
-            .draw-controls .size-control input {
-                width: 50px;
-            }
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 420px) {
+            #app { padding: 16px 16px 16px; }
+            .station-item { font-size: 13px; padding: 6px 12px; }
+            .station-item.active { font-size: 17px; padding: 6px 18px; }
+            .slider-container { height: 64px; margin: 4px 0 12px; }
+            .vinyl { width: 220px; height: 220px; max-width: 60vw; max-height: 60vw; }
+            .btn { width: 40px; height: 40px; padding: 6px; font-size: 1rem; }
+            .btn-play { width: 56px; height: 56px; font-size: 1.2rem; }
+            .track-title { font-size: 14px; }
+            .track-artist { font-size: 12px; }
+            .volume-container { right: 6px; height: 120px; opacity: 0.12; }
+            .volume-slider { width: 80px; }
         }
 
-        @media (max-width: 700px) {
-            .dashboard {
-                width: 98%;
-                grid-template-columns: 1fr;
-                grid-template-rows: auto auto auto;
-                padding: 10px;
-                gap: 10px;
-                border-radius: 20px;
-            }
-            .player-widget {
-                grid-column: 1 / 2;
-                grid-row: 1 / 2;
-            }
-            .clock-widget {
-                grid-column: 1 / 2;
-                grid-row: 2 / 3;
-            }
-            .draw-widget {
-                grid-column: 1 / 2;
-                grid-row: 3 / 4;
-                min-height: 280px;
-            }
-            .vinyl-container {
-                width: 75px;
-                height: 75px;
-            }
-            .clock-time {
-                font-size: 1.8rem;
-            }
-            .station-dropdown-btn {
-                max-width: 90px;
-                font-size: 0.5rem;
-            }
-            .draw-colors .color-dot {
-                width: 17px;
-                height: 17px;
-            }
-            .draw-controls .size-control input {
-                width: 40px;
-            }
-            .theme-wrapper {
-                bottom: 12px;
-                right: 12px;
-            }
-            .theme-toggle {
-                width: 32px;
-                height: 32px;
-                font-size: 0.9rem;
-            }
-            .theme-picker .theme-dot {
-                width: 20px;
-                height: 20px;
-            }
+        @media (max-width: 360px) {
+            .station-item { font-size: 11px; padding: 4px 10px; }
+            .station-item.active { font-size: 14px; padding: 4px 14px; }
+            .slider-container { height: 56px; }
+            .vinyl { width: 160px; height: 160px; max-width: 50vw; max-height: 50vw; }
         }
 
-        @media (max-width: 400px) {
-            body {
-                padding: 8px;
-            }
-            .dashboard {
-                padding: 6px;
-                gap: 6px;
-                border-radius: 16px;
-            }
-            .widget {
-                padding: 12px;
-                border-radius: 16px;
-            }
-            .clock-time {
-                font-size: 1.5rem;
-            }
-            .vinyl-container {
-                width: 60px;
-                height: 60px;
-            }
-            .draw-colors .color-dot {
-                width: 15px;
-                height: 15px;
-            }
-            .draw-controls button {
-                padding: 2px 6px;
-                font-size: 0.5rem;
-                height: 22px;
-            }
-            .draw-controls .size-control input {
-                width: 30px;
-            }
-            .theme-wrapper {
-                bottom: 8px;
-                right: 8px;
-            }
-            .theme-toggle {
-                width: 28px;
-                height: 28px;
-                font-size: 0.8rem;
-            }
-            .theme-picker .theme-dot {
-                width: 18px;
-                height: 18px;
+        @supports (padding: max(0px)) {
+            #app {
+                padding-left: max(20px, env(safe-area-inset-left));
+                padding-right: max(20px, env(safe-area-inset-right));
+                padding-bottom: max(20px, env(safe-area-inset-bottom));
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="dashboard">
+    <div id="app">
+        <!-- Слайдер -->
+        <section class="slider-container">
+            <div class="slider" id="slider"></div>
+        </section>
 
-        <!-- === РАДИО (2x4) === -->
-        <div class="widget player-widget">
-            <div class="station-dropdown">
-                <button class="station-dropdown-btn" id="stationDropdownBtn">
-                    <span id="currentStationLabel">Groove Salad</span>
-                    <i class="fas fa-chevron-down"></i>
-                </button>
-                <div class="station-dropdown-menu" id="stationDropdownMenu"></div>
+        <!-- Винил -->
+        <section class="vinyl-container">
+            <div class="vinyl" id="vinyl">
+                <div class="vinyl-disc" id="vinylDisc"></div>
+                <div class="vinyl-center"></div>
             </div>
+        </section>
 
-            <div class="player-content">
-                <div class="vinyl-container" id="vinylContainer">
-                    <div class="vinyl-shadow"></div>
-                    <svg viewBox="0 0 120 120">
-                        <defs>
-                            <radialGradient id="vinylGrad" cx="50%" cy="50%" r="50%">
-                                <stop offset="0%" stop-color="var(--vinyl-dark)"/>
-                                <stop offset="15%" stop-color="var(--vinyl-light)"/>
-                                <stop offset="30%" stop-color="var(--vinyl-dark)"/>
-                                <stop offset="45%" stop-color="var(--vinyl-light)"/>
-                                <stop offset="60%" stop-color="var(--vinyl-dark)"/>
-                                <stop offset="75%" stop-color="var(--vinyl-light)"/>
-                                <stop offset="90%" stop-color="var(--vinyl-dark)"/>
-                                <stop offset="100%" stop-color="var(--vinyl-light)"/>
-                            </radialGradient>
-                            <radialGradient id="shine1" cx="65%" cy="30%" r="35%">
-                                <stop offset="0%" stop-color="rgba(255,255,255,0.15)"/>
-                                <stop offset="60%" stop-color="rgba(255,255,255,0.04)"/>
-                                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-                            </radialGradient>
-                            <radialGradient id="shine2" cx="85%" cy="75%" r="25%">
-                                <stop offset="0%" stop-color="rgba(255,255,255,0.07)"/>
-                                <stop offset="70%" stop-color="rgba(255,255,255,0.02)"/>
-                                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-                            </radialGradient>
-                            <radialGradient id="labelGrad" cx="50%" cy="50%" r="50%">
-                                <stop offset="0%" stop-color="var(--accent)"/>
-                                <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.7"/>
-                            </radialGradient>
-                        </defs>
-                        <circle cx="60" cy="60" r="56" fill="url(#vinylGrad)" stroke="var(--border-color)" stroke-width="0.5"/>
-                        <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.3"/>
-                        <circle cx="60" cy="60" r="49" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.2"/>
-                        <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.3"/>
-                        <circle cx="60" cy="60" r="43" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.2"/>
-                        <circle cx="60" cy="60" r="40" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.3"/>
-                        <circle cx="60" cy="60" r="37" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.2"/>
-                        <circle cx="60" cy="60" r="34" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.3"/>
-                        <circle cx="60" cy="60" r="31" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.2"/>
-                        <circle cx="60" cy="60" r="28" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.3"/>
-                        <circle cx="60" cy="60" r="25" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.2"/>
-                        <circle cx="60" cy="60" r="22" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.3"/>
-                        <circle cx="60" cy="60" r="56" fill="url(#shine1)"/>
-                        <circle cx="60" cy="60" r="56" fill="url(#shine2)"/>
-                        <circle cx="60" cy="60" r="18" fill="url(#labelGrad)" opacity="0.9"/>
-                        <circle cx="60" cy="60" r="14" fill="var(--bg-secondary)" opacity="0.12"/>
-                        <circle cx="60" cy="60" r="8" fill="var(--bg-secondary)" stroke="var(--border-color)" stroke-width="0.5"/>
-                        <circle cx="60" cy="60" r="4" fill="var(--bg-primary)"/>
-                        <circle cx="60" cy="60" r="2" fill="var(--accent)" opacity="0.3"/>
-                        <text x="60" y="53" font-size="5" fill="rgba(255,255,255,0.7)" text-anchor="middle" font-weight="700" letter-spacing="0.5">S</text>
-                        <text x="60" y="63" font-size="3.5" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-weight="300">FM</text>
-                    </svg>
-                </div>
-                <div class="radio-info">
-                    <div class="track" id="trackName">Groove Salad</div>
-                    <div class="station" id="stationName">SomaFM · Chillout</div>
-                    <div class="player-controls">
-                        <button id="prevBtn"><i class="fas fa-step-backward"></i></button>
-                        <button id="playBtn" class="play-btn"><i class="fas fa-play"></i></button>
-                        <button id="nextBtn"><i class="fas fa-step-forward"></i></button>
-                        <button id="stopBtn"><i class="fas fa-stop"></i></button>
-                        <i class="fas fa-volume-low" style="color:var(--text-muted); font-size:0.6rem;"></i>
-                        <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.7">
-                    </div>
-                </div>
-            </div>
+        <!-- Транспорт -->
+        <section class="controls">
+            <button class="btn btn-prev" id="prevBtn" aria-label="Previous">
+                <i class="fas fa-step-backward"></i>
+            </button>
+            <button class="btn btn-play" id="playBtn" aria-label="Play">
+                <i class="fas fa-play" id="playIcon"></i>
+            </button>
+            <button class="btn btn-next" id="nextBtn" aria-label="Next">
+                <i class="fas fa-step-forward"></i>
+            </button>
+            <button class="btn btn-stop" id="stopBtn" aria-label="Stop">
+                <i class="fas fa-stop"></i>
+            </button>
+        </section>
+
+        <!-- Информация о треке -->
+        <footer class="track-info">
+            <div class="track-title loading" id="trackTitle">Connecting</div>
+            <div class="track-artist" id="trackArtist">Radio</div>
+        </footer>
+
+        <!-- Громкость -->
+        <div class="volume-container">
+            <input type="range" class="volume-slider" id="volumeSlider" 
+                   min="0" max="1" step="0.05" value="0.7">
         </div>
 
-        <!-- === ЧАСЫ (2x4) === -->
-        <div class="widget clock-widget">
-            <div class="toggle-switcher">
-                <div class="toggle-track active" id="clockToggle">
-                    <div class="toggle-thumb"></div>
-                </div>
-            </div>
-
-            <!-- Часы -->
-            <div class="clock-content" id="clockMode">
-                <div class="clock-time" id="clockTime">00:00:00</div>
-                <div class="clock-date" id="clockDate">1 января 2026</div>
-            </div>
-
-            <!-- Календарь -->
-            <div class="clock-content hidden" id="calendarMode">
-                <div class="calendar-header">
-                    <span id="calendarMonth">Январь</span>
-                    <span id="calendarYear">2026</span>
-                </div>
-                <div class="calendar-grid" id="calendarGrid"></div>
-            </div>
-        </div>
-
-        <!-- === РИСОВАЛКА + ТЕКСТ (6x8) === -->
-        <div class="widget draw-widget">
-            <div class="toggle-switcher">
-                <div class="toggle-track active" id="drawToggle">
-                    <div class="toggle-thumb"></div>
-                </div>
-            </div>
-
-            <!-- Рисование -->
-            <div class="widget-content" id="drawMode">
-                <div class="draw-area" id="drawArea">
-                    <canvas id="drawCanvas"></canvas>
-                </div>
-                <div class="draw-controls">
-                    <button id="drawUndo" title="Отменить"><i class="fas fa-undo"></i></button>
-                    <button id="drawClear" title="Очистить"><i class="fas fa-trash"></i></button>
-                    <button id="drawEraser" title="Ластик"><i class="fas fa-eraser"></i></button>
-                    <button id="drawSave" title="Сохранить как PNG"><i class="fas fa-download"></i></button>
-                    <div class="tool-divider"></div>
-                    <div class="draw-colors" id="drawColors"></div>
-                    <div class="tool-divider"></div>
-                    <div class="size-control">
-                        <span>Размер</span>
-                        <input type="range" id="drawSize" min="1" max="30" value="3">
-                        <span id="drawSizeLabel">3</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Текстовый редактор -->
-            <div class="widget-content hidden" id="textMode">
-                <div class="text-editor">
-                    <textarea id="textEditor"></textarea>
-                    <div class="editor-controls">
-                        <button id="textSave"><i class="fas fa-save"></i> Сохранить</button>
-                        <button id="textDownload"><i class="fas fa-download"></i> Скачать .txt</button>
-                        <button id="textClear"><i class="fas fa-trash"></i> Очистить</button>
-                        <div class="editor-stats">
-                            <span id="textWords">0 слов</span>
-                            <span id="textChars">0 символов</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- === ВЫБОР ТЕМЫ === -->
-    <div class="theme-wrapper">
-        <div class="theme-picker" id="themePicker"></div>
-        <button class="theme-toggle" id="themeToggle" title="Выбрать тему">
-            <i class="fas fa-palette"></i>
-        </button>
+        <audio id="audioPlayer" preload="none"></audio>
     </div>
 
     <script>
         (function() {
             'use strict';
 
-            // === СПИСОК РАДИОСТАНЦИЙ ===
-            const stations = [
+            // === СТАНЦИИ (из dash.html, без Left Coast 70s) ===
+            const STATIONS = [
                 { value: 'https://ice1.somafm.com/groovesalad-128-mp3', track: 'Groove Salad', station: 'SomaFM · Chillout' },
                 { value: 'https://ice1.somafm.com/darkzone-128-mp3', track: 'The Dark Zone', station: 'SomaFM · Ambient' },
                 { value: 'https://ice1.somafm.com/defcon-128-mp3', track: 'Def Con Radio', station: 'SomaFM · Dark Ambient' },
                 { value: 'https://ice1.somafm.com/metal-128-mp3', track: 'Metal Detector', station: 'SomaFM · Heavy Metal' },
-                { value: 'https://ice1.somafm.com/lc70s-128-mp3', track: 'Left Coast 70s', station: 'SomaFM · 70s Hits' },
                 { value: 'https://ice1.somafm.com/u80s-128-mp3', track: 'Underground 80s', station: 'SomaFM · 80s Underground' },
                 { value: 'https://ice1.somafm.com/7soul-128-mp3', track: 'Seven Inch Soul', station: 'SomaFM · Soul Classics' },
                 { value: 'https://ice1.somafm.com/insound-128-mp3', track: 'The In-Sound', station: 'SomaFM · 60s Garage' },
@@ -1213,554 +496,284 @@
                 { value: 'https://ice1.somafm.com/beatblender-128-mp3', track: 'Beat Blender', station: 'SomaFM · Deep House' },
             ];
 
-            let currentStationIndex = 0;
+            const $ = (sel) => document.querySelector(sel);
+            const $$ = (sel) => document.querySelectorAll(sel);
 
-            // === ДРОПДАУН СТАНЦИЙ ===
-            const dropdownBtn = document.getElementById('stationDropdownBtn');
-            const dropdownMenu = document.getElementById('stationDropdownMenu');
-            const currentStationLabel = document.getElementById('currentStationLabel');
+            const app = $('#app');
+            const slider = $('#slider');
+            const vinyl = $('#vinyl');
+            const vinylDisc = $('#vinylDisc');
+            const playBtn = $('#playBtn');
+            const playIcon = $('#playIcon');
+            const prevBtn = $('#prevBtn');
+            const nextBtn = $('#nextBtn');
+            const stopBtn = $('#stopBtn');
+            const trackTitle = $('#trackTitle');
+            const trackArtist = $('#trackArtist');
+            const volumeSlider = $('#volumeSlider');
+            const audio = $('#audioPlayer');
 
-            function renderStationDropdown() {
-                let html = '';
-                stations.forEach((s, i) => {
-                    html += `
-                        <div class="station-dropdown-item ${i === currentStationIndex ? 'active' : ''}" data-index="${i}">
-                            <span class="dot"></span>
-                            ${s.track}
-                        </div>
-                    `;
+            let currentIndex = 0;
+            let isPlaying = false;
+            let isStopped = false;
+            let resizeTimeout;
+
+            // ---------- ПОСТРОЕНИЕ СЛАЙДЕРА ----------
+            function buildSlider() {
+                slider.innerHTML = '';
+                STATIONS.forEach((station, index) => {
+                    const el = document.createElement('div');
+                    el.className = 'station-item';
+                    el.textContent = station.track;
+                    el.dataset.index = index;
+                    slider.appendChild(el);
                 });
-                dropdownMenu.innerHTML = html;
-
-                dropdownMenu.querySelectorAll('.station-dropdown-item').forEach(item => {
-                    item.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const idx = parseInt(item.dataset.index, 10);
-                        selectStation(idx);
-                        dropdownMenu.classList.remove('open');
-                        dropdownBtn.classList.remove('open');
-                    });
-                });
+                updateSlider(0, true);
             }
 
-            function selectStation(index) {
-                currentStationIndex = index;
-                const s = stations[index];
-                currentStationLabel.textContent = s.track;
-                updateStationInfo(index);
-                if (audio.src && !audio.paused) {
-                    playRadio(index);
-                }
-                renderStationDropdown();
-            }
-
-            dropdownBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                dropdownMenu.classList.toggle('open');
-                dropdownBtn.classList.toggle('open');
-            });
-
-            document.addEventListener('click', () => {
-                dropdownMenu.classList.remove('open');
-                dropdownBtn.classList.remove('open');
-            });
-
-            // === ТЕМЫ (7 уникальных) ===
-            const themes = [
-                { id: 'theme-dark', color: '#1a1a1a' },
-                { id: 'theme-light', color: '#e8e8e8' },
-                { id: 'theme-ocean', color: '#1a3a6a' },
-                { id: 'theme-forest', color: '#1a3a1a' },
-                { id: 'theme-sunset', color: '#6a2a1a' },
-                { id: 'theme-midnight', color: '#2a1a4a' },
-                { id: 'theme-cyber', color: '#00cccc' },
-            ];
-
-            const themePicker = document.getElementById('themePicker');
-            const themeToggle = document.getElementById('themeToggle');
-            const body = document.body;
-
-            function renderThemePicker() {
-                let html = '';
-                themes.forEach(t => {
-                    const isActive = body.className === t.id;
-                    html += `
-                        <div class="theme-dot ${isActive ? 'active' : ''}" 
-                             style="background:${t.color};" 
-                             data-theme="${t.id}"
-                             title="${t.id.replace('theme-', '')}">
-                        </div>
-                    `;
-                });
-                themePicker.innerHTML = html;
-
-                themePicker.querySelectorAll('.theme-dot').forEach(dot => {
-                    dot.addEventListener('click', () => {
-                        setTheme(dot.dataset.theme);
-                    });
-                });
-            }
-
-            function setTheme(themeName) {
-                body.className = themeName;
-                localStorage.setItem('dashboard_theme', themeName);
-                renderThemePicker();
-            }
-
-            // Сворачивание/разворачивание
-            let isThemeOpen = false;
-
-            themeToggle.addEventListener('click', () => {
-                isThemeOpen = !isThemeOpen;
-                themeToggle.classList.toggle('open', isThemeOpen);
-                themePicker.classList.toggle('open', isThemeOpen);
-            });
-
-            const savedTheme = localStorage.getItem('dashboard_theme');
-            if (savedTheme && themes.some(t => t.id === savedTheme)) {
-                setTheme(savedTheme);
-            } else {
-                setTheme('theme-dark');
-            }
-
-            // === ЧАСЫ ===
-            function updateClock() {
-                const now = new Date();
-                const hours = String(now.getHours()).padStart(2, '0');
-                const minutes = String(now.getMinutes()).padStart(2, '0');
-                const seconds = String(now.getSeconds()).padStart(2, '0');
-                document.getElementById('clockTime').textContent = `${hours}:${minutes}:${seconds}`;
-                const options = { day: 'numeric', month: 'long', year: 'numeric' };
-                document.getElementById('clockDate').textContent = now.toLocaleDateString('ru-RU', options);
-            }
-            updateClock();
-            setInterval(updateClock, 1000);
-
-            // === КАЛЕНДАРЬ ===
-            function renderCalendar() {
-                const now = new Date();
-                const year = now.getFullYear();
-                const month = now.getMonth();
-                const today = now.getDate();
-
-                document.getElementById('calendarMonth').textContent = now.toLocaleDateString('ru-RU', { month: 'long' });
-                document.getElementById('calendarYear').textContent = year;
-
-                const firstDay = new Date(year, month, 1).getDay();
-                const daysInMonth = new Date(year, month + 1, 0).getDate();
-                const daysInPrevMonth = new Date(year, month, 0).getDate();
-
-                let html = '';
-                const dayNames = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
-                dayNames.forEach(name => {
-                    html += `<div class="day-name">${name}</div>`;
-                });
-
-                let startOffset = firstDay === 0 ? 6 : firstDay - 1;
-
-                for (let i = startOffset - 1; i >= 0; i--) {
-                    html += `<div class="day empty">${daysInPrevMonth - i}</div>`;
-                }
-
-                for (let d = 1; d <= daysInMonth; d++) {
-                    const dateObj = new Date(year, month, d);
-                    const isWeekend = (dateObj.getDay() === 0 || dateObj.getDay() === 6);
-                    const isToday = d === today ? 'today' : '';
-                    const weekendClass = isWeekend ? 'weekend' : '';
-                    html += `<div class="day ${isToday} ${weekendClass}">${d}</div>`;
-                }
-
-                const totalCells = startOffset + daysInMonth;
-                const remaining = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
-                for (let d = 1; d <= remaining; d++) {
-                    html += `<div class="day empty">${d}</div>`;
-                }
-
-                document.getElementById('calendarGrid').innerHTML = html;
-            }
-            renderCalendar();
-
-            // === TOGGLE SWITCHER ДЛЯ ЧАСОВ ===
-            const clockToggle = document.getElementById('clockToggle');
-            const clockMode = document.getElementById('clockMode');
-            const calendarMode = document.getElementById('calendarMode');
-            let isClockMode = true;
-
-            clockToggle.addEventListener('click', () => {
-                isClockMode = !isClockMode;
-                clockToggle.classList.toggle('active', isClockMode);
-
-                if (isClockMode) {
-                    clockMode.classList.remove('hidden');
-                    calendarMode.classList.add('hidden');
-                } else {
-                    clockMode.classList.add('hidden');
-                    calendarMode.classList.remove('hidden');
-                }
-            });
-
-            // === TOGGLE SWITCHER ДЛЯ РИСОВАЛКИ ===
-            const drawToggle = document.getElementById('drawToggle');
-            const drawMode = document.getElementById('drawMode');
-            const textMode = document.getElementById('textMode');
-            let isDrawMode = true;
-
-            drawToggle.addEventListener('click', () => {
-                isDrawMode = !isDrawMode;
-                drawToggle.classList.toggle('active', isDrawMode);
-
-                if (isDrawMode) {
-                    drawMode.classList.remove('hidden');
-                    textMode.classList.add('hidden');
-                    setTimeout(() => {
-                        if (window.resizeDrawCanvas) window.resizeDrawCanvas();
-                    }, 100);
-                } else {
-                    drawMode.classList.add('hidden');
-                    textMode.classList.remove('hidden');
-                }
-            });
-
-            // === РАДИО ===
-            const audio = new Audio();
-            audio.volume = 0.7;
-
-            const vinylContainer = document.getElementById('vinylContainer');
-            const playBtn = document.getElementById('playBtn');
-            const stopBtn = document.getElementById('stopBtn');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const trackName = document.getElementById('trackName');
-            const stationName = document.getElementById('stationName');
-            const volumeSlider = document.getElementById('volumeSlider');
-
-            function updateStationInfo(index) {
-                const s = stations[index];
-                trackName.textContent = s.track;
-                stationName.textContent = s.station;
-                currentStationLabel.textContent = s.track;
-                renderStationDropdown();
-            }
-
-            function playRadio(index) {
-                const url = stations[index].value;
-                if (audio.src !== url) {
-                    audio.src = url;
-                    audio.load();
-                }
-                audio.play().catch(e => console.warn('Play error:', e));
-                vinylContainer.classList.add('playing');
-                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                updateStationInfo(index);
-                currentStationIndex = index;
-            }
-
-            function pauseRadio() {
-                audio.pause();
-                vinylContainer.classList.remove('playing');
-                playBtn.innerHTML = '<i class="fas fa-play"></i>';
-            }
-
-            function stopRadio() {
-                audio.pause();
-                audio.currentTime = 0;
-                audio.src = '';
-                vinylContainer.classList.remove('playing');
-                playBtn.innerHTML = '<i class="fas fa-play"></i>';
-                trackName.textContent = 'Выберите станцию';
-                stationName.textContent = 'Нажмите Play';
-            }
-
-            playBtn.addEventListener('click', () => {
-                if (audio.src && !audio.paused) {
-                    pauseRadio();
-                } else {
-                    playRadio(currentStationIndex);
-                }
-            });
-
-            stopBtn.addEventListener('click', stopRadio);
-
-            prevBtn.addEventListener('click', () => {
-                const newIndex = (currentStationIndex - 1 + stations.length) % stations.length;
-                if (audio.src && !audio.paused) {
-                    playRadio(newIndex);
-                } else {
-                    currentStationIndex = newIndex;
-                    updateStationInfo(newIndex);
-                }
-            });
-
-            nextBtn.addEventListener('click', () => {
-                const newIndex = (currentStationIndex + 1) % stations.length;
-                if (audio.src && !audio.paused) {
-                    playRadio(newIndex);
-                } else {
-                    currentStationIndex = newIndex;
-                    updateStationInfo(newIndex);
-                }
-            });
-
-            volumeSlider.addEventListener('input', (e) => {
-                audio.volume = parseFloat(e.target.value);
-            });
-
-            renderStationDropdown();
-            updateStationInfo(0);
-
-            // === РИСОВАНИЕ ===
-            const canvas = document.getElementById('drawCanvas');
-            const ctx = canvas.getContext('2d');
-            const drawArea = document.getElementById('drawArea');
-            let isDrawing = false;
-            let drawColor = '#ffffff';
-            let drawSize = 3;
-            let isEraser = false;
-            let history = [];
-            let historyIndex = -1;
-            let isInitialized = false;
-
-            // Цвета
-            const colors = [
-                '#ffffff', '#cccccc', '#888888', '#444444', '#000000',
-                '#ff6b6b', '#ee5a24', '#f97316', '#ff9f43', '#feca57',
-                '#ffd93d', '#fdcb6e', '#6ab04c', '#00b894', '#00cec9',
-                '#0984e3', '#4fc3ff', '#74b9ff', '#a29bfe', '#6c5ce7',
-                '#fd79a8', '#f472b6', '#e84393',
-            ];
-
-            const drawColorsContainer = document.getElementById('drawColors');
-
-            colors.forEach(c => {
-                const dot = document.createElement('div');
-                dot.className = 'color-dot';
-                dot.style.background = c;
-                dot.dataset.color = c;
-                dot.addEventListener('click', () => {
-                    document.querySelectorAll('.draw-colors .color-dot').forEach(d => d.classList.remove('active'));
-                    dot.classList.add('active');
-                    drawColor = c;
-                    isEraser = false;
-                    const eraserBtn = document.getElementById('drawEraser');
-                    eraserBtn.classList.remove('active');
-                    eraserBtn.style.color = '';
-                });
-                drawColorsContainer.appendChild(dot);
-            });
-
-            // Выбираем белый по умолчанию
-            document.querySelector('.draw-colors .color-dot').classList.add('active');
-
-            function resizeDrawCanvas() {
-                const rect = drawArea.getBoundingClientRect();
-                canvas.width = rect.width || 300;
-                canvas.height = rect.height || 200;
-                if (isInitialized) {
-                    restoreFromHistory();
-                }
-            }
-            window.resizeDrawCanvas = resizeDrawCanvas;
-
-            function saveToHistory() {
-                if (historyIndex < history.length - 1) {
-                    history = history.slice(0, historyIndex + 1);
-                }
-                history.push(canvas.toDataURL());
-                historyIndex = history.length - 1;
-                if (history.length > 50) {
-                    history.shift();
-                    historyIndex--;
-                }
-            }
-
-            function restoreFromHistory() {
-                if (historyIndex >= 0 && history[historyIndex]) {
-                    const img = new Image();
-                    img.onload = () => {
-                        ctx.clearRect(0, 0, canvas.width, canvas.height);
-                        ctx.drawImage(img, 0, 0);
-                    };
-                    img.src = history[historyIndex];
-                } else {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                }
-            }
-
-            function getPos(e) {
-                const rect = canvas.getBoundingClientRect();
-                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-                return {
-                    x: (clientX - rect.left) * (canvas.width / rect.width),
-                    y: (clientY - rect.top) * (canvas.height / rect.height)
-                };
-            }
-
-            function startDraw(e) {
-                e.preventDefault();
-                isDrawing = true;
-                const pos = getPos(e);
-                ctx.beginPath();
-                ctx.moveTo(pos.x, pos.y);
-            }
-
-            function draw(e) {
-                e.preventDefault();
-                if (!isDrawing) return;
-                const pos = getPos(e);
-                ctx.lineTo(pos.x, pos.y);
-
-                if (isEraser) {
-                    ctx.globalCompositeOperation = 'destination-out';
-                    ctx.lineWidth = drawSize * 2.5;
-                } else {
-                    ctx.globalCompositeOperation = 'source-over';
-                    ctx.lineWidth = drawSize;
-                    ctx.strokeStyle = drawColor;
-                }
-
-                ctx.lineCap = 'round';
-                ctx.lineJoin = 'round';
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(pos.x, pos.y);
-                ctx.globalCompositeOperation = 'source-over';
-            }
-
-            function endDraw(e) {
-                if (!isDrawing) return;
-                isDrawing = false;
-                ctx.beginPath();
-                ctx.globalCompositeOperation = 'source-over';
-                saveToHistory();
-            }
-
-            canvas.addEventListener('mousedown', startDraw);
-            canvas.addEventListener('mousemove', draw);
-            canvas.addEventListener('mouseup', endDraw);
-            canvas.addEventListener('mouseleave', endDraw);
-
-            canvas.addEventListener('touchstart', startDraw, { passive: false });
-            canvas.addEventListener('touchmove', draw, { passive: false });
-            canvas.addEventListener('touchend', endDraw, { passive: false });
-
-            // Ластик (изначально не активен)
-            const eraserBtn = document.getElementById('drawEraser');
-
-            eraserBtn.addEventListener('click', function() {
-                isEraser = !isEraser;
-                this.classList.toggle('active');
-
-                if (isEraser) {
-                    document.querySelectorAll('.draw-colors .color-dot').forEach(d => d.classList.remove('active'));
-                } else {
-                    const activeColor = document.querySelector('.draw-colors .color-dot.active');
-                    if (activeColor) {
-                        drawColor = activeColor.dataset.color;
+            function updateSlider(activeIndex, instant = false) {
+                const items = slider.querySelectorAll('.station-item');
+                const total = items.length;
+                
+                items.forEach((item, index) => {
+                    item.classList.remove('active', 'prev', 'next', 'hidden');
+                    
+                    let distance = index - activeIndex;
+                    if (distance > total / 2) distance -= total;
+                    if (distance < -total / 2) distance += total;
+                    
+                    if (distance === 0) {
+                        item.classList.add('active');
+                    } else if (distance === -1 || distance === total - 1) {
+                        item.classList.add('prev');
+                    } else if (distance === 1 || distance === -(total - 1)) {
+                        item.classList.add('next');
                     } else {
-                        const firstColor = document.querySelector('.draw-colors .color-dot');
-                        if (firstColor) {
-                            firstColor.classList.add('active');
-                            drawColor = firstColor.dataset.color;
-                        }
+                        item.classList.add('hidden');
+                    }
+                });
+
+                // Центрируем активный элемент
+                const activeItem = items[activeIndex];
+                if (activeItem) {
+                    const containerWidth = slider.parentElement.offsetWidth;
+                    const itemWidth = activeItem.offsetWidth || 120;
+                    const centerOffset = (containerWidth / 2) - (itemWidth / 2);
+                    const rawOffset = -activeIndex * (itemWidth + 8);
+                    
+                    if (instant) {
+                        slider.style.transition = 'none';
+                        slider.style.transform = `translateX(${rawOffset + centerOffset}px)`;
+                        requestAnimationFrame(() => {
+                            slider.style.transition = '';
+                        });
+                    } else {
+                        slider.style.transform = `translateX(${rawOffset + centerOffset}px)`;
                     }
                 }
-            });
+            }
 
-            // Сохранить как PNG
-            document.getElementById('drawSave').addEventListener('click', () => {
-                const link = document.createElement('a');
-                link.download = `рисунок_${new Date().toISOString().slice(0,10)}.png`;
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-            });
-
-            // Размер
-            const drawSizeInput = document.getElementById('drawSize');
-            const drawSizeLabel = document.getElementById('drawSizeLabel');
-            drawSizeInput.addEventListener('input', () => {
-                drawSize = parseInt(drawSizeInput.value);
-                drawSizeLabel.textContent = drawSize;
-            });
-
-            // Очистить
-            document.getElementById('drawClear').addEventListener('click', () => {
-                if (confirm('Очистить холст?')) {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    saveToHistory();
+            // ---------- ФОН ----------
+            function updateBackground(index) {
+                // Разные цвета для разных станций
+                const colors = [
+                    ['#3a1a3a', '#0a0a0a'], // Groove Salad
+                    ['#1a0a1a', '#000000'], // Dark Zone
+                    ['#0a3a1a', '#0a0a0a'], // Def Con
+                    ['#3a1a0a', '#0a0a0a'], // Metal Detector
+                    ['#2a1a3a', '#0a0a0a'], // Underground 80s
+                    ['#1a2a3a', '#0a0a0a'], // Seven Inch Soul
+                    ['#1a3a2a', '#0a0a0a'], // The In-Sound
+                    ['#2a3a1a', '#0a0a0a'], // Covers
+                    ['#1a1a1a', '#0a0a0a'], // SF 10-33
+                    ['#0a0a2a', '#0a0a0a'], // SF Police
+                    ['#1a1a2a', '#0a0a0a'], // SF in SF
+                    ['#1a0a2a', '#0a0a0a'], // Vaporwaves
+                    ['#2a0a0a', '#0a0a0a'], // Doomed
+                    ['#2a0a3a', '#0a0a0a'], // Beat Blender
+                ];
+                const c = colors[index % colors.length];
+                if (c) {
+                    app.style.background = `radial-gradient(ellipse at 50% 30%, ${c[0]}, ${c[1]})`;
                 }
-            });
+            }
 
-            // Отменить
-            document.getElementById('drawUndo').addEventListener('click', () => {
-                if (historyIndex > 0) {
-                    historyIndex--;
-                    restoreFromHistory();
+            // ---------- МЕРЦАНИЕ ВИНИЛА ----------
+            function setVinylGlow(active) {
+                vinyl.classList.toggle('glow', active);
+            }
+
+            // ---------- АУДИО ----------
+            function loadStation(index) {
+                const station = STATIONS[index];
+                if (!station) return;
+                currentIndex = index;
+                audio.src = station.value;
+                audio.load();
+                updateSlider(index);
+                updateBackground(index);
+                trackTitle.textContent = 'Loading...';
+                trackTitle.className = 'track-title loading';
+                trackArtist.textContent = station.station;
+            }
+
+            function play() {
+                if (isStopped) {
+                    audio.currentTime = 0;
+                    isStopped = false;
                 }
-            });
-
-            function initCanvas() {
-                resizeDrawCanvas();
-                ctx.fillStyle = 'rgba(0,0,0,0.02)';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                isInitialized = true;
-                saveToHistory();
+                audio.play()
+                    .then(() => {
+                        isPlaying = true;
+                        updatePlayButton(true);
+                        vinylDisc.style.animationPlayState = 'running';
+                        setVinylGlow(true);
+                        trackTitle.textContent = STATIONS[currentIndex].track;
+                        trackTitle.className = 'track-title';
+                        trackArtist.textContent = STATIONS[currentIndex].station;
+                    })
+                    .catch((e) => {
+                        console.warn('Play error:', e.message);
+                        trackTitle.textContent = 'Stream unavailable';
+                        trackTitle.className = 'track-title loading';
+                        isPlaying = false;
+                        updatePlayButton(false);
+                        vinylDisc.style.animationPlayState = 'paused';
+                        setVinylGlow(false);
+                    });
             }
 
-            initCanvas();
-            window.addEventListener('resize', resizeDrawCanvas);
-
-            // === ТЕКСТОВЫЙ РЕДАКТОР ===
-            const textEditor = document.getElementById('textEditor');
-            const textWords = document.getElementById('textWords');
-            const textChars = document.getElementById('textChars');
-
-            function updateTextStats() {
-                const text = textEditor.value;
-                const words = text.trim() ? text.trim().split(/\s+/).length : 0;
-                const chars = text.length;
-                textWords.textContent = `${words} слов`;
-                textChars.textContent = `${chars} символов`;
+            function pause() {
+                audio.pause();
+                isPlaying = false;
+                updatePlayButton(false);
+                vinylDisc.style.animationPlayState = 'paused';
+                setVinylGlow(false);
             }
 
-            textEditor.addEventListener('input', updateTextStats);
-
-            const savedText = localStorage.getItem('dashboard_text');
-            if (savedText) {
-                textEditor.value = savedText;
-                updateTextStats();
+            function stop() {
+                pause();
+                audio.currentTime = 0;
+                isStopped = true;
+                trackTitle.textContent = 'Stopped';
+                trackTitle.className = 'track-title';
+                trackArtist.textContent = STATIONS[currentIndex].station;
             }
 
-            document.getElementById('textSave').addEventListener('click', () => {
-                localStorage.setItem('dashboard_text', textEditor.value);
-                const btn = document.getElementById('textSave');
-                btn.innerHTML = '<i class="fas fa-check"></i> Сохранено';
-                setTimeout(() => {
-                    btn.innerHTML = '<i class="fas fa-save"></i> Сохранить';
-                }, 1500);
-            });
+            function togglePlay() {
+                isPlaying ? pause() : play();
+            }
 
-            document.getElementById('textDownload').addEventListener('click', () => {
-                const text = textEditor.value;
-                if (!text.trim()) {
-                    alert('Нет текста для сохранения');
+            function switchStation(direction) {
+                const total = STATIONS.length;
+                let newIndex = (currentIndex + direction + total) % total;
+                doSwitch(newIndex);
+            }
+
+            function doSwitch(newIndex) {
+                if (newIndex === currentIndex && isPlaying) return;
+                
+                const wasPlaying = isPlaying;
+                if (wasPlaying) {
+                    audio.pause();
+                    setVinylGlow(false);
+                }
+                
+                loadStation(newIndex);
+                
+                if (wasPlaying) {
+                    setTimeout(play, 400);
+                } else {
+                    trackTitle.textContent = 'Stopped';
+                    trackTitle.className = 'track-title';
+                    trackArtist.textContent = STATIONS[newIndex].station;
+                }
+            }
+
+            function goToStation(index) {
+                if (index === currentIndex) {
+                    if (!isPlaying) togglePlay();
                     return;
                 }
-                const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-                const link = document.createElement('a');
-                link.download = `заметки_${new Date().toISOString().slice(0,10)}.txt`;
-                link.href = URL.createObjectURL(blob);
-                link.click();
-                URL.revokeObjectURL(link.href);
-            });
-
-            document.getElementById('textClear').addEventListener('click', () => {
-                if (confirm('Очистить текст?')) {
-                    textEditor.value = '';
-                    updateTextStats();
-                    localStorage.removeItem('dashboard_text');
+                const wasPlaying = isPlaying;
+                if (wasPlaying) {
+                    audio.pause();
+                    setVinylGlow(false);
                 }
-            });
+                loadStation(index);
+                if (wasPlaying) {
+                    setTimeout(play, 400);
+                } else {
+                    trackTitle.textContent = 'Stopped';
+                    trackTitle.className = 'track-title';
+                    trackArtist.textContent = STATIONS[index].station;
+                }
+            }
+
+            // ---------- КНОПКА PLAY/PAUSE ----------
+            function updatePlayButton(playing) {
+                if (playing) {
+                    playIcon.className = 'fas fa-pause';
+                    playBtn.classList.add('active');
+                } else {
+                    playIcon.className = 'fas fa-play';
+                    playBtn.classList.remove('active');
+                }
+            }
+
+            // ---------- ОБНОВЛЕНИЕ ПРИ РЕСАЙЗЕ ----------
+            function handleResize() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    updateSlider(currentIndex, true);
+                }, 300);
+            }
+
+            // ---------- ИНИЦИАЛИЗАЦИЯ ----------
+            function init() {
+                buildSlider();
+                loadStation(0);
+                updatePlayButton(false);
+
+                // Ждём отрисовки перед центрированием
+                setTimeout(() => {
+                    updateSlider(0, true);
+                }, 100);
+
+                playBtn.addEventListener('click', togglePlay);
+                prevBtn.addEventListener('click', () => switchStation(-1));
+                nextBtn.addEventListener('click', () => switchStation(1));
+                stopBtn.addEventListener('click', stop);
+
+                volumeSlider.addEventListener('input', (e) => {
+                    audio.volume = parseFloat(e.target.value);
+                });
+
+                slider.addEventListener('click', (e) => {
+                    const item = e.target.closest('.station-item');
+                    if (item) {
+                        const index = parseInt(item.dataset.index);
+                        goToStation(index);
+                    }
+                });
+
+                audio.addEventListener('error', () => {
+                    trackTitle.textContent = 'Stream Error';
+                    trackTitle.className = 'track-title loading';
+                    isPlaying = false;
+                    updatePlayButton(false);
+                    vinylDisc.style.animationPlayState = 'paused';
+                    setVinylGlow(false);
+                });
+
+                window.addEventListener('resize', handleResize);
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
 
         })();
     </script>
